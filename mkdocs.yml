@@ -1,0 +1,10 @@
+site_name: Tango with Django 中文文档
+pages:
+- [index.md, Home]
+site_url: http://hackerxu.com/Twd
+theme_dir: 'custom_theme'
+theme: yeti
+repo_name: Github
+repo_url: https://github.com/taizilongxu
+site_description: Twd1.7
+site_author: taizilongxu

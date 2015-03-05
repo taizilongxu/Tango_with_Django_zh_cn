@@ -1,0 +1,14 @@
+<nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix">
+    <ul class="nav bs-docs-sidenav">
+    {% for toc_item in toc %}
+        <li class="{% if toc_item.active %}active{% endif %}"><a href="{{ toc_item.url }}">{{ toc_item.title }}</a>
+        <ul class="nav">
+        {% for toc_item in toc_item.children %}
+            <li><a href="{{ toc_item.url }}">{{ toc_item.title }}</a></li>
+        {% endfor %}
+        </ul>
+        </li>
+    {% endfor %}
+    </ul>
+    <a class="back-to-top" href="#top"> 返回顶部 </a>
+</nav>
