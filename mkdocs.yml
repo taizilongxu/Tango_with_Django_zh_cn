@@ -4,7 +4,7 @@ pages:
 site_url: http://hackerxu.com/Twd
 theme_dir: 'custom_theme'
 theme: yeti
-repo_name: Github
-repo_url: https://github.com/taizilongxu
+repo_name: 帮助改进
+repo_url: https://github.com/taizilongxu/Tango_with_Django_zh_cn/blob/master/docs/index.md
 site_description: Twd1.7
 site_author: taizilongxu

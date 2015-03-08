@@ -46,15 +46,18 @@
                     <a href="#searchModal" data-toggle="modal"><i class="fa fa-search"></i> Search</a>
                 </li>
                 {% endif %}
-                <li {% if not previous_page %}class="disabled"{% endif %}>
+                <li {% if not previous_page %}class="hidden"{% endif %}>
                     <a rel="next" {% if previous_page %}href="{{ previous_page.url }}"{% endif %}>
                         <i class="fa fa-arrow-left"></i> Previous
                     </a>
                 </li>
-                <li {% if not next_page %}class="disabled"{% endif %}>
+                <li {% if not next_page %}class="hidden"{% endif %}>
                     <a rel="prev" {% if next_page %}href="{{ next_page.url }}"{% endif %}>
                         Next <i class="fa fa-arrow-right"></i>
                     </a>
+                </li>
+                <li>
+                    <a href="http://www.tangowithdjango.com/book17/">英文原版</a>
                 </li>
                 {% if repo_url %}
                 <li>
@@ -66,6 +69,9 @@
                         {% endif %}
                         {{ repo_name }}
                     </a>
+                </li>
+                <li>
+                    <a href="http://hackerxu.com">Blog</a>
                 </li>
                 {% endif %}
             </ul>

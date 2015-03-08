@@ -1,3 +1,18 @@
+[1]: #1-twd17
+[2]: #2
+[3]: #3-tango
+[4]: #4-django
+[5]: #5
+[6]: #6
+[7]: #7
+[8]: #8
+[9]: #9
+[10]: #10
+[11]: #11-cokkiessessions
+[12]: #12-django-registration-redux
+[13]: #13-bootstraprango
+[14]: #14
+
 
 # 1. Twd1.7新特性
 
@@ -12,38 +27,38 @@
 	* 在模板中载入静态文件现在可以用{% load staticfiles %}
 	* 用`slugify`来创建组织好的URL字符串
 * 增加验证一章
-	* 用Django-Registration-Redux来处理登陆和注册(参见第12章)
-* Bootstrap章节更新为Bootstrap 3.2.0(参见第13章)
+	* 用Django-Registration-Redux来处理登陆和注册(参见[第12章][12])
+* Bootstrap章节更新为Bootstrap 3.2.0(参见[第13章][13])
 	* 同时讲解一些如何使用Django-Bootstrap-Toolkit的技巧
-* 增加使用模板标签一章(参见第14章)
-* 增加在Django里使用JQuery一章(参见第18章)
-* 关于测试的一章扩展了一些内容-但是仍在修改中(参见第20章)
+* 增加使用模板标签一章(参见[第14章][14])
+* 增加在Django里使用JQuery一章(参见[第18章][18])
+* 关于测试的一章扩展了一些内容-但是仍在修改中(参见[第20章][20])
 	* 包括如何用`coverage`包去检测测试覆盖(参见 http://nedbatchelder.com/code/coverage/ )
 
 # 2. 总览
 
-这本书的旨在通过实践教给你如何用Django1.7来开发网站.这本书主要提供给学生,包括从写出并运行你的第一个网页应用直到完成网页部署的每一步.
+这本书的旨在通过一些实例教给你如何用Django1.7来开发网站.这本书主要提供给Django的初学者,包括从写出并运行第一个网页应用直到完成网页部署的每一步.
 
-这本书将作为官方教程和其他出色教程的补充.通过把许多东西集合到一起,这本书填补了官方文档的许多空白,而且这本书还提供了许多关于web应用开发方面的其他内容.
+这本书将作为[官方教程](https://docs.djangoproject.com/en/1.7/intro/tutorial01/)和其他出色教程的补充.通过把许多东西集合到一起,这本书填补了官方文档的许多空白,而且这本书还提供了许多关于web应用开发方面的其他内容.
 
 ## 2.1 本书特点
 
-**这本书将节约你的时间.**许多时候我看到有些聪明的学生在学习Django和其他web开发方面遇到困难,并且花费了很多时间.这往往是因为关键的信息没有被提供或是一些事没有讲清楚.然而这些琐碎的问题将会阻碍你10-15分钟,甚至有些时候你需要花费几个小时来解决.我们尽可能的清楚了障碍.这意味着你们可以很轻松的开发你们的应用,而不用坐在那摸不着头脑.
+**这本书将节约你大量的时间.**许多时候我看到有些聪明的学生在学习Django和其他web开发方面遇到困难,并且花费了很多时间.这往往是因为没有抓住关键点或是一些东西没有讲清楚.然而这些琐碎的问题将会阻碍你10-15分钟,甚至有些时候你需要花费几个小时来解决.我们在书里尽可能的清除了障碍.这意味着你们可以很轻松的开发你们的应用,而不用坐在那摸不着头脑.
 
 **这本书将会降低你的学习曲线.**web应用框架可以解决你的许多麻烦并节省一大堆时间.当然,前提是你事先懂得如何去用他们!通常学习曲线非常陡峭.这本书试图让你快速学习.通过向你展示在web应用中的经验及技巧,这本书缩短了学习的曲线.
 
-**这本书将会改善你的工作流.**用web应用框架进行开发需要你掌握并运行一个特殊的设计模式-所以你只能在特定的地方填入特定的东西.在和许多学生一起开发的时候,我们听到许多关于web应用框架的抱怨-最多的就是如何摆脱它们的控制(i.e. 反过来控制它们).为了帮助你控制他们,我们创建了一系列的工作流来清晰专注到开发流程,让你重新找到掌握web应用开发的感觉.
+**这本书将会改善你的工作流.**用web应用框架进行开发需要你掌握并运行一个特殊的设计模式 - 所以你只能在特定的地方填入特定的东西.在和许多学生一起开发的时候,我们听到许多关于web应用框架的抱怨最多的就是如何摆脱它们的控制(i.e. 反过来控制它们).为了帮助你掌握他们,我们创建了一系列的工作流来ch开发流阐明程,让你重新找到掌握web应用开发的感觉.
 
-**这本书不是用来读的.**不管怎么样,不要读这本书!这是一个强调动手实践去开发web应用的教程.读和做是不一样的.为了增加你从这本书里的经验获得的价值,请亲自动手完成应用的开发.当你码代码的时候,千万别粘贴和复制.一个个输入,想一想它是什么,然后去读我们提供接下来会发生什么的解释.如果你仍然不明白,那么就去查看Django文档,去StackOverflow或者其他有帮助的网站,用你自己的方法去了解它.如果你觉得很有必要的话,请联系我们来改善这本书-我们已经有许多的贡献者而我们也非常高兴得到你的贡献.
+**这本书不是用来读的.**不管怎么样,不要读这本书!这是一个强调动手实践去开发web应用的教程.读和做是不一样的.为了增加这个教程的价值,请亲自动手完成应用的开发.当你码代码的时候,千万别粘贴和复制.要一个个输入,想一想它是什么,我们都会对它一一解释.如果你仍然不明白,那么就去查看Django文档,去[StackOverflow](http://stackoverflow.com/questions/tagged/django)或者其他有帮助的网站,用你自己的方法去了解它.如果你觉得很有必要的话,请联系我们来改善这本书-我们已经有许多的贡献者而我们也非常高兴得到你的贡献.
 
 ## 2.2 你将会学到
 
-在这本书里,我们将会通过一个进本的例子来逐渐学习(或者说通过提问的方式).这本书将会展示给你如何设计一个叫做Rango的web应用(参见2.4.1段落的简要设计).通过这种方式,我们将会展示给你如何完成下面的任务.
+在这本书里,我们将会通过一个基本的例子来逐渐学习(或者说通过提问的方式).这本书将会展示给你如何设计一个叫做Rango的web应用(参见[2.4.1][2]的简要设计).通过这种方式,我们将会展示给你如何完成下面的任务.
 
 * 建立一个开发环境 - 包括如何使用终端,安装Pip,如何使用Git等等.
 * 建立一个Django项目,创立一个基本的Django应用.
 * 为Django项目设立静态文件和其他文件
-* 使用Django的Model-View-Template设计模式
+* 使用Django的Model-View-Template(MVT)设计模式
 * 创建数据库模型,用Django提供的对象关系绑定功能
 * 利用数据库模型生成的数据来创建动态生成页面
 * 使用Django提供的用户认证服务
@@ -54,9 +69,9 @@
 * 在应用中使用像AJAX这样的高级功能
 * 用PythonAnywhere部署你的应用到web服务器
 
-在每章的最后,我们设计了许多练习题来检验你们所学的知识.在后面的章节中提供了一些开放的开发练习并给出了代码和解释.最后,这些代码都在GitHub上:  https://github.com/leifos/tango_with_django .
+在每章的最后,我们设计了许多练习题来检验你们所学的知识.在后面的章节中提供了一些练习并给出了代码和解释.最后,这些代码都在GitHub上:  https://github.com/leifos/tango_with_django .
 
-要查看网站的完整版本,你可以访问 How to Tango with Django 在  http://www.tangowithdjango.com/rango/ .
+要查看网站的完整版本,你可以访问 [How to Tango with Django](http://www.tangowithdjango.com/) 在  http://www.tangowithdjango.com/rango/ .
 
 ## 2.3 技术和服务
 
@@ -76,7 +91,7 @@
 * PythonAnywhere, https://www.pythonanywhere.com
 
 
-我们选择这些技术和服务作为web开发的基本要掌握的,它们可以提供我们把web应用集成进CSS工具或者让你的应用部署快速便捷.
+上面是我们学习web开发需要掌握的基本技能,它们可以提供我们把web应用集成进CSS工具或者让你的应用部署快速便捷.
 
 ## 2.4 Rango:初始设计和规划
 
@@ -170,20 +185,20 @@
 
 这些设计和说明将会对我们构建我们的web应用提供很好的帮助.我们要用到的技术和步骤同样适用于大多数数据驱动的网站.熟悉这些规范和设计对我们有很大的好处.
 
-如果你已经安装了了Python2.7和Django1.7,你对命令行设置你的路径有所了解,那么你可以直接跳过Django基础这一章.否则,让我们一起来看第三章.
+如果你已经安装了了Python2.7和Django1.7,你对命令行设置你的路径有所了解,那么你可以直接跳过[Django基础][3]这一章.否则,让我们一起来看[第三章][3].
 
 ### 2.10.1 和Django官方教程一起学习
 
-我们建议Django官方教程作为这本书每个章节的练习题.你可以在下表中找到这两本书章节之间的对应关系.官方教学的练习将会帮助你深入了解Django框架,而且会提升你的技巧.
+我们建议[Django官方教程](https://docs.djangoproject.com/en/1.7/intro/tutorial01/)作为这本书每个章节的练习题.你可以在下表中找到这两本书章节之间的对应关系.官方教学的练习将会帮助你深入了解Django框架,而且会提升你的技巧.
 
 | Tango woth Django | Django Tutorial |
-|:--------:|:--------:|
-|Chapter 3|Part 1 - Models|
-|Chapter 5|Part 2 - The Admin Interface|
-|Chapter 6|Part 3 - URLs and Views|
-|Chapter 7|Part 4 - Templates|
-|Chapter 18|Part 5 - Testing|
-|Chapter 11|Part 6 - CSS|
+|:--------|:--------|
+|Chapter 3|[Part 1 - Models](https://docs.djangoproject.com/en/1.7/intro/tutorial01/)|
+|Chapter 5|[Part 2 - The Admin Interface](https://docs.djangoproject.com/en/1.7/intro/tutorial02/)|
+|Chapter 6|[Part 3 - URLs and Views](https://docs.djangoproject.com/en/1.7/intro/tutorial03/)|
+|Chapter 7|[Part 4 - Templates](https://docs.djangoproject.com/en/1.7/intro/tutorial04/)|
+|Chapter 18|[Part 5 - Testing](https://docs.djangoproject.com/en/1.7/intro/tutorial05/)|
+|Chapter 11|[Part 6 - CSS](https://docs.djangoproject.com/en/1.7/intro/tutorial06/)|
 
 
 # 3 准备好Tango
@@ -204,11 +219,11 @@
 
 ## 3.1 使用终端
 
-学习如何使用你的操作系统提供的命令行交互对设置你的环境来说至关重要.在本教程中,你应当习惯用命令行进行交互.如果你已经熟悉使用命令行那么你可以直接跳到安装软件这一章节.
+学习如何使用你的操作系统提供的命令行交互对设置你的环境来说至关重要.在本教程中,你应当习惯用命令行进行交互.如果你已经熟悉使用命令行那么你可以直接跳到[安装软件](#32)这一章节.
 
-类UNIX系统都有一个看起来相似的终端.UNIX有许多派生或者衍生的后代,包括苹果的OS X和许多Linux发行版本.所有的这些操作系统都包含一系列命令行界面可以帮助你管理文件和运行程序,他们并不需要图形界面.本节介绍你应当掌握的关键命令.
+类UNIX系统都有一个看起来相似的[终端](http://www.ee.surrey.ac.uk/Teaching/Unix/unixintro.html).UNIX有许多派生或者衍生的后代,包括苹果的[OS X](http://en.wikipedia.org/wiki/OS_X)和许多[Linux发行版本](http://en.wikipedia.org/wiki/List_of_Linux_distributions).所有的这些操作系统都包含一系列命令行界面可以帮助你管理文件和运行程序,他们并不需要图形界面.本节介绍你应当掌握的关键命令.
 
->注意:这个教程针对的是类UNIX系统.虽然Django和Python可以在Windows系统下运行,但是这本书中的大部分命令都是针对类UNIX终端的.在Windows中,可以用与UNIX相近的命令或者使用仿UNIX终端的PowerShell来运行这些命令.
+>注意:这个教程针对的是类UNIX系统.虽然Django和Python可以在Windows系统下运行,但是这本书中的大部分命令都是针对类UNIX终端的.在Windows中,可以用与[UNIX相近的命令](http://www.ai.uga.edu/mc/winforunix.html)或者使用仿UNIX终端的[PowerShell](http://technet.microsoft.com/en-us/library/bb978526.aspx)来运行这些命令.
 
 如果进入一个终端里,你会看到如下的形式:
 
@@ -222,7 +237,7 @@ sibu:~leif$
 * 你的当前目录(波浪线,或者`~`)
 * 你用户的权限(美元符,或者`$`)
 
-美元符(`$`)一般意味着用户作为一个标准的用户.相反,如果是井字号(`#`)则表示用户具有root权限.不管什么符号都意味着电脑正在等待你的输入.
+美元符(`$`)一般意味着用户作为一个标准的用户.相反,如果是井字号(`#`)则表示用户具有[root权限](http://en.wikipedia.org/wiki/Superuser).不管什么符号都意味着电脑正在等待你的输入.
 
 打开终端窗口,看一看你的提示符是什么.
 
@@ -274,9 +289,9 @@ sibu:~ leif$ ls -l
 drwxr-xr-x   36 leif  staff    1224 23 Sep 10:42 code
 ```
 
-输出信息同时包含目录权限的信息,谁建立了这个文件夹(`leif`),它的群组(`staff`),大小,这个文件修改时间,当然还有它的名字.
+输出信息同时包含[目录权限的信息](http://www.elated.com/articles/understanding-permissions/),谁建立了这个文件夹(`leif`),它的群组(`staff`),大小,这个文件修改时间,当然还有它的名字.
 
-通过终端你可以发现可以很方便的修改文件.在你的电脑上可能已经安装了许多出色的编辑器.nano编辑器是一个很简洁的编辑器,它不像vi需要花很多时间来学习.下面将介绍一些十分有用的UNIX命令.
+通过终端你可以发现可以很方便的修改文件.在你的电脑上可能已经安装了许多出色的编辑器.[nano](http://www.nano-editor.org/)编辑器是一个很简洁的编辑器,它不像[vi](http://en.wikipedia.org/wiki/Vi)需要花很多时间来学习.下面将介绍一些十分有用的UNIX命令.
 
 ### 3.1.1 常用命令
 
@@ -284,15 +299,15 @@ drwxr-xr-x   36 leif  staff    1224 23 Sep 10:42 code
 
 * `pwd`:在终端打印出当前工作目录.展示出当前所在目录的绝对路径.
 * `ls`:在终端打印出当前工作目录中文件列表.默认情况下,你不会看到文件大小 - 可以通过`ls -lh`命令进行查看.
-* `cd`:后边连接路径,可以允许你改变当前工作目录.例如,`cd /home/leif/`改变工作目录到`/home/leif/`.你还可以通过键入两个点(`cd ..`)转移到上一级目录而不用输入绝对路径.
+* `cd`:后边连接路径,可以允许你改变当前工作目录.例如,`cd /home/leif/`改变工作目录到`/home/leif/`.你还可以通过键入两个点(`cd ..`)转移到上一级目录而不用输入[绝对路径](http://www.uvsc.edu/disted/decourses/dgm/2120/IN/steinja/lessons/06/06_04.html).
 * `cp`:复制文件或者目录.你必须提供源和目标.例如,如果要在同一文件夹里复制`input.py`,那你可以这样输入`cp input.py input_backup.py`
 * `mv`移动文件或者目录.像`cp`一样,必须提供源和目标.这个命令还可以重命名文件.例如,把`numbers.txt`重命名为`letters.txt`只需键入`mv numbers.txt letters.txt`.把一个文件移动到另一个目录,你可以使用绝对或者相对路径作为目的地址 - 比如`mv numbers.txt /home/david/numbers.txt`.
 * `mkdir`:在当前目录创见文件夹.你需要提供一个新文件夹的名字在`mkdir`命令后面.例如,当前目录是`/home/david/`,运行`mkdir music`,你将会得到一个文件夹`/home/david/music/`.你需要键入`cd`来进入这个文件夹.
-* `rm`:remove的简写,这个命令会删除你的文件.你必须提供你要删除文件的名字.如果你输入`rm`命令,它会提示你是否希望删除这个文件的选项.你也可以用递归删除来删除文件夹.用这个命令一定要小心,要恢复删除的文件几乎不可能.
+* `rm`:remove的简写,这个命令会删除你的文件.你必须提供你要删除文件的名字.如果你输入`rm`命令,它会提示你是否希望删除这个文件的选项.你也可以用[递归删除](http://www.computerhope.com/issues/ch000798.htm)来删除文件夹.用这个命令一定要小心,要恢复删除的文件几乎不可能.
 * `rmdir`:删除目录的传统方法.在后面提供你要删除的目录.需要注意的是:这个命令没有提示是否要删除这个目录.
-* `sudo`:允许你用其他用户权限来运行这个程序.一般,用`root`(类UNIX或者UNIX衍生系统的超级用户)身份来运行这个程序.
+* `sudo`:允许你用其他用户权限来运行这个程序.一般,用`root`(类UNIX或者UNIX衍生系统的[超级用户](http://en.wikipedia.org/wiki/Superuser))身份来运行这个程序.
 
->注意:这里只列出了一小部分命令列表.如果想了解更多请查看ubuntu的关于使用终端的文档,或者FOSSwire写的Cheat Sheet.
+>注意:这里只列出了一小部分命令列表.如果想了解更多请查看ubuntu的关于[使用终端](https://help.ubuntu.com/community/UsingTheTerminal)的文档,或者FOSSwire写的[Cheat Sheet](http://fosswire.com/post/2007/08/unixlinux-command-cheat-sheet/).
 
 ## 3.2 安装软件
 
@@ -300,7 +315,7 @@ drwxr-xr-x   36 leif  staff    1224 23 Sep 10:42 code
 
 ### 3.2.1 安装Python
 
-Python2.7.5已经安到你的电脑上了吗?如果你使用的是linux发行版或者OS X系统,那么你的Python已经安装好了.因为许多系统的功能都是有Python实现的,所以他们本身自带Python解析器!
+Python2.7.5已经安到你的电脑上了吗?如果你使用的是linux发行版或者OS X系统,那么你的Python已经安装好了.因为许多系统的功能都是有Python实现的,所以他们本身自带[Python解析器](http://en.wikipedia.org/wiki/Yellowdog_Updater,_Modified)!
 
 很不幸,几乎所有的现代操作系统的Python版本都比我们在这个教程里需要的要老.有许多方法可以安装Python,许多方法都非常苦难.我们提供了最常用的方法,并且提供获取更多信息的链接.
 
@@ -322,11 +337,11 @@ Python2.7.5已经安到你的电脑上了吗?如果你使用的是linux发行版
 
 #### 3.2.1.2 Linux发行版
 
-不幸的是,在Linux发行版上下载更新Python有许多不同的方法.更糟糕的是每个发行版的方法都不一样.例如,Fedora安装Python的方法就和Ubuntu不一样.
+不幸的是,在Linux发行版上下载更新Python有许多不同的方法.更糟糕的是每个发行版的方法都不一样.例如,[Fedora](http://fedoraproject.org/)安装Python的方法就和[Ubuntu](http://www.ubuntu.com/)不一样.
 
-然而并不是一点方法都没有.一个非常牛B的叫做Pythonbrew工具(或者说是Python环境管理器)可以帮助我们解决这一难题.它提供了一个简单的安装和管理不同版本Python的方法.这意味着你可以不用管系统已经默认安装的Python了.
+然而并不是一点方法都没有.一个非常牛B的叫做[Pythonbrew](https://github.com/utahta/pythonbrew)工具(或者说是Python环境管理器)可以帮助我们解决这一难题.它提供了一个简单的安装和管理不同版本Python的方法.这意味着你可以不用管系统已经默认安装的Python了.
 
-可从pythonbrew的主页和stackOverflow了解到,安装Python2.7.5需要以下步骤.
+可从[pythonbrew](https://github.com/utahta/pythonbrew)的主页和[stackOverflow](http://stackoverflow.com/questions/5233536/python-2-7-on-ubuntu)了解到,安装Python2.7.5需要以下步骤.
 
 1. 打开一个终端
 2. 运行命令`curl -kL http://xrl.us/pythonbrewinstall | bash`.你将会下载一个安装器,然后在终端里运行它.pythonbrew将会安装在`~/.pythonbrew`目录.记住`~`符号表示你的主目录.
@@ -336,11 +351,11 @@ Python2.7.5已经安到你的电脑上了吗?如果你使用的是linux发行版
 6. 现在你需要切换Python2.7.5来激活Python的安装.只需要键入`pythonbrew switch 2.7.5`.
 7. Python 2.7.5就已经安装好了.
 
->注意:以点号开头的文件或者目录同windows里的隐藏文件是一样的.Dot file正常情况下是看不见的,他们通常用作配置文件.如果要查看隐藏的文件只需要键入`ls -a`.
+>注意:以点号开头的文件或者目录同windows里的隐藏文件是一样的.[Dot file](http://en.wikipedia.org/wiki/Dot-file)正常情况下是看不见的,他们通常用作配置文件.如果要查看隐藏的文件只需要键入`ls -a`.
 
 #### 3.2.1.3 Windows
 
-Windows并没有默认安装Python.也就是说不必考虑遗留版本的问题,只需下载安装即可.可以从Python官方网站下载64位或者32位的版本.如果你不确定要下载哪一个,你可以通过访问the Microsoft website来确定你的电脑是64位还是32位.
+Windows并没有默认安装Python.也就是说不必考虑遗留版本的问题,只需下载安装即可.可以从[Python官方网站](http://www.python.org/download/)下载64位或者32位的版本.如果你不确定要下载哪一个,你可以通过访问[the Microsoft website](http://windows.microsoft.com/en-gb/windows7/32-bit-and-64-bit-windows-frequently-asked-questions)来确定你的电脑是64位还是32位.
 
 1. 当安装器下好以后,打开它.
 2. 根据提示安装Python
@@ -358,11 +373,11 @@ Windows并没有默认安装Python.也就是说不必考虑遗留版本的问题
 6. 点击确定保存配置.
 7. 关闭所有的命令行,重新打开,试试看键入`python`.
 
-如果一步步做下来Python应当就能安装成功了.对于Windows XP来说,有一些不同,对于Windows 8的情况也是.
+如果一步步做下来Python应当就能安装成功了.对于Windows XP来说,有[一些不同](http://www.computerhope.com/issues/ch000549.htm),对于[Windows 8](http://stackoverflow.com/a/14224786)的情况也是.
 
 ### 3.2.2 设立PYTHONPATH
 
-当Python安装完毕,我们需要检查一下安装是否成功.为了确定安装成功我们需要检查`PYTHONPATH`环境变量成功被设定.`PYTHONPATH`为Python解析器提供了包和模块的位置.如果`PYTHONPATH`设置错误,我们将不能安装和使用Django!
+当Python安装完毕,我们需要检查一下安装是否成功.为了确定安装成功我们需要检查`PYTHONPATH`[环境变量](http://en.wikipedia.org/wiki/Environment_variable)成功被设定.`PYTHONPATH`为Python解析器提供了[包和模块](http://stackoverflow.com/questions/7948494/whats-the-difference-between-a-python-module-and-a-python-package)的位置.如果`PYTHONPATH`设置错误,我们将不能安装和使用Django!
 
 首先,让我们验证`PYTHONPATH`变量存在.在类UNIX系统中,键入如下命令.
 
@@ -419,7 +434,7 @@ export PYTHONPATH=$PYTHONPATH:<PATH_TO_SITE-PACKAGES>
 
 在这本书里我们将使用Pip.Pip是一个对用户更友好的Python包管理工具.因为Pip依赖于Setuptools,所以我们必须保证两个程序都安装在你的电脑上.
 
-一开始我们需要在Python package website下载Setuptools.你可以下载`.tar.gz`文件.用你喜欢的解压软件解压它.它们应当被解压到`setuptools-1.1.6`目录里 - 这里`1.1.6`代表Setuptools版本号.在终端里进入目录执行`ez_setup.py`脚本,如下.
+一开始我们需要在[Python package website](https://pypi.python.org/pypi/setuptools/1.1.6)下载Setuptools.你可以下载`.tar.gz`文件.用你喜欢的解压软件解压它.它们应当被解压到`setuptools-1.1.6`目录里 - 这里`1.1.6`代表Setuptools版本号.在终端里进入目录执行`ez_setup.py`脚本,如下.
 
 ```
 $ cd setuptools-1.1.6
@@ -466,7 +481,7 @@ $ sudo pip install -U django==1.7
 
 ### 3.2.5 安装Python图像库
 
-在建造Rango这个应用的时候,我们需要处理和上传图片.所以我们需要Pillow这个图形库.打开终端输入如下.
+在建造Rango这个应用的时候,我们需要处理和上传图片.所以我们需要[Pillow](https://pillow.readthedocs.org/en/latest/)这个图形库.打开终端输入如下.
 
 ```
 $ pip install pillow
@@ -500,7 +515,7 @@ $ pip install -r requirements.txt
 
 ## 3.3 集成开发环境
 
-尽管不是必须的,但是一个好的集成开发环境(IDE)将会对我们的开发灰常有帮助.像JetBrain系列的PyCharm和PyDev(Eclipse的一个插件)都是比较流行的IDE.Python Wiki会提供一个实时更新的Python IDE列表.
+尽管不是必须的,但是一个好的集成开发环境(IDE)将会对我们的开发灰常有帮助.像JetBrain系列的[PyCharm](http://www.jetbrains.com/pycharm/)和PyDev([Eclipse](http://www.eclipse.org/downloads/)的一个插件)都是比较流行的IDE.[Python Wiki](http://wiki.python.org/moin/IntegratedDevelopmentEnvironments)会提供一个实时更新的Python IDE列表.
 
 可以试试到底哪个适合你,同时要知道其中一些需要购买认证.理想情况下,你会选择一个集成Django的IDE.PyCharm和PyDev都提供了Django的集成 - 尽管你需要告诉IDE你使用的是哪个版本的Python.
 
@@ -508,7 +523,7 @@ $ pip install -r requirements.txt
 
 我们马上就快设置完毕了!在我们继续之前,值得注意的是如果我们就这么安装的话会有很多缺点.加入我们有其他的Python应用,需要另一个版本才能运行?或者你想转到新的版本的Django,但仍然像维持Django1.7项目?
 
-解决的方法就是virtual environment.虚拟环境可以允许我们同时安装不同版本的Python和他们的包.现在,这已经成为一个普遍的方法.
+解决的方法就是[virtual environment](http://simononsoftware.com/virtualenv-tutorial/).虚拟环境可以允许我们同时安装不同版本的Python和他们的包.现在,这已经成为一个普遍的方法.
 
 安装的话也非常好安装.
 
@@ -527,7 +542,7 @@ $ source virtualenvwrapper.sh
 
 为了不必每次使用时都输入这个命令可以在profile里设定.
 
-如果你使用的是Windows环境,那么需要下载virtualenvwrapper-win包:
+如果你使用的是Windows环境,那么需要下载[virtualenvwrapper-win](https://pypi.python.org/pypi/virtualenvwrapper-win)包:
 
 ```
 $ pip install virtualenvwrapper-win
@@ -552,7 +567,7 @@ $ workon rango
 
 ### 3.3.2 代码库
 
-当你进行开发时,可以使用SVN或者GIT来进行版本控制.在我们的教程里不会使用版本控制.但是我们提供了crash course on GIT.我们强烈建议你在自己的项目里建立版本控制.他往往能终究你与水火.
+当你进行开发时,可以使用[SVN](http://subversion.tigris.org/)或者[GIT](http://git-scm.com/)来进行版本控制.在我们的教程里不会使用版本控制.但是我们提供了[crash course on GIT](http://www.tangowithdjango.com/book17/chapters/git.html#git-crash-course).我们强烈建议你在自己的项目里建立版本控制.他往往能终究你与水火.
 
 ## 3.4 练习
 
@@ -564,7 +579,7 @@ $ workon rango
 * 设置虚拟环境
 * 设置你的GitHub账号
 * 下载并设置IDE(比如PyCharm)
-* 我们将书中的代码放在了GitHub,参见Tango With Django Book和Rango Application
+* 我们将书中的代码放在了GitHub,参见[Tango With Django Book](https://github.com/leifos/tango_with_django_book)和[Rango Application](https://github.com/leifos/tango_with_django)
 	* 如果你对这本书遇到错误和问题,你可以创建一个request!
     * 如果对练习题有问题,你可以检查代码库看看我们是如何完成的.
 
@@ -3692,6 +3707,248 @@ def get_category_list(cat=None):
 `)
 
 重启Django服务并访问页面.我们可以传递`category`变量.当你浏览一个目录页面,模板会访问`catogory`变量并且为`get_category_list()`提供`cat`值.然后`cats.html`会选择哪一个目录高亮.
+
+# 15 增加外部搜索功能
+
+在这个阶段,我们的Rango看起来已经非常好啦 - 大部分的功能都已经实现了,在这章,我们将为我们的Rango提供Bing的搜索的功能而不是仅仅使用目录.首先让我们先设置一个Bing账户来使用它的API,然后把Bing搜索集成进Rango.
+
+## 15.1 Bing搜索API
+
+Bing搜索API提供了在你的应用中嵌入搜索结果的功能.通过简单的交互,你可以从Bing的服务器返回一个XML或者JSON.这个数据可以通过XML或者JSON解析器进行解析,最后结果传递给你的模板进行调用.
+
+尽管Bing的API可以处理不同内容的请求,我们只需要关注本教程使用的部分 - 就是处理响应的JSON.为了使用Bing搜索的API,你需要注册一个API key.这个key可以给用户每个月5000次请求的权限,对于我们个人用户来说足够用了.
+
+### 15.1.1 注册一个API key
+
+为了注册一个Bing API key,你必须首先注册一个免费的Microsoft账户.这个账户提供了许多的Microsoft服务.如果你已经有一个Hotmail账户,那么就不用再注册了.你可以在这里 https://account.windowsazure.com 注册和登录帐号.
+
+当你创建完帐号,访问 Windows Azure Marketplace Bing Search API page.在页面的顶部你需要点击Sign In按钮 - 如果你已经你已经进入到Microsoft账户(上面写着Sing Out),就不需要再登录了.
+
+页面右边的列表是每月的事务量.在最顶部是5000/月.点击右边的注册按钮 - 你将会订阅一个免费的服务.阅读完有关条例以后,如果同意条款点击注册按钮继续.接下来将会显示成功注册的页面.
+
+注册成功以后,点击页面顶部的数据链接.在这里你将会看到Windows Azure Marketplace的可用资源列表.在这个列表顶部应当是Bing Search API - 同时右边显示的是你已订阅该资源.点击位于右边的使用.你将会看到如下图所示的页面.
+
+![](img/bing-explore.png)
+
+你可以通过左侧的输入栏输入信息来尝试Bing Search API.例如查询栏允许你输入查询语句来发送给API.确保在屏幕的底部选择Web,这样我们就可以只得到网页搜索结果.注意上不的蓝色框中的URL会随着你选择的网页地址而改变.记下这个Web搜索URL.一会我们将会在我们的代码中使用这个URL.下面是使用网页搜错查询rango的例子.
+
+```
+https://api.datamarket.azure.com/Bing/Search/v1/Web?Query=%27rango%27
+```
+
+我们需要得到API key以便在你发送请求时得到Bing服务器的认证.为了获取你的key,点击页面上部的主帐户密钥现实按钮.这样你就会看到你的API key了.一会我们将使用它,先把它记下来 - 还要注意不要泄露这个key!如果别人得到你的key,那么别人就可以使用你的key进行免费的查询了.
+
+>注意:这个页面同时现实剩余每月的事务量.
+
+## 15.2 增加搜索功能
+
+为了增加Rango的搜索功能,我们必须增加一个Bing API查询语句.这个代码将会从一个特定的用户获取请求,并返回一个列表作为结果.所有在API查询阶段的错误都能被很好的处理.拆分这个搜索函数作为添加函数可以有效的分离Django代码和搜索函数代码.
+
+开始,在`rango`应用目录里添加一个新的Python模块`bing_search.py`.代码如下.注意查看注释的内容.
+
+```python
+import json
+import urllib, urllib2
+
+# Add your BING_API_KEY
+
+BING_API_KEY = '<insert_bing_api_key>'
+
+def run_query(search_terms):
+    # Specify the base
+    root_url = 'https://api.datamarket.azure.com/Bing/Search/'
+    source = 'Web'
+
+    # Specify how many results we wish to be returned per page.
+    # Offset specifies where in the results list to start from.
+    # With results_per_page = 10 and offset = 11, this would start from page 2.
+    results_per_page = 10
+    offset = 0
+
+    # Wrap quotes around our query terms as required by the Bing API.
+    # The query we will then use is stored within variable query.
+    query = "'{0}'".format(search_terms)
+    query = urllib.quote(query)
+
+    # Construct the latter part of our request's URL.
+    # Sets the format of the response to JSON and sets other properties.
+    search_url = "{0}{1}?$format=json&$top={2}&$skip={3}&Query={4}".format(
+        root_url,
+        source,
+        results_per_page,
+        offset,
+        query)
+
+    # Setup authentication with the Bing servers.
+    # The username MUST be a blank string, and put in your API key!
+    username = ''
+
+
+    # Create a 'password manager' which handles authentication for us.
+    password_mgr = urllib2.HTTPPasswordMgrWithDefaultRealm()
+    password_mgr.add_password(None, search_url, username, BING_API_KEY)
+
+    # Create our results list which we'll populate.
+    results = []
+
+    try:
+        # Prepare for connecting to Bing's servers.
+        handler = urllib2.HTTPBasicAuthHandler(password_mgr)
+        opener = urllib2.build_opener(handler)
+        urllib2.install_opener(opener)
+
+        # Connect to the server and read the response generated.
+        response = urllib2.urlopen(search_url).read()
+
+        # Convert the string response to a Python dictionary object.
+        json_response = json.loads(response)
+
+        # Loop through each page returned, populating out results list.
+        for result in json_response['d']['results']:
+            results.append({
+            'title': result['Title'],
+            'link': result['Url'],
+            'summary': result['Description']})
+
+    # Catch a URLError exception - something went wrong when connecting!
+    except urllib2.URLError, e:
+        print "Error when querying the Bing API: ", e
+
+    # Return the list of results to the calling function.
+    return results
+```
+
+上面的代码逻辑可以分为六个部分:
+
+* 首先,定义准备请求Bing的URL地址.
+* 然后准备用你的Bing API key进行认证.确保用你的Bing API key替代`<api_key>`.
+* 然后我们用命令`urllib2.urlopen(search_url)`连接Bing API.服务器返回的结果会保存在一个字符串里.
+* 这个字符串会被`json`Python包解析成一个Python字典对象.
+* 我们遍历所有返回的结果生成一个`results`字典.每个返回结果都带有页面`title`,URL`link`还有一小段`summary`.
+* 最后函数返回这个字典.
+
+注意从Bing服务器返回的结果是JSON.这是因为我们在请求中标明了返回JSON - 查看一下我们定义的`search_url`变量.如果在尝试连接Bing服务器的时候发生了错误,就会通过`except`代码块中的`print`语句打印出来.
+
+>注意:Bing搜索API还有许多可控参数我们没有涉及到,如果你有兴趣可以查看这里:Bing Search API Migration Guide and FAQ
+
+## 15.3 安全的保存你的API KEY
+
+如果你把你的代码保存在像Github这样的公共仓库,你必须小心你的API Key了.一个解决办法是创建一个新的`keys.py`文件,调用里面的`BING_API_KEY`变量.然后把`BING_API_KEY`导入到`bing_search.py`里.修改你的`.gitignore`文件包含`keys.py`,最终你的`keys.py`就不会被添加到项目里了.它只会存储在本地.
+
+## 15.4 练习
+
+上面我们已经完成了Bing搜索API的功能,试试下面的练习.**如果使用一个公共仓库,重构一下代码不要把你的API key泄露**,在`bing_search.py`中加入`main()`函数来测试一下Bing搜索api(提示:加入下面代码,当你使用`python bing_search.py`的时候会调用`main()`函数)
+
+```python
+if __name__ == '__main__':
+    main()
+```
+
+* 主函数将会向用户请求一个查询语句(从命令行),然后通过`run_query`方法来请求Bing API,最后会打印处前十个结果.
+* 打印每个结果的`rank`,`title`和`URL`
+
+## 15.5 把搜索放入Rango
+
+为了加入外部搜索我们需要进行以下几步.
+
+1. 我们需要创建一个继承自`base.html`模板的`search.html`模板.这个模板将会包含一个HTML`<form>`来获取用户输入的请求,然后会程序返回的结果.
+2. 然后我们创建一个视图来处理`search.html`模板传递给我们的参数,然后调用我们上面定义的`run_query()`函数.
+
+### 15.5.1 加入搜索模板
+
+让我们现建立一个`search.html`模板.代码如下.
+
+```html
+{% extends "base.html" %}
+
+{% load staticfiles %}
+
+{% block title %}Search{% endblock %}
+
+{% block body_block %}
+
+    <div class="page-header">
+        <h1>Search with Rango</h1>
+    </div>
+
+    <div class="row">
+
+        <div class="panel panel-primary">
+            <br/>
+
+            <form class="form-inline" id="user_form" method="post" action="{% url 'search' %}">
+                {% csrf_token %}
+                <!-- Display the search form elements here -->
+                <input class="form-control" type="text" size="50" name="query" value="" id="query" />
+                <input class="btn btn-primary" type="submit" name="submit" value="Search" />
+                <br />
+            </form>
+
+            <div class="panel">
+                {% if result_list %}
+                    <div class="panel-heading">
+                    <h3 class="panel-title">Results</h3>
+                    <!-- Display search results in an ordered list -->
+                    <div class="panel-body">
+                        <div class="list-group">
+                            {% for result in result_list %}
+                                <div class="list-group-item">
+                                    <h4 class="list-group-item-heading"><a href="{{ result.link }}">{{ result.title }}</a></h4>
+                                    <p class="list-group-item-text">{{ result.summary }}</p>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                {% endif %}
+                </div>
+            </div>
+ </div>
+
+{% endblock %}
+```
+
+这段代码完成了两个主要功能:
+
+1. 在所有情况下,它都会展现一个搜索框和一个搜索按钮,使用一个HTML`<form>`来供用户输入并发送查询语句.
+2. 当`results_list`传递给模板上下文时,模板将会展示它包含的所有结果.
+
+我们用Bootstrap来美化我们的html:panels, http://getbootstrap.com/components/#panels ,list groups, http://getbootstrap.com/components/#list-group, and inline forms, http://getbootstrap.com/css/#forms-inline.
+
+一会我们就可以看到我们的视图了,只有当返回结果时`results_list`才会传递给模板.当我们第一次载入我们的搜索页面时我们还没有得到结果 - 因为用户还没有提交查询!
+
+### 15.5.2 添加视图
+
+添加完搜索模板后,我们可以添加视图了.在`views.py`模块里添加下面`search()`视图.
+
+```python
+
+    result_list = []
+
+    if request.method == 'POST':
+        query = request.POST['query'].strip()
+
+        if query:
+            # Run our Bing function to get the results list!
+            result_list = run_query(query)
+
+    return render(request, 'rango/search.html', {'result_list': result_list})
+```
+
+到现在为止,你应当能理解上面代码了.主要是添加了调用我们先前增加的`run_query()`函数.为了调用它我们需要导入`bing_search.py`模块.确保运行代码前在`views.py`模块顶部加入了如下代码.
+
+```python
+from rango.bing_search import run_query
+```
+
+同时你也需要确保如下.
+
+1. 增加`search()`视图和`/rango/search/`URL的映射,命名为`name='search'`.
+2. 在`base.html`导航栏增加搜索链接.记得使用`url`模板标签来引用链接.
+
+>注意:通过relevant article on Wikipedia,一个Application Programming Interface (API)是指软件之间如何进行交互.在web应用中API是指一系列已经定义结构的HTTP请求和它们所返回的各样请求信息.任何在互联网上有意义的服务都可以提供它们自己的API - 不限于web搜索.更多的API信息请看 Luis Rei provides an excellent tutorial on APIs.
+
+
+
 
 
 
