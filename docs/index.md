@@ -4174,4 +4174,149 @@ def category(request, category_name_slug):
 
 注意到在我们传递的`context_dict`字典里我们包含了`resut_list`和`query`,如果没有请求,我们将提供一个默认的请求,例如目录名.然后请求框会现实这个变量.
 
+# 18 JQuery和Django
+
+JQuery是集成了Javascript一些实用功能的库.几行JQuery可以代替几百行的javascript代码.JQuery提供了一整套操作HTML元素的函数.在本章,我们将会:
+
+* 如何在Django应用里使用JQuery
+* 向你阐释如何与JQuery代码交互
+* 提供一些小例子
+
+## 18.1 在你的Django项目/应用里使用JQuery
+
+在你的基础模板里加入下面:
+
+```html
+{% load staticfiles %}
+
+<script src="{% static "js/jquery-1.11.1.js" %}"></script>
+<script src="{% static "js/rango-jquery.js" %}"></script>
+```
+
+这里我们假设你已经下载了JQuery库,但是你也可以直接引用它们:
+
+```html
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+```
+
+确定你已经设置了静态文件(参看[第4章][4])
+
+在静态文件夹创建`js`目录,然后把JQuery文件(jquery.js)放入这里,同时创建一个叫做`rango-jquery.js`的文件,我们将会在这里写入javascript代码.在`rango-jquery.js`里添加下面:
+
+```javascript
+$(document).ready(function() {
+
+        // JQuery code to be added in here.
+
+        });
+```
+
+这段javascript代码会首先选择一个文档对象(使用`$(document)`),然后调用`ready()`.一旦文档准备好(例如,整个页面加载完毕),这个`function(){}`匿名函数包含的内容会被执行.这是非常常用的方法,它会移植等到文档全部载入完毕再执行JQuery函数.否则的话,代码就会尝试执行,但是这时候HTML文档或许还没有下载完毕(查看http://api.jquery.com/ready/)
+
+### 18.1.1 代码风格
+
+和传统的javascript侧重过程变成不一样,JQuery要求使用侧重功能的编程风格.对于所有的JQuery命令,它们遵循相同的形式:选择和行为.选择一个元素和早做一个元素.所以最好记住它.这里提供了许多不同的选择操作符和不同的动作.在下一部分我们将会使用一些JQuery函数来早做HTML元素.
+
+## 18.2 点击弹出框的例子
+
+在这个例子中,我们想要展示使用Javascript和JQuery完成相同的功能,以对比它们的不同之处.
+
+在你的`about.html`模板,加入下面代码:
+
+```html
+<button onClick="alert('You clicked the button using Javascript.');">
+       Click Me - I run Javascript
+</button>
+```
+
+我们在按钮`onClick`事件中加入`alert()`函数.加载`about`页面,试一试.
+
+现在容我们用JQuery加入另一个按钮:
+
+```html
+<button id="about-btn"> Click Me - I'm Javascript on Speed</button>
+
+<p>This is a example</p>
+
+<p>This is another example</p>
+```
+
+现在这个按钮还没有关联javascript代码.下面我们将会在`rango-jquery.js`增加如下代码:
+
+```javascript
+$(document).ready( function() {
+
+    $("#about-btn").click( function(event) {
+        alert("You clicked the button using JQuery!");
+    });
+});
+```
+
+加载页面尝试一下.如果顺利的话点击两个按钮都将会弹出会话.
+
+这个JQuery/Javascript代码,首先会选择文档对象,当页面加载完毕以后,会执行里面的代码,例如`$("#about-btn").click()`,它将会选择页面中id等于`about-btn`的元素,然后会设置点击事件启用`alert()`函数.
+
+看了上面的例子你或许会想JQuery太笨重了,做同样的事需要更多的代码.对于简单的像`alert()`这样的函数或许是真的,但是如果面对复杂的功能它更适用,它会使JQuery/Javascript代码保存在不同的文件(完全的!!).这是因为只是在运行的时候设置事件出发而不是静态的写在代码里.这样我们就成功的分离了JQuery/javascript和HTML代码.
+
+>注意:CSS,JAVASCRIPT和HTML,你也需要保持它们分离!
+
+## 18.3 选择器
+
+在JQuery里有许多不同的方式来选择元素.从上面的例子展示了如何使用`#`来在HTML文档里找到`id`元素.查找类时,你可以使用`.`,例如:
+
+```javascript
+$(".ouch").click( function(event) {
+           alert("You clicked me! ouch!");
+});
+```
+
+所有含有`class="ouch"`的元素将被选择,然后设置一个点击事件触发`alert()`函数.注意所有的元素都将会设置相同的函数.
+
+HTML标签也可以通过选择器进行选择:
+
+```javascript
+$("p").hover( function() {
+            $(this).css('color', 'red');
+    },
+    function() {
+            $(this).css('color', 'blue');
+    });
+```
+
+这里我们选择了HTML里所有的`p`元素,并关联了两个函数,一个是浮动状态另一个是非浮动状态.可以看到使用了另一个叫做`this`的选择器,它会选择先前选过的元素然后分别设置为红色或蓝色.注意,JQuery`hover()`函数里包含两个函数(查看 http://api.jquery.com/hover/ ),`click()`需要传递事件(查看 http://api.jquery.com/click/ ).
+
+试着在`rango-jquery.js`里加入上面代码,确保它们包含在`$(document).ready()`函数里.试想一下如果把`$(this)`改成`$(p)`会怎么样?
+
+浮动是一个鼠标事件简单的例子,获取更多信息请看: http://api.jquery.com/category/events/mouse-events/ .
+
+## 18.4 操作DOM实例
+
+在上面的例子中我们使用`hover`函数来设置浮动事件的触发,然后使用`css`函数来改变元素的颜色.这个`css`是操作DOM的一个例子,然而标准JQuery库提供了许多其他方法来操作DOM.例如我们使用`addClass`函数为元素添加类:
+
+```javascript
+$("#about-btn").addClass('btn btn-primary')
+```
+
+它将会选择id为`#about-btn`的元素并且设置`btn`和`btn-primary`类.加入上面的代码后,它会改变按钮为Bootstrap样式(如果你使用了Bootstrap套件).
+
+我们还可以选择特定元素.例如,让我们在`about.html`加入一个`div`:
+
+```html
+<div id="msg">Hello</div>
+```
+
+然后在`rango-jquery.js`中加入下面代码:
+
+```javascript
+$("#about-btn").click( function(event) {
+msgstr = $("#msg").html()
+        msgstr = msgstr + "o"
+        $("#msg").html(msgstr)
+ });
+```
+
+当点击了id为`#about-btn`的按钮,我们首先得到在其中id为`msg`的元素并且添加一个"o".然后通过再次调用`html`函数改变html里的元素,但是这次的作用是用`msgstr`代替html里的元素.
+
+在这章里我们简单的介绍了如何在Django应用里使用JQuery.现在你应当已经知道了如何使用JQuery,并且都收验证了JQuery提供的几个功能(查看 http://jquery.com ).在下一章,我们将会使用JQuery来帮助我们实现AJAX功能.
+
 
