@@ -3187,13 +3187,13 @@ else:
 return render(request, 'rango/about.html', {'visits': count})
 ```
 
-# 12 使用Django-Registration-Redux进行用户验证
+# 12 使用DRR进行验证
 
 在Django里有许多的应用提供登录,注册和验证机制.许多的应用都提供这种功能而且几乎不重写url,视图和模板.在这章,我们需要使用`django-registration-redux`包来提供这些功能.这就意味着我们需要重构我们的代码 - 然而它将会教给我们如何使用外部应用以及如何轻松的在我们Django项目里加入应用.它也会使我们的应用更加简洁.
 
 >注意:这章并不是必要的,你可以跳过,但是在随后的章节里我们会假设你已经更新了验证机制.
 
-## 12.1 设置Django-Registration-Redux
+## 12.1 设置DRR
 
 开始我们先安装`django-registration-redux`:
 
