@@ -4027,3 +4027,151 @@ Rango旨在为用户提供有用的页面链接目录.现在这个搜索功能�
 # 17 代码和提示
 
 如果你能够根据我们上一章的提示完成练习就太好了,如果不能的话这章将会给你一些提示和代码来帮助你完成.
+
+## 17.1 跟踪页面点击
+
+目前Rango直接提供了外部页面的链接.对于要统计每个页面点击和浏览次数很不利.为了计算通过Rango浏览一个页面的次数你需要完成下面几个步骤.
+
+### 17.1.1 创建URL跟踪视图
+
+在`/rango/views.py`里创建一个叫做`track_url()`的新视图,它将会获取HTTP`GET`请求的参数(例如`rango/goto/?page_id=1`)并且修改浏览页面的次数.
+
+```python
+from django.shortcuts import redirect
+
+def track_url(request):
+    page_id = None
+    url = '/rango/'
+    if request.method == 'GET':
+        if 'page_id' in request.GET:
+            page_id = request.GET['page_id']
+            try:
+                page = Page.objects.get(id=page_id)
+                page.views = page.views + 1
+                page.save()
+                url = page.url
+            except:
+                pass
+
+    return redirect(url)
+```
+
+确保在`views.py`文件里引入了`redirect()`函数.
+
+```python
+from django.shortcuts import redirect
+```
+
+### 17.1.2 映射URL
+
+在`/rango/urls.py`里为`urlpatterns`元组增加下列代码.
+
+```python
+url(r'^goto/$', views.track_url, name='goto'),
+```
+
+### 17.1.3 修改目录模板
+
+修改`category.html`模板的链接,使用户点击时访问`rango/goto/?page_id=XXX`而不是直接访问链接
+
+```python
+{% for page in pages %}
+            <li>
+            <a href="{% url 'goto' %}?page_id={{page.id}}">{{ page.title }}</a>
+        {% if page.views > 1 %}
+            ({{ page.views }} views)
+            {% elif page.views == 1 %}
+            ({{ page.views }} view)
+        {% endif %}
+            </li>
+{% endfor %}
+```
+
+在这里我们可以看到在模板里我们添加了一些控制语句来展示`view`,`views`或者什么也不展示,这依赖于`page.views`的值.
+
+### 17.1.4 修改目录视图
+
+因为我们我们需要追踪点击数,你需要修改`category()`视图使页面按照浏览次数排序,例如:
+
+```python
+pages = Page.objects.filter(category=category).order_by('-views')
+```
+
+现在可以点击以下链接,然后回到目录页检查一下是否正常工作.不要忘记刷新或者点击其他目录来查看页面的更改.
+
+## 17.2 在目录页搜索
+
+我们首先需要移除先前添加的搜索功能然后只让用户在目录页面进行搜索.这意味着我们需要删除现在的搜索页面和搜索视图.我们需要完成下面的步骤.
+
+### 17.2.1 移除搜索
+
+把`search.html`代码放入`category.html`中.确定`action`指向`category()`视图.
+
+```html
+<form class="form-inline" id="user_form" method="post" action="{% url 'category'  category.slug %}">
+     {% csrf_token %}
+     <!-- Display the search form elements here -->
+     <input class="form-control" type="text" size="50" name="query" value="{{query}}" id="query" />
+     <input class="btn btn-primary" type="submit" name="submit" value="Search" />
+</form>
+```
+
+在底部添加`<div>`来存放搜索结果.
+
+```html
+<div class="panel">
+        {% if result_list %}
+        <div class="panel-heading">
+                <h3 class="panel-title">Results</h3>
+                <!-- Display search results in an ordered list -->
+                <div class="panel-body">
+                <div class="list-group">
+                        {% for result in result_list %}
+                    <div class="list-group-item">
+                        <h4 class="list-group-item-heading"><a href="{{ result.link }}">{{ result.title }}</a></h4>
+                        <p class="list-group-item-text">{{ result.summary }}</p>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    {% endif %}
+</div>
+```
+
+### 17.2.3 修改目录视图
+
+修改category视图来活的HTTP`POST`请求(例如当用户提交一个搜索)并且把结果列表存入上下文中.下面的代码实现这个功能.
+
+```python
+def category(request, category_name_slug):
+    context_dict = {}
+    context_dict['result_list'] = None
+    context_dict['query'] = None
+    if request.method == 'POST':
+        query = request.POST['query'].strip()
+
+        if query:
+            # Run our Bing function to get the results list!
+            result_list = run_query(query)
+
+            context_dict['result_list'] = result_list
+            context_dict['query'] = query
+
+    try:
+        category = Category.objects.get(slug=category_name_slug)
+        context_dict['category_name'] = category.name
+        pages = Page.objects.filter(category=category).order_by('-views')
+        context_dict['pages'] = pages
+        context_dict['category'] = category
+    except Category.DoesNotExist:
+        pass
+
+    if not context_dict['query']:
+        context_dict['query'] = category.name
+
+    return render(request, 'rango/category.html', context_dict)
+```
+
+注意到在我们传递的`context_dict`字典里我们包含了`resut_list`和`query`,如果没有请求,我们将提供一个默认的请求,例如目录名.然后请求框会现实这个变量.
+
+
