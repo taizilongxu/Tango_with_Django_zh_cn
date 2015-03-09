@@ -4319,4 +4319,262 @@ msgstr = $("#msg").html()
 
 在这章里我们简单的介绍了如何在Django应用里使用JQuery.现在你应当已经知道了如何使用JQuery,并且都收验证了JQuery提供的几个功能(查看 http://jquery.com ).在下一章,我们将会使用JQuery来帮助我们实现AJAX功能.
 
+# 19 使用AJAX
 
+AJAX是一种混合技术,它可以减少页面加载的数量.代替了以往的加载全部页面,AJAX可以使一部分页面或者数据进行重载.如果你从来没有使用过AJAX或者你想在使用之前多多了解一下,可以查看这个网站: https://developer.mozilla.org/en-US/docs/AJAX
+
+为了简化AJAX请求,我们使用JQuery库.注意,如果你使用了Twitter CSS Bootstrap套件,那么他已经加入了JQuery.否则的话,下载JQuery最近的版本然后加入到你的应用里(查看..).
+
+## 19.1 AJAX基本功能
+
+为了使我们无缝的和Rango进行交互,让我们用AJAX加入一些特性,例如:
+
+* 增加"Like Button"让注册用户可以"like"一个特殊的目录
+* 增加一个行内的目录建议 - 这样当用户键入的时候就能很快的找到目录
+* 增加"Add Button"使用户快速的方便的为目录添加页面
+
+创建`rango-ajax.js`文件并放入到`js`目录.然后在你的基础模板里:
+
+```html
+<script src="{% static "js/jquery.js" %}"></script>
+<script src="{% static "js/rango-ajax.js" %}"></script>
+```
+
+这里我们假设你已经下载了JQuery库,但是如果没有的话可以直接引用:
+
+```html
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+```
+
+现在我们已经完成加入JQuery的准备工作.
+
+## 19.2 增加"Like Button"
+
+对于注册用户可以标记"like"一个目录是很友好的.接下来,我们将让用户"like"目录,但是我们将不会跟踪用户已经"like"的目录,我们相信用户不会重复点击喜欢按钮.
+
+### 19.2.1 工作流程
+
+为了让用户"like"特定的目录需要以下步骤:
+
+* 在`cateegory.html`模板:
+    * 增加"like"按钮并且使用`id="like"`.
+    * 增加一个模板标签来展示喜欢的数量:`{{% category.likes %}}`
+    * 添加一个`div`并使用`id="like_count"`,例如: `<div id="like_count">{{ category.likes }} </div>`
+    * 设置完后模板会获取喜欢并且展示喜欢的目录
+    * 注意,因为`category()`视图会传递一个目录对象的引用,我们可以使用`{{ category.likes }}`来获取用户喜欢数
+* 创建`like_category`视图,它将会检测请求并取出`category_id`参数,并且增加喜欢目录的数目.
+    * 不要往家增加url映射;例如 把`like_category`视图映射到`rango/like_category/`.`GET`请求将会是`rango/like_category/?category_id=XXX`样式.
+    * 和以往返回HTML页面不同,这个视图将返回新的喜欢目录总数.
+* 现在在`rango-ajax.js`文件中加入JQuery代码来发送AJAX`GET`请求.
+    * 如果请求成功, 修改`#like_count`元素并隐藏喜欢按钮.
+
+### 19.2.2 修改目录模板
+
+我们需要添加`id="like"的`"Like"按钮,并且创建一个`<div>`来展示喜欢数量`{{% category.likes %}}`.
+
+```html
+<p>
+
+<strong id="like_count">{{ category.likes }}</strong> people like this category
+
+{% if user.is_authenticated %}
+        <button id="likes" data-catid="{{category.id}}" class="btn btn-primary" type="button">
+        <span class="glyphicon glyphicon-thumbs-up"></span>
+        Like
+        </button>
+{% endif %}
+
+</p>
+```
+
+### 19.2.3 创建喜欢目录视图
+
+在`rango/views.py`里创建`like_category`视图,它会检测请求并抽取出`category_id`然后增加喜欢目录的数量.
+
+```python
+from django.contrib.auth.decorators import login_required
+
+@login_required
+def like_category(request):
+
+    cat_id = None
+    if request.method == 'GET':
+        cat_id = request.GET['category_id']
+
+    likes = 0
+    if cat_id:
+        cat = Category.objects.get(id=int(cat_id))
+        if cat:
+            likes = cat.likes + 1
+            cat.likes =  likes
+            cat.save()
+
+    return HttpResponse(likes)
+```
+
+这里只有注册用户才有权限标记喜欢的目录.这是视图假设通过`GET`方式传递进一个`category_id`变量,这样我们可以知道要更改哪个目录.在这个视图里,如果我们需要的话可以跟踪和记录特定用户喜欢的目录 - 但是在这里我们为了保持AJAX简单就不这样做了.
+
+不要忘记在`rango/urls.py`里增加URL映射.修改`urlpatterns`如下:
+
+```python
+url(r'^like_category/$', views.like_category, name='like_category'),
+```
+
+### 19.2.4 设置AJAX请求
+
+现在需要在`rango-ajax.js`里添加一些JQuery代码来完成AJAX`GET`请求.增加代码如下:
+
+```javascript
+$('#likes').click(function(){
+    var catid;
+    catid = $(this).attr("data-catid");
+    $.get('/rango/like_category/', {category_id: catid}, function(data){
+               $('#like_count').html(data);
+               $('#likes').hide();
+    });
+});
+```
+
+这段JQuery/Javascript代码将会处理id为`#likes`的元素,例如按钮.当点击过后,它将会从按钮元素里抽取出category的id,并把`category_id`写入一个AJAX`GET`请求中,这个请求的地址是`/rango/like_category/`.如果请求成功的话,这个id为`like_count`的HTML元素将会更新为返回的内容,而id为`likes`的按钮将会被隐藏.
+
+这背后运行的机理有些复杂.基本上,当一个按钮被点击后就会生成一个AJAX请求,它将会映射到相应的url,传递给`like_category`视图,最后视图将会更改目录并返回新的喜欢数目.当AJAX请求得到响应它就会修改部分页面,例如文本和按钮.`#like`按钮将会被隐藏.
+
+## 19.3 增加行内目录提示
+
+如果我们提供给用户快速寻找目录的方法那就再好不过了,而不是让用户浏览尝尝的列表.我们可以创建一个提示组建使用户输入一个字母或单词的一部分,然后会返回一个提示目录列表,这样用户就可以选择它们了.随着用户的输入服务器返回的目录将会更加接近用户所需要的.
+
+### 19.3.1 工作流程
+
+你需要以下步骤.
+
+* 创建一个带参函数`get_category_list(max_results=0, starts_with='')`,如果`max_result=0`的话它会返回所有以`starts_with`开头的目录,否则的话它会返回最多`max_results`个目录.
+	* 这个函数将会返回一个目录对象的列表,连同它们已经编码过后的`url`属性.
+* 创建一个叫做`suggest_category`的视图,它将会检测请求并抽取目录查询语句.
+	* 假设`GET`请求已经生成并尝试得到查询属性.
+    * 如果查询语句非空,询问目录模型获取获取8个最前面的以查询字符串为首的目录.
+    * 这个目录对象列表将会通过模板整合进HTML的一部分.
+* 我们不用再新建一个`suggestions.html`模板了,我们可以重用`cats.html`.它可以展示同样类型的数据.(目录)
+* 让客户端请求这个数据,你需要创建一个URL映射:让我们命名为`category_suggest`好了
+
+映射视图和模板后,你需要修改`base.html`模板并添加一些javascript代码以便展示用户输入的目录.
+
+* 在`base.html`模板里修改侧边栏,添加进一个`id="cats"`的`<div>`以便呈现目录.JQuery/AJAX将会修改这个元素.
+	* 在这个`<div>`上面添加一个输入框使用户可以输入目录的字母,例如:`<input  class="input-medium search-query" type="text" name="suggestion" value="" id="suggestion" />`
+* 当这些元素都添加修改完毕,你需要添加一些JQuery代码来修改用户输入所呈现的目录列表.
+	* 在`input`里关联一个id为`"suggestion"`的按键事件
+    * `$('#suggestion').keyup(function(){ ... })`
+    * 当按键结束抬起时调用一个ajax来请求更新目录列表
+    * 然后使用JQuery`.get()`函数,例如`$(this).get( ... )`
+    * 如果调用成功,用返回的数据替换`id="cats"`的`<div>`.
+    * 这里你可以使用JQuery的`.html()`函数,例如`$('#cats').html( data )`
+
+### 19.3.2  参数化获取目录列表函数
+
+在这个函数的帮助下,我们使用一个过滤器来查找以提供的字符串开头的目录.我们将使用`istartwith`来进行过滤,它可以确保输入的大小写无关.如果想使用大小写相关那就久使用`startswith`来替代.
+
+```python
+def get_category_list(max_results=0, starts_with=''):
+        cat_list = []
+        if starts_with:
+                cat_list = Category.objects.filter(name__istartswith=starts_with)
+
+        if max_results > 0:
+                if len(cat_list) > max_results:
+                        cat_list = cat_list[:max_results]
+
+        return cat_list
+```
+
+### 19.3.4 映射视图到URL
+
+在`rango/urls.py`的`urlpatterns`元组增加以下:
+
+```python
+url(r'^suggest_category/$', views.suggest_category, name='suggest_category'),
+```
+
+### 19.3.5 修改基础模板
+
+在基础模板的侧边栏加入`<div>`如下:
+
+```html
+<ul class="nav nav-list">
+        <li class="nav-header">Find a Category</li>
+        <form>
+        <label></label>
+        <li><input  class="search-query span10" type="text" name="suggestion" value="" id="suggestion" /></li>
+        </form>
+</ul>
+
+<div id="cats">
+</div>
+```
+
+这里我们加入了一个`id="suggestion"`的输入框和一个`id="cats"`的div(这个div用来展示返回结果).我们这里不需要加入按钮,因为我们添加了一个按键抬起的事件,触发它可以传送提示请求.
+
+### 19.3.6 增加AJAX请求提示
+
+在`js/rango-ajax.js`增加如下:
+
+```javascript
+$('#suggestion').keyup(function(){
+        var query;
+        query = $(this).val();
+        $.get('/rango/suggest_category/', {suggestion: query}, function(data){
+         $('#cats').html(data);
+        });
+});
+```
+
+这里我们绑定了一个`id="suggestion"`的输入框来捕捉按键抬起事件.当它获取输入框的内容后会把让放入`query`变量.然后会调用一个AJAX`GET`请求,这个请求里包含`query`参数.如果请求成功,这个`id="cats"`的HTML元素(div)会更新目录列表.
+
+## 19.4 练习
+
+为了让注册用户快速简单的添加一个页面到目录里,在每个搜索结果旁边添加"Add"按钮.
+
+* 修改`category.html`模板:
+	* 在每个搜索结果后面加入一个小按钮(如果用户已经验证),同时加入标题和url信息,以便JQuery能够抽取出来.
+    * 在目录的每个页面都用`id="page"`的`<div>`包含,这样当页面增加的时候会更新.
+    * 如果你喜欢的话移除增加按钮的链接.
+* 增加一个`auto_add_page`视图,它会接收`GET`请求的参数(title,utl,catid)并且添加到目录.
+* 映射视图到url`url(r'^auto_add_page/$', views.auto_add_page, name='auto_add_page')`
+* 使用JQuery绑定按钮事件 - 当添加过后隐藏按钮.同时也修改目录页的那些页面.
+
+### 19.4.1 提示
+
+HTML模板代码:
+
+```html
+{% if user.is_authenticated %}
+        <button data-catid="{{category.id}}" data-title="{{ result.title }}" data-url="{{ result.link }}" class="rango-add btn btn-mini btn-info" type="button">Add</button>
+{% endif %}
+```
+
+JQuery代码:
+
+注意这里我们需要绑定所有`rango-add`类按钮的事件.
+
+视图代码:
+
+```python
+@login_required
+def auto_add_page(request):
+    cat_id = None
+    url = None
+    title = None
+    context_dict = {}
+    if request.method == 'GET':
+        cat_id = request.GET['category_id']
+        url = request.GET['url']
+        title = request.GET['title']
+        if cat_id:
+            category = Category.objects.get(id=int(cat_id))
+            p = Page.objects.get_or_create(category=category, title=title, url=url)
+
+            pages = Page.objects.filter(category=category).order_by('-views')
+
+            # Adds our results list to the template context under name pages.
+            context_dict['pages'] = pages
+
+    return render(request, 'rango/page_list.html', context_dict)
+```
