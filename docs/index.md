@@ -3947,47 +3947,83 @@ from rango.bing_search import run_query
 
 >注意:通过relevant article on Wikipedia,一个Application Programming Interface (API)是指软件之间如何进行交互.在web应用中API是指一系列已经定义结构的HTTP请求和它们所返回的各样请求信息.任何在互联网上有意义的服务都可以提供它们自己的API - 不限于web搜索.更多的API信息请看 Luis Rei provides an excellent tutorial on APIs.
 
+# 16 练习
 
+到目前为止我们已经为Rango添加了许多功能.我们通过建立这个应用让你熟悉Django框架,而且从中学到了建立自己网站时遇到的各种各样的困难和挑战.但是现在Rango还不够紧凑.在本章,我们将使各个功能更加紧凑,同时改善应用的用户体验并加入一些新的功能.
 
+为了使我们的Rango耦合度更高我们将加入下面的功能.
 
+* 检测目录和页面的点击数,例如:
+	* 累计目录访问次数
+    * 累计页面访问次数
+    * 收集目录喜欢数(查看19章)
+* 在目录里继承搜索和展示,例如:
+	* 在每个目录页搜索页面而不是使搜索页分开.
+    * 在侧边栏过滤目录(查看19章)
+    * 当用户搜索时,只刷新搜索结果而不是刷新整个页面(查看19章)
+* 为注册用户提供服务,例如:
+	* 假设你已经使用了django-registration-redux,我们需要设立注册表单来增加额外的信息(例如网站,个人图片)
+    * 可以让用户查看自己的资料
+    * 可以让用户修改自己的资料
+    * 让用户查看其他用户和他们的资料
 
+>注意:我们不需要现在完成所有的任务.一些将会在第19章里完成,剩下的一些当做练习由你自己完成.
 
+在我们开始添加功能之前我们将会为每个任务列出一个todo list.把任务划分成小任务将会简化任务的难度,所以让我们一起来各个击破吧.在这章,我们将提供给你上面任务的工作流程.已经学了这么多了,剩下的工作基本上可以独立完成了(除了请求AJAX).在下一章,我们将提供一些代码来展示如何完成这些功能.
 
+## 16.1 跟踪页面点击
 
+现在Rango提供了一个直接指向外部页面的链接.这对于我们追踪每个页面点击和查看次数很不利.为了累计页面查看次数你需要完成以下步骤.
 
+* 创建一个新的`track_url()`视图,并把它映射到`/rango/got/`URL,命名为`name='goto'`.
+* `track_url`视图将会检查HTTP`GET`请求参数并得到`page_id`的值.这个HTTP`GET`请求看起来像`/rango/goto/?page_id=1`.
+	* 在视图里,选择/获取`page`的`page_id`然后增加它所关联的`views`字段并且`save()`.
+    * 然后这个视图会使用Django的`redirect`方法,使用户重定向到到要跳转的URL.
+    * 如果HTTP`GET`请求没有`page_id`参数,或者这个参数没有返回一个`Page`对象,那么直接跳转到用户Rango的主页.
+* 修改`category.html`使所有URL都使用`/rango/goto/?page_id=XXX`这样的形式,记得使用`url`模板标签(例如` <a href=”{% url ‘goto’ %}?pageid={{page.id}}”>`)
 
+### 16.1.1 提示
 
+如果你不确定如何检查HTTP`GET`请求的`page_id`参数,下面的代码将会帮助你.
 
+```python
+if request.method == 'GET':
+    if 'page_id' in request.GET:
+        page_id = request.GET['page_id']
+```
 
+每次都要先检查请求的`GET`方法,然后访问包含参数的`request.GET`字典.如果`page_id`在这个字典中,你可以用`request.GET['page_id']`提取出来.
 
+>注意:你也可以不实用查询语句而是使用URL替代,例如`/rango/goto/<page_id>/`.这样你必须创建一个urlpattern来抽取这个`page_id`.
 
+## 16.2 在目录页搜索
 
+Rango旨在为用户提供有用的页面链接目录.现在这个搜索功能是基于目录搜索的.如果能继承进目录浏览就好了.让我们假设用户将会首先浏览他们感兴趣的目录.如果找不到他们想要的页面,用户就会搜索.如果用户发现一个合适的页面,就会把它添加到目录里.让我们注意第一个问题,把搜索放入目录页.为了解决这个问题,需要以下几步:
 
+* 移除菜单栏的搜索链接.
+* 把搜索表单和结果模板从`search.html`放入`category.html`.
+* 修改搜索表单使它的action指向目录页,例如:`form class="form-inline" id="user_form" method="post" action="{% url 'category'  category.slug %}">`.
+* 修改目录视图获取HTTP`POST`请求.视图将会获取模板上下文字典里的所有搜索结果.
+* 同时仅让注册用户才能够进行搜索.所以在`category.html`模板里加入`{% if user.authenticated %}`进行限制.
 
+## 16.3 创建和浏览个人档案
 
+如果你使用了` django-registration-redux`包,你必须收集`UserProfile`数据.你不需要跳转到用户的rango主页而是跳转到一个新的表单,去收集用户的个人网站和url信息.为了增加`UserProfile`注册功能:
 
+* 创建一个`profile_registration.html`模板来展示`UserProfileForm`.
+* 创建`register_profile()`视图来获取个人信息
+* 映射视图到url,例如`rango/add_profile/`.
+* 在`MyRegistrationView`中修改`get_sucess_url`指向`rango/add_profile`.
 
+另一个有用的功能是让用户修改个人信息.以下几步添加这个功能.
 
+* 首先,床架一个名字叫`profile.html`模板.在这个模板里添加用户个人信息相关的字段(例如,用户名,邮箱,网站和图片).
+* 创建`profile()`视图.这个视图将会获取用户个人信息模板里的数据.
+* 映射`profile()`视图到`/rango/profile/`
+* 在基础模板里增加个人档案的链接到菜单栏,在右边增加用户相关的链接.这个链接只提供给已登录的用户(例如`{% if user.is_authenticated %}`).
 
+为了让用户浏览用户们信息,你可以创建用户页面,列出所有用户的列表.如果点击一个用户页面,你将会看到它们的个人信息(但是用户只能更改它们自己的信息).
 
+# 17 代码和提示
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+如果你能够根据我们上一章的提示完成练习就太好了,如果不能的话这章将会给你一些提示和代码来帮助你完成.
