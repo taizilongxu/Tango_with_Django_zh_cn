@@ -17,11 +17,14 @@
 [17]: #17
 [18]: #18-jquerydjango
 [19]: #19-ajax
+[20]: #20
+[21]: #21
 
 
 # 1. Twd1.7新特性
 
->警告:这个版本仍在草稿阶段.尽管它们应当还管用(但是一些链接和截图需要更新).如果发现bug,问题或者其他请求请通过github来提交: https://github.com/leifos/tango_with_django_book/tree/master/17
+!!! warning
+	这个版本仍在草稿阶段.尽管它们应当还管用(但是一些链接和截图需要更新).如果发现bug,问题或者其他请求请通过github来提交:  https://github.com/leifos/tango_with_django_book/tree/master/17
 
 在这个版本中,我们加入了以下特性:
 
@@ -228,7 +231,8 @@
 
 类UNIX系统都有一个看起来相似的[终端](http://www.ee.surrey.ac.uk/Teaching/Unix/unixintro.html).UNIX有许多派生或者衍生的后代,包括苹果的[OS X](http://en.wikipedia.org/wiki/OS_X)和许多[Linux发行版本](http://en.wikipedia.org/wiki/List_of_Linux_distributions).所有的这些操作系统都包含一系列命令行界面可以帮助你管理文件和运行程序,他们并不需要图形界面.本节介绍你应当掌握的关键命令.
 
->注意:这个教程针对的是类UNIX系统.虽然Django和Python可以在Windows系统下运行,但是这本书中的大部分命令都是针对类UNIX终端的.在Windows中,可以用与[UNIX相近的命令](http://www.ai.uga.edu/mc/winforunix.html)或者使用仿UNIX终端的[PowerShell](http://technet.microsoft.com/en-us/library/bb978526.aspx)来运行这些命令.
+!!! note
+    这个教程针对的是类UNIX系统.虽然Django和Python可以在Windows系统下运行,但是这本书中的大部分命令都是针对类UNIX终端的.在Windows中,可以用与[UNIX相近的命令](http://www.ai.uga.edu/mc/winforunix.html)或者使用仿UNIX终端的[PowerShell](http://technet.microsoft.com/en-us/library/bb978526.aspx)来运行这些命令.
 
 如果进入一个终端里,你会看到如下的形式:
 
@@ -273,7 +277,8 @@ $ mkdir code
 
 进入新建的`code`文件夹,键入`cd code`.如果你检查你现在的工作目录,你可以看到你处在`~/code/`目录中.同样你可以通过你的提示符看出来.看下面的例子,当前工作目录出现在电主机名字`sibu`后面.
 
->注意:以后不管什么时候提到工作空间(`<workspace>`),我们指的是你的`code`目录
+!!! note
+    以后不管什么时候提到工作空间(`<workspace>`),我们指的是你的`code`目录
 
 ```
 sibu:~ leif$ mkdir code
@@ -312,7 +317,8 @@ drwxr-xr-x   36 leif  staff    1224 23 Sep 10:42 code
 * `rmdir`:删除目录的传统方法.在后面提供你要删除的目录.需要注意的是:这个命令没有提示是否要删除这个目录.
 * `sudo`:允许你用其他用户权限来运行这个程序.一般,用`root`(类UNIX或者UNIX衍生系统的[超级用户](http://en.wikipedia.org/wiki/Superuser))身份来运行这个程序.
 
->注意:这里只列出了一小部分命令列表.如果想了解更多请查看ubuntu的关于[使用终端](https://help.ubuntu.com/community/UsingTheTerminal)的文档,或者FOSSwire写的[Cheat Sheet](http://fosswire.com/post/2007/08/unixlinux-command-cheat-sheet/).
+!!! note
+	这里只列出了一小部分命令列表.如果想了解更多请查看ubuntu的关于[使用终端](https://help.ubuntu.com/community/UsingTheTerminal)的文档,或者FOSSwire写的[Cheat Sheet](http://fosswire.com/post/2007/08/unixlinux-command-cheat-sheet/).
 
 ## 3.2 安装软件
 
@@ -324,13 +330,15 @@ Python2.7.5已经安到你的电脑上了吗?如果你使用的是linux发行版
 
 很不幸,几乎所有的现代操作系统的Python版本都比我们在这个教程里需要的要老.有许多方法可以安装Python,许多方法都非常苦难.我们提供了最常用的方法,并且提供获取更多信息的链接.
 
->警告:这个段落将会详细介绍如何安装Python2.7.5.但是千万不要移除系统默认的Python.这样做可能损坏你的系统.
+!!! warning
+	这个段落将会详细介绍如何安装Python2.7.5.但是千万不要移除系统默认的Python.这样做可能损坏你的系统.
 
 #### 3.2.1.1 苹果OS X
 
 这个方法最简单,你只需要下载并运行官方的下载器即可.网址在 http://www.python.org/getit/releases/2.7.5/.
 
->警告:在下载前确保`.dmg`文件的版本和你的OS X系统的版本相符!
+!!! warning
+	在下载前确保`.dmg`文件的版本和你的OS X系统的版本相符!
 
 1. 下载完`.dmg`文件,在目录里双击.
 2. 文件会以磁盘方式挂载,并会出现一个新的Finder窗口.
@@ -356,7 +364,8 @@ Python2.7.5已经安到你的电脑上了吗?如果你使用的是linux发行版
 6. 现在你需要切换Python2.7.5来激活Python的安装.只需要键入`pythonbrew switch 2.7.5`.
 7. Python 2.7.5就已经安装好了.
 
->注意:以点号开头的文件或者目录同windows里的隐藏文件是一样的.[Dot file](http://en.wikipedia.org/wiki/Dot-file)正常情况下是看不见的,他们通常用作配置文件.如果要查看隐藏的文件只需要键入`ls -a`.
+!!! note
+    以点号开头的文件或者目录同windows里的隐藏文件是一样的.[Dot file](http://en.wikipedia.org/wiki/Dot-file)正常情况下是看不见的,他们通常用作配置文件.如果要查看隐藏的文件只需要键入`ls -a`.
 
 #### 3.2.1.3 Windows
 
@@ -466,7 +475,8 @@ Finished processing dependencies for pip
 
 如果看到上面的输出,你就可以在终端里直接输入`pip`来启动Pip了.如果没有遇到什么错误的话,你将会看到一个Pip提供的命令列表.如果你看到了这个列表,那么恭喜你!
 
->注意:在Windows主机里,操作都一样.但是在输入命令的时候不用输入`sudo`.
+!!! note
+    在Windows主机里,操作都一样.但是在输入命令的时候不用输入`sudo`.
 
 ### 3.2.4 安装Django
 
@@ -620,7 +630,8 @@ $ python -c "import django; print(django.get_version())"
 $ django-admin.py startproject tango_with_django_project
 ```
 
->注意:在Windows机器上你需要全路径运行django-admin.py脚本.比如`python c:\python27\scripys\django-admin.py startproject tango_with_django_project`
+!!! note
+    在Windows机器上你需要全路径运行django-admin.py脚本.比如`python c:\python27\scripys\django-admin.py startproject tango_with_django_project`
 
 这个命令竟会运行`django-admin.py`脚本,它将会为你创建一个名叫`tango_with_django_project`的Django新项目.这个名字随便你取的.
 
@@ -636,11 +647,13 @@ $ django-admin.py startproject tango_with_django_project
 * `urls.py`:用来存储项目里的URL模式.
 * `wsgi.py`:用来帮助你运行开发服务,同时可以帮助部署你的生产环境.
 
->注意:这个项目文件是自从1.4版本后才创立的.虽然和项目同名的目录看起来很怪,但这样做还是有道理的,它可以和其他应用进行区分.
+!!! note
+	这个项目文件是自从1.4版本后才创立的.虽然和项目同名的目录看起来很怪,但这样做还是有道理的,它可以和其他应用进行区分.
 
 在项目里还有一个叫做`manage.py`的文件.这个文件是我们开发项目时经常使用的文件,它为我们提供了一系列的Django命令.例如,`manage.py`允许你运行内建的Django服务来测试和运行数据库命令.真的,这个脚本是你最常用的脚本了.
 
->注意:可以参见Admin and Manage scripts来了解更多.
+!!! note
+	可以参见Admin and Manage scripts来了解更多.
 
 现在可以运行`manage.py`脚本了.
 
@@ -695,7 +708,8 @@ $ python manage.py runserver <your_machines_ip_address>:5555
 
 用上面那个命令就可以轻松的向同事们展示你的网页了.当你运行你的web服务时,其他人可以通过键入`http://<your_machines_ip_address>:<port>/ `来进入你的web应用.当然这也要取决于你的网络设置.在联通之前你或许要设置以下防火墙或者代理.如果你不能远程连接你的网站,那么请检查以下你的网络.
 
->注意:`django-admin.py`和`manage.py`提供了许多有用的节省时间的功能.`django-admin.py`可以创建项目和应用以及一些其他的命令.不带参数的执行脚本可以参看各自的说明.official Django documentation provides a detailed list and explanation of each possible command 有详细的介绍.
+!!! note
+	`django-admin.py`和`manage.py`提供了许多有用的节省时间的功能.`django-admin.py`可以创建项目和应用以及一些其他的命令.不带参数的执行脚本可以参看各自的说明.official Django documentation provides a detailed list and explanation of each possible command 有详细的介绍.
 
 如果你正在使用版本控制,那么现在可以提交你的更改到工作空间了.如果你忘记该用什么命令,可以看看crash course on GIT.
 
@@ -778,9 +792,11 @@ urlpatterns = patterns('',
 
 为了建立映射,我们用到了tuple.在Django里必须用`urlpatterns`来命名这个元组.这个`urlpatterns`元组包含一些`django.conf.urls.url()`函数的调用,而每个函数里都有一个唯一的映射.在上面的代码里,我们只用了`url()`一次,所以我们只映射了一个URL.`django.conf.urls.url()`函数的第一个参数是正则表达式`^$`,指的是匹配一个空字符串.所有匹配这个模式的URL都会映射到`views.index()`这个视图.用户的请求信息会包含在`HttpRequest`对象里作为参数传递给视图.我们给`url()`函数可选参数`name`赋值为`index`.
 
->注意:你或许以为映射一个空URL毫无意义 - 它有什么用?当我们进行URL匹配时,只考虑到了原始URL字符串的一部分.这是因为我们的Django项目会优先处理原始URL字符串(例如`http://www.tangowithdjango.com/rango/`).一旦被处理,它将会被删除,留给剩下的部分去做匹配.在本例中,会剩下空字符串 - 所以空字符串会进行匹配!
+!!! note
+	你或许以为映射一个空URL毫无意义 - 它有什么用?当我们进行URL匹配时,只考虑到了原始URL字符串的一部分.这是因为我们的Django项目会优先处理原始URL字符串(例如`http://www.tangowithdjango.com/rango/`).一旦被处理,它将会被删除,留给剩下的部分去做匹配.在本例中,会剩下空字符串 - 所以空字符串会进行匹配!
 
->注意:`django.conf.urls.url()`函数的`name`参数是个可选参数.Django提供这个方法可以让你区别不同的映射.有时候连个不同的URL映射表达式会调用相同的视图.`name`可以让你轻松的区分他们 - 有些时候反响URL匹配会很有用.更多细节查看the Official Django documentation .
+!!! note
+	`django.conf.urls.url()`函数的`name`参数是个可选参数.Django提供这个方法可以让你区别不同的映射.有时候连个不同的URL映射表达式会调用相同的视图.`name`可以让你轻松的区分他们 - 有些时候反响URL匹配会很有用.更多细节查看the Official Django documentation .
 
 你或许已经看到在项目目录里已经存在了一个`urls.py`文件.为什么创建另一个呢?事实上,你可以吧所有的项目应用的URL都放在这个文件里.但是这是一个坏的习惯,这回增加你的应用的耦合.各自应用的`urls.py`文件存放各自应用的URL.为了最小耦合,你可以稍后把它们加入到项目目录的`urls.py`文件里.
 
@@ -811,7 +827,8 @@ urlpatterns = patterns('',
 
 对于理解Django的URL机制非常的重要.如果你仍有什么困惑可以查看official Django documentation on URL,以做更进一步的了解.
 
->注意:URL模式使用正则表达式来进行匹配.在Python中学好正则表达式非常的有用.Python官方文档包含了userful guide on regular expressions, regexcheatsheet.com提供了 neat summary of regular expressions.
+!!! note
+	URL模式使用正则表达式来进行匹配.在Python中学好正则表达式非常的有用.Python官方文档包含了userful guide on regular expressions, regexcheatsheet.com提供了 neat summary of regular expressions.
 
 ## 4.6 基本流程
 
@@ -872,7 +889,8 @@ TEMPLATE_DIRS = ['<workspace>/tango_with_django_project/']
 
 注意你需要提供`templates`目录的绝对路径.如果你是一个团队的一员或者工作在不同的电脑上,这在将来可能出现问题.你可以有不同的用户名这意味着你`<workspace>`目录有不同的路径.如果是硬编码路径的话上面的路径在不同电脑上是不同的.当然,你需要为不同的设置增加不同目录,难道没有什么好的方法了吗?
 
->警告:硬编码路径绝逼带你通往地狱.硬编码在软件工程类是绝对抵制的一种模式,它会让你的项目不利于移植.
+!!! warning
+	硬编码路径绝逼带你通往地狱.硬编码在软件工程类是绝对抵制的一种模式,它会让你的项目不利于移植.
 
 ### 5.1.2 动态路径
 
@@ -905,7 +923,8 @@ TEMPLATE_DIRS = [
 
 我们可以吧`TEMPLATE_PATH`放在`settings.py`模块的开头以方便我们对它的修改.这就是为什么我们创建变量来存储模板路径.
 
->警告:当连接系统路径的时候用`os.path.join()`是一个比较好的方法.用这种方法可以保证依据你的操作一同来添加正确的分隔符.在POSIX兼容的操作系统上,斜杠用来分割目录,而在Windows系统里用的是反斜杠.如果你手动为路径添加分隔符,那么你可能会在别的操作系统上操作时印发路径错误.
+!!! warning
+	当连接系统路径的时候用`os.path.join()`是一个比较好的方法.用这种方法可以保证依据你的操作一同来添加正确的分隔符.在POSIX兼容的操作系统上,斜杠用来分割目录,而在Windows系统里用的是反斜杠.如果你手动为路径添加分隔符,那么你可能会在别的操作系统上操作时印发路径错误.
 
 ### 5.1.3 添加模板
 
@@ -1175,7 +1194,8 @@ DATABASES = {
 
 能看到默认用SQLite3作为后端数据库.SQLite是个轻量级的数据库对我们开发很有用.我们仅仅需要设置`DATABASE_PATH`里的`NAME`键值对.其他引擎需要`USER`,`PASSWORD`,`HOST`和`PORT`等关键字.
 
->注意:对于教程来说使用SQLite引擎还好,但是对于部署你的应用来说可能不是最好的选择,或许应当使用其他更健壮和更大型的数据库引擎.Django同样支持像PostgreSQL和MySQL这样的流行数据库引擎.从 official Django documentation on Database Engines 获取更多细节.你可以查看关于SQLite的网站来选择是否使用SQLite引擎.
+!!! note
+    对于教程来说使用SQLite引擎还好,但是对于部署你的应用来说可能不是最好的选择,或许应当使用其他更健壮和更大型的数据库引擎.Django同样支持像PostgreSQL和MySQL这样的流行数据库引擎.从 official Django documentation on Database Engines 获取更多细节.你可以查看关于SQLite的网站来选择是否使用SQLite引擎.
 
 ## 6.3 创建模型
 
@@ -1221,7 +1241,8 @@ Django也提供了连接模型/表的简单机制.这个机制封装在3个字�
 
 从上面我们的例子,`Page`中`category`字段是`ForeignKey`类型.所以我们可以创建一个1对多关系的`Category`模型/表,这个`Category`会作为构造函数的一个参数.Django会自动的为每个模型表中创建ID字段.所以你不同为每个模型创建主键 - 它已经为你做好了!
 
->注意:当创建模板的时候,最好创建`__unicode__()`方法 - 等价于`__strr__()`方法.如果你不熟悉这两个方法,它们俩的作用和Java中`toString()`方法相似.`__unicode__()`方法为模型实例提供unicode表达式.例如我们的`Category`模型通过`__unicode__()`方法返回目录的名字 - 当你开始用Django的管理界面后这将会非常便利.
+!!! note
+    当创建模板的时候,最好创建`__unicode__()`方法 - 等价于`__strr__()`方法.如果你不熟悉这两个方法,它们俩的作用和Java中`toString()`方法相似.`__unicode__()`方法为模型实例提供unicode表达式.例如我们的`Category`模型通过`__unicode__()`方法返回目录的名字 - 当你开始用Django的管理界面后这将会非常便利.
 在你的类里加入`__unicode__()`方法对debug也非常有用.如果在`Category`模型中没有`__unicode`方法将会返回`<Category: Category object>`.我们只知道是一个目录,但是是哪一个呢?如果我们有`__unicode__()`方法我们将会返回`<Category: python>`,这里的`python`是目录的名字.
 
 ## 6.4 创建和迁移数据库
@@ -1287,7 +1308,8 @@ Running migrations:
   Applying rango.0001_initial... OK
 ```
 
->警告:当你添加已存在的模型,你需要重复运行`python manage.py makemigrations <app_name>`命令然后再运行`python manage.py migrate`.
+!!! warning
+    当你添加已存在的模型,你需要重复运行`python manage.py makemigrations <app_name>`命令然后再运行`python manage.py migrate`.
 
 你可能发现了我们的`Category`模块缺少一些我们要求的字段.我们将在稍后添加.
 
@@ -1325,7 +1347,8 @@ $ python manage.py shell
 
 在例子中我们首先导入我们需要操作的模型.然后打印出存在的目录,在这里因为我们的图表是空所以输出也是空.然后创建并储存一个目录,打印.
 
->注意:上面的例子只展示了Django shell一小部分功能.更多的可以看 official Django Tutorial to learn more about interacting with the model和official Django documentation on the list of available commands.
+!!! note
+    上面的例子只展示了Django shell一小部分功能.更多的可以看 official Django Tutorial to learn more about interacting with the model和official Django documentation on the list of available commands.
 
 ## 6.6 设置管理界面
 
@@ -1355,9 +1378,11 @@ admin.site.register(Page)
 
 点击`Categorys`链接.这里我们能看见我们通过Django shell创建的`test`目录.我们可以非常方便的在这里创建,修改和删除目录和页面.同样你可以在`Auth`应用里添加`User`来增加登陆Django管理界面的用户.
 
->注意:注意管理界面的排印错误(category而不是categories).这个问题可以通过在你的模型里添加元类并定义`verbose_name_plural`属性来解决.查看 Django’s official documentation on models 获取更多细节.
+!!! note
+    注意管理界面的排印错误(category而不是categories).这个问题可以通过在你的模型里添加元类并定义`verbose_name_plural`属性来解决.查看 Django’s official documentation on models 获取更多细节.
 
->注意:这里的`admin.py`文件只提供了一个简单的例子.还有许多炫酷的定制可以使用,比如说改变管理界面模型出现的方式.在本教程,我们只使用了最原始的界面.如果感兴趣请查看 official Django documentation on the admin interface .
+!!! note
+    这里的`admin.py`文件只提供了一个简单的例子.还有许多炫酷的定制可以使用,比如说改变管理界面模型出现的方式.在本教程,我们只使用了最原始的界面.如果感兴趣请查看 official Django documentation on the admin interface .
 
 ## 6.7 创建Population Script
 
@@ -1435,11 +1460,13 @@ if __name__ == '__main__':
 
 虽然看起来有许多代码,但是非常简单.在文件开头我们定义了许多函数,代码会在底部开始执行 - 寻找`if __name__ == '__main__'`这一行开始.我们调用了`populate()`函数.
 
->警告:当导入Django模块时确保已经导入了Django设置,并把环境变量`DJANGO_SETTINGS_MODULE`设置为项目设置文件.然后调用`django.setup()`来导入django设置.如果不这么做就会引发一场.这就是为什么我们需要在导入设置之后才能导入`Category`和`Page`.
+!!! warning
+    当导入Django模块时确保已经导入了Django设置,并把环境变量`DJANGO_SETTINGS_MODULE`设置为项目设置文件.然后调用`django.setup()`来导入django设置.如果不这么做就会引发一场.这就是为什么我们需要在导入设置之后才能导入`Category`和`Page`.
 
 `populate()`函数负责调用`add_cat()`和`add_page()`函数,而这两个函数将会创建新的目录和页面.`populate()`创建页面和目录并存到数据库.最后我们在终端里输出页面和目录.
 
->注意:我们使用`get_or_create()`函数创建模型实例.我们可以用`get_or_creat()`函数来检查在数据库里是否存在.如果不存在就创建它.这将减少我们的代码而不是让我们自己检查.
+!!! note
+    我们使用`get_or_create()`函数创建模型实例.我们可以用`get_or_creat()`函数来检查在数据库里是否存在.如果不存在就创建它.这将减少我们的代码而不是让我们自己检查.
 `get_or_create()`方法返回`(object,created)`元组.如果没有在数据库找到,那么这个`object`参数就是`get_or_create()`方法创造的实例.如果这个实体不存在,那么这个方法就返回和这个实体相符的实例.`created`是一个布尔值;如果`get_or_create()`创建模型实体的话它会返回`true`.
 `[0]`会返回`object`元组的第一个位置,这个其他编程语言一样,Python使用zero-based numbering.
 official Django documentation  可以查看`get_or_vreate()`方法的详细资料.
@@ -1558,7 +1585,8 @@ def index(request):
 
 当访问数据库结束,我们把这个列表(`category_list`)传给了字典`context_dict`.这个字典同时会作为`render()`的参数返回给模板.
 
->警告:注意Category模型包含`likes`字段.增添它的操作在前面章节的练习里,你需要完成它们.
+!!! warning
+    注意Category模型包含`likes`字段.增添它的操作在前面章节的练习里,你需要完成它们.
 
 ### 7.2.3 修改index模板
 
@@ -1611,13 +1639,15 @@ def index(request):
 
 另一种方法就是用目录名作为URL.`/rango/category/Python/`将会返回给我们关于Python的目录.这是一个简单的,可读的URL.
 
->注意:对于网页来说,设计一个简洁的URL是只管重要的.更多细节请看 Wikipedia’s article on Clean URLs.
+!!! note
+    对于网页来说,设计一个简洁的URL是只管重要的.更多细节请看 Wikipedia’s article on Clean URLs.
 
 ### 7.3.2 为Category表增加Slug字段
 
 为了建立简洁的url我们需要在`Category`模型里增加slug字段.首先我们需要从django导入`slugify`函数,这个函数的作用是把空格用连字符代替,例如"how do i create a slug in django"将会转换成"how-do-i-create-a-slug-in-djang".
 
->警告:虽然你能在URL中用空格,但是它们并不安全.更多细节查看IETF Memo on URLs.
+!!! warning
+    虽然你能在URL中用空格,但是它们并不安全.更多细节查看IETF Memo on URLs.
 
 接下来我们将会重写`Category`模型的`save`方法,我们将会调用`slugify`方法并更新`slug`字段.注意任何时候目录名称更改都会更改slug.像下面一样修改模型.
 
@@ -1753,7 +1783,8 @@ def category(request, category_name_slug):
 
 上面的HTML代码同样给我们展示了如何把数据通过字典传递给模板.我们用到了`category_name`变量和`category`和`pages`对象.如果`category`在模板上下文并没有定义,或者在数据库并没有发现这个目录,那么就会提示一个友好的错误信息.相反的话如果存在,我们将会检查`pages`.如果`pages`没有被定义或者不存在元素,我们同样也会呈现友好的错误提示.否则的话目录里包含的页面就会写入HTML李彪.对于在`pages`列表的每个页面我们都会展示它的`title`和`url`.
 
->注意:Django模板包含`{% if %}`标签 - 是检测对象是否在模板上下文的好方法.尝试在你的代码里使用以减少错误的发生.
+!!! note
+    Django模板包含`{% if %}`标签 - 是检测对象是否在模板上下文的好方法.尝试在你的代码里使用以减少错误的发生.
 
 ### 7.3.6 参数化的URL映射
 
@@ -1768,14 +1799,16 @@ urlpatterns = patterns('',
 
 你能看到当正则表达式` r'^(?P<category_name_slug>\w+)/$`匹配时会调用`view.category()`函数.我们的正则表达式会匹配URL斜杠前所有的字母数字(例如 a-z, A-Z, 或者 0-9)和连字符(-).然后把这个值作为`category_name_slug`参数传递给`views.category()`,这个参数必须在强制的`request`参数之后.
 
->注意:当你希望参数化URL时,一定要确保你的URL模式会正确匹配参数.为了更进一步的了解,让我们看一看上面的例子.
+!!! note
+    当你希望参数化URL时,一定要确保你的URL模式会正确匹配参数.为了更进一步的了解,让我们看一看上面的例子.
 `url(r'^category/(?P<category_name_slug>[\w\-]+)/$', views.category, name='category')`
 我们可以从这里找到在`category/`和后面的`/`之间的字符串,并把它作为参数`category_name_slug`传递给`views.category()`参数.例如,URL`category/python-books/`将会返回的`category_name_slug`参数是`python-books`.
 需要知道的十,所有的视图函数必须带至少一个参数.这个参数是`request` - 它会提供HTTP请求用户的相关信息。当参数化URL时,可以给视图添加已经命名德尔参数.使用上面的例子,我们的category视图是这样的.
 `def category(request, category_name_slug):`
 附加参数的位置不重要,重要的是在URL模式中定义的参数名称.注意如何为我们的视图在URL模式匹配中定义`category_name_slug`参数.
 
->注意:正则表达式虽然开始看起来比较复杂,但是网上有许多资料. This cheat sheet将会解决你的疑问.
+!!! note
+    正则表达式虽然开始看起来比较复杂,但是网上有许多资料. This cheat sheet将会解决你的疑问.
 
 ### 7.3.7 修改index模板
 
@@ -1907,7 +1940,8 @@ Django为我们提供了许多定制表单的方法.在上面的例子中,我们
 
 我们也可以用`Meat`类来定义我们希望包括的表单字段.用`fields`元组来定义所需包含的字段.
 
->注意:强烈建议查看 official Django documentation on forms来获取更多.
+!!! note
+    强烈建议查看 official Django documentation on forms来获取更多.
 
 ### 8.2.2 创建和增加目录视图
 
@@ -1947,10 +1981,12 @@ def add_category(request):
 * 保存用户提交的数据给模型,并转向到Rango主页;
 * 如果发生错误,在表单里展示错误信息.
 
->注意:`GET`和`POST`是什么意思?他们是HTTP请求的两个不同类型.
-* 一个HTTP`GET`用来请求指定的资源.换句话说,不管他是网页,图片还是文件,我们都可以用HTTP`GET`来获取.
-* 相反的HTTP`POST`用来提交客户端网页浏览器的数据.这种请求类型用来提交HTML表单.
-* 一个HTTP`POST`也可能用来在服务器上创建新的资源(例如新的数据库条目),以后可以通过HTTP`GET`请求.
+!!! note
+    `GET`和`POST`是什么意思?他们是HTTP请求的两个不同类型.
+
+    * 一个HTTP`GET`用来请求指定的资源.换句话说,不管他是网页,图片还是文件,我们都可以用HTTP`GET`来获取.
+    * 相反的HTTP`POST`用来提交客户端网页浏览器的数据.这种请求类型用来提交HTML表单.
+    * 一个HTTP`POST`也可能用来在服务器上创建新的资源(例如新的数据库条目),以后可以通过HTTP`GET`请求.
 
 Django表单处理数据是用过用户浏览器的HTTP`POST`请求实现.它不仅可以存储表单数据,而且还能对每个表单字段自动生成错误信息.这就意味着Django将不会存储表单的错误信息以保护数据库的数据完整性.例如如果目录名为空的话将会返回不能为空的错误.
 
@@ -1992,7 +2028,8 @@ Django表单处理数据是用过用户浏览器的HTTP`POST`请求实现.它不
 
 好吧,这些代码是干什么的?可以看到在`<body>`标签中我们设置了一个`<form>`元素.再来看看`<form>`中的元素,所有表单中的数据将会用`POST`请求发送给`/rango/add_category/`(`method`属性大小写不敏感,所以可以写成`POST`或是`post` - 两者功能一样).在表单里我们有两个循环 - 一个控制表单隐藏字段,另一个则是可见字段 - 可见字段的设置是在`ModelForm`的`Meta`类中设置`fields`属性来实现的.这些循环帮助我们生成HTML标记.对于表单的可见字段,我们也设置一个特殊区域来展示错误信息,同时设置帮助文本告诉用户那需要输入什么.
 
->注意:使用隐藏和可见表单字段是因为HTTP是无状态协议.你不可以在两个不同的HTTP请求之间保持状态,因为实现起来相当复杂.为了摆脱这个限制,创建隐藏的HTML表单字段可以使web应用传递给用户HTML表单重要的数据,只有用户提交的时候才会返回数据.
+!!! note
+    使用隐藏和可见表单字段是因为HTTP是无状态协议.你不可以在两个不同的HTTP请求之间保持状态,因为实现起来相当复杂.为了摆脱这个限制,创建隐藏的HTML表单字段可以使web应用传递给用户HTML表单重要的数据,只有用户提交的时候才会返回数据.
 
 可能你也注意到了代码`{% csrf_token %}`,这是跨站请求伪造令牌,有助于保护我们提交表单的HTTP`POST`方法的安全.Django框架要求使用CSRFtoken.如果忘记在你的表单里包含CSRF令牌,有可能会在提交表单时遇到错误.查看 official Django documentation on CSRF tokens 以获取更多信息.
 
@@ -2024,7 +2061,8 @@ urlpatterns = patterns('',
 
 ![](img/rango-form-steps.png)
 
->注意:如果你增加许多目录,它们有可能不会出现在首页,这是因为我们紧紧展示5个目录.如果登录管理界面你就能看到所有输入的目录了.#TODO
+!!! note
+    如果你增加许多目录,它们有可能不会出现在首页,这是因为我们紧紧展示5个目录.如果登录管理界面你就能看到所有输入的目录了.#TODO
 
 ### 8.2.7 清理表单
 
@@ -2058,7 +2096,8 @@ class PageForm(forms.ModelForm):
 
 这个小例子说明如何在表单数据存储之前进行修改.这是非常方便的,尤其是有一些字段需要设定默认值时 - 或者表单中的数据发生了丢失.
 
->注意:重写方法是Django框架提供给我们增加应用额外功能的一种优雅的方法.就像`ModelForm`模块中`clean()`方法一样,Django提供了许多安全的方法可以供你重写.检查 the Official Django Documentation on Models以获取更多信息.
+!!! note
+    重写方法是Django框架提供给我们增加应用额外功能的一种优雅的方法.就像`ModelForm`模块中`clean()`方法一样,Django提供了许多安全的方法可以供你重写.检查 the Official Django Documentation on Models以获取更多信息.
 
 ## 8.3 练习
 
@@ -2142,7 +2181,8 @@ INSTALLED_APPS = (
 
 `django.contrib.auth `为Django提供访问认证系统,`django.contrib.contenttypes`可以通过认证的应用程序来跟踪安装的数据库模型.
 
->注意:如果你需要在`INSTALLED_APPS`元组里添加`auth`应用,你需要用命令`python manage.py migrate`来进行更新数据库.
+!!! note
+    如果你需要在`INSTALLED_APPS`元组里添加`auth`应用,你需要用命令`python manage.py migrate`来进行更新数据库.
 
 密码默认将会用 PBKDF2 algorithm进行储存,它可以安全的保存你用户的数据.在 official Django documentation on how django stores passwords你可以了解到更多,文档还提供了使用不同的哈希算法来提高安全等级.
 
@@ -2219,7 +2259,8 @@ from django.contrib.auth.models import User
 
 注意`ImageField`字段有一个`upload_to`属性.这个属性值连接着`MEDIA_ROOT`设置用来提供上传文档图片的路径.例如,`MEDIA_ROOT`设置为`<workspace>/tango_with_django_project/media/`,那么`upload_to=profile_imges`将会使图片保存在`<workspace>/tango_with_django_project/media/profile_images/`目录.
 
->警告:Django`ImageField`使用python图片库(PIL).返回到第3章,我们在安装Django时已经讲过如何安装PIL.如果还没有安装现在就可以安装了.如果你没有安装PIL,那么将会遇到`pil`模块不能找到的错误!
+!!! warning
+    Django`ImageField`使用python图片库(PIL).返回到第3章,我们在安装Django时已经讲过如何安装PIL.如果还没有安装现在就可以安装了.如果你没有安装PIL,那么将会遇到`pil`模块不能找到的错误!
 
 定义完`UserProfile`模型,我们需要修改Rango的`admin.py`文件使管理界面包含`UserPrifile`模型.在`admin.py`文件里添加如下.
 
@@ -2229,13 +2270,15 @@ from rango.models import UserProfile
 admin.site.register(UserProfile)
 ```
 
->注意:我们在修改模型后需要更新数据库.在终端里运行`$ python manage.py makemigrations rango`来为`UserProfile`模型创建迁移脚本.然后运行`$ python manage.py migrate`.
+!!! note
+    我们在修改模型后需要更新数据库.在终端里运行`$ python manage.py makemigrations rango`来为`UserProfile`模型创建迁移脚本.然后运行`$ python manage.py migrate`.
 
 ## 9.4 创建用户注册视图和模板
 
 用户认证已经处理完毕,我们现在需要让用户在网站上进行注册.我们将通过创建新视图和模板来达到这个目的.
 
->注意:这里有许多现成的用户注册包可以使用,它们大大的减少创建注册和表单的繁琐程度.然而使用这样的应用对于了解内部机制是非常好的.它将会使你加深对表单,扩展用户模型和上传媒体的理解.
+!!! note
+    这里有许多现成的用户注册包可以使用,它们大大的减少创建注册和表单的繁琐程度.然而使用这样的应用对于了解内部机制是非常好的.它将会使你加深对表单,扩展用户模型和上传媒体的理解.
 
 为用户提供注册服务我们需要以下几步:
 
@@ -2389,7 +2432,8 @@ def register(request):
 
 这个HTML模板使用`registered`变量来检测注册是否成功.当`registered`为`False`时模板会展示注册表单 - 否则,除了标题外它只会展示一条成功信息.
 
->警告:你可能注意到在`<form>`元素里的`enctype`属性.当你希望用户通过表单上传文件时,必须把`enctype`设置成`multipart/form-data`.这个属性会让你的浏览器以特定的方式把表单数据返回给服务器.实际上,你的文件会被分成一块块的传输.想了解更多查看 this great Stack Overflow answer.你也应当记得加入CSRF令牌.确保在你的`<form>`属性里包含`{% csrf_token %}`.
+!!! warning
+    你可能注意到在`<form>`元素里的`enctype`属性.当你希望用户通过表单上传文件时,必须把`enctype`设置成`multipart/form-data`.这个属性会让你的浏览器以特定的方式把表单数据返回给服务器.实际上,你的文件会被分成一块块的传输.想了解更多查看 this great Stack Overflow answer.你也应当记得加入CSRF令牌.确保在你的`<form>`属性里包含`{% csrf_token %}`.
 
 ### 9.4.4 视图`register()`的URL映射
 
@@ -2732,9 +2776,11 @@ urlpatterns = patterns('',
 
 从现在开始让它做我们的基础模板,并且包存在`templates`目录的`base.html`文件(例如 `templates/base.html`)
 
->注意:应当尽可能多的抽离出重复的内容.虽然在开始的时候会有一些困难,但是一旦做完以后会省下大量的时间.想想吧:你希望看到许多同样代码的拷贝吗?
+!!! note
+    应当尽可能多的抽离出重复的内容.虽然在开始的时候会有一些困难,但是一旦做完以后会省下大量的时间.想想吧:你希望看到许多同样代码的拷贝吗?
 
->警告:`<!DOCTYPE html>`必须放在页面的第一行!不这样做将意味着你的标记不符合W3C HTML5准则。
+!!! warning
+    `<!DOCTYPE html>`必须放在页面的第一行!不这样做将意味着你的标记不符合W3C HTML5准则。
 
 ## 10.2 模板块
 
@@ -2823,7 +2869,8 @@ urlpatterns = patterns('',
 
 `extends`命令携带一个参数,这个参数是要继承的模板(例如 rango/base.html).然后修改`category.html`模板如下.
 
->注意:提供给`extends`命令的参数的默认路径是项目的`templates`目录.例如,Rango所有模板应当是从`rango/base.html`扩展而不是`base.html`.
+!!! note
+    提供给`extends`命令的参数的默认路径是项目的`templates`目录.例如,Rango所有模板应当是从`rango/base.html`扩展而不是`base.html`.
 
 ```
 {% extends 'base.html' %}
@@ -2857,7 +2904,8 @@ urlpatterns = patterns('',
 
 在`category.html`模板里使用`extends`命令来继承`base.html`.在这里你不需要写一个完整的HTML文档,因为`base.html`已经提供了一个完整的框架.你只要把增添的内容写到基础模板里,它就会创建一个完整的HTML文档发送给用户浏览器.
 
->注意:模板非常强大,你甚至可以创建你自己的模板标签.在这里我们将演示如何减小模板里重复的HTML结构.
+!!! note
+    模板非常强大,你甚至可以创建你自己的模板标签.在这里我们将演示如何减小模板里重复的HTML结构.
 然而,模板可以减小应用视图里的代码.例如,如果你想在你的应用增加一些相同的数据库驱动的内容,你需要调用特定的视图来处理网页中重复的部分.这样在每个视图里就不用重复调用Django ORM函数来收集数据了.
 查看更多内容请查看 Django documentation on templates.
 
@@ -2911,11 +2959,13 @@ TODO(leifos):指出如何把url放到一个命名空间并引用,见http://djang
 * 使用url模板标签代替所有的url.
 * 添加一个地址使用户不论在网站的哪个位置都能返回到主页.
 
->警告:记得在每个模板头部加入`{% load static %}`以使用静态媒体.如果没有这样做,将会产生一个错误!Django模板模块需要分别单独导入 - 你不可以调用在你扩展的模板里的模块.
+!!! warning
+    记得在每个模板头部加入`{% load static %}`以使用静态媒体.如果没有这样做,将会产生一个错误!Django模板模块需要分别单独导入 - 你不可以调用在你扩展的模板里的模块.
 
 ![](img/rango-template-inheritance.svg)
 
->注意:完成上面的练习后,所有Rango的模板都会继承`bashe`.html.让我们回过头看看`base.html`的内容,`user`对象 - 在Django请求的上下文中 - 将会用来检查当前的Rnago用户是否已经登录(通过使用`user.is_authenticated`).因为所有的Rango模板都会继承基础模板,所以所有的Rango模板的访问都要依赖于所发送请求的上下文.
+!!! note
+    完成上面的练习后,所有Rango的模板都会继承`bashe`.html.让我们回过头看看`base.html`的内容,`user`对象 - 在Django请求的上下文中 - 将会用来检查当前的Rnago用户是否已经登录(通过使用`user.is_authenticated`).因为所有的Rango模板都会继承基础模板,所以所有的Rango模板的访问都要依赖于所发送请求的上下文.
 因为这个新的依赖,你必须检查每个Rango的Django视图.对于每个视图,确保每个请求对于Django模板引擎都是可用的.通过这个教程,我们通过`render()`传递请求作为参数来达到这个目的.有时会发生这样的情况,如果你的请求被错误的传送可能出现用户没有登录,但是Django认为已经登录.
 这里我们以`about`视图作为例子来进行检查.开始用硬编码的方式进行,代码如下.注意我们只发送字符串 - 我们没有使用`request`参数.
 ```
@@ -2955,7 +3005,8 @@ def about(request):
 
 session ID也可以不存储在cookies中.传统的PHP应用会把它们做成一个请求字符串或是URL的一部分来请求资源.如果你偶然间访问像`http://www.site.com/index.php?sessid=omgPhPwtfIsThisIdDoingHere332i942394`这样的URL,很可能是服务器唯一识别你的标识.很有趣吧!
 
->注意:仔细看上图,注意到`csrftoken`令牌了吗?这个cookie帮助我们避免跨站请求.
+!!! note
+    仔细看上图,注意到`csrftoken`令牌了吗?这个cookie帮助我们避免跨站请求.
 
 ## 11.3 在Django里设置Sessions
 
@@ -2965,7 +3016,8 @@ session ID也可以不存储在cookies中.传统的PHP应用会把它们做成�
 
 `SessionMiddleware`可以灵活的使用不同的方法来存储session信息.你可以采取很多方法储存 - 存在文件,数据库甚至在cache中.最直接的方法是使用`django.contrib.sessions`应用把session信息存储到Django模型/数据库中(详细的说是`django.contrib.sessions.models.Session`模型).使用这种方法,你必须首先确保在Django项目的`settings.py`文件里`django.contrib.sessions`保存在`INSTALLED_APPS`元组里.如果你现在要添加应用,你需要使用迁移命令来更新数据库.
 
->注意:如果你希望使用轻量快捷的方式,你可以把session信息存储在cache中.可以查看 official Django documentation for advice on cached sessions.
+!!! note
+    如果你希望使用轻量快捷的方式,你可以把session信息存储在cache中.可以查看 official Django documentation for advice on cached sessions.
 
 ## 11.4 基于cookie的session
 
@@ -2997,7 +3049,8 @@ if request.session.test_cookie_worked():
 
 如果没有看到上面的信息,请检查一下你的浏览器安全设置,有可能会阻止浏览器接受cookie.
 
->注意:你可以删除增加的代码 - 我们只是拿它用来验证以下cookies
+!!! note
+    你可以删除增加的代码 - 我们只是拿它用来验证以下cookies
 
 ## 11.5 客户端Cookies:一个网站技术的例子
 
@@ -3063,7 +3116,9 @@ from datatime import datetime
 
 如果你现在打开Rango主页,检查你浏览器中的开发者工具,你将会看到`visits`和`last_visit`两个cookie.如上图所示.
 
->注意:你或许注意到了刷新浏览器并不能使`visits`增长.为什么?因为上面给出的示例代码只在用户上次访问距今是1天时才增加.当我们测试的时候这个值有点不合理 - 所以为什么我们不缩短以下这个时间呢?修改`index()`视图,找到下面这一行.
+!!! note
+    你或许注意到了刷新浏览器并不能使`visits`增长.为什么?因为上面给出的示例代码只在用户上次访问距今是1天时才增加.当我们测试的时候这个值有点不合理 - 所以为什么我们不缩短以下这个时间呢?修改`index()`视图,找到下面这一行.
+
 ```
 if (datetime.now() - last_visit_time).days > 0:
 ```
@@ -3071,6 +3126,7 @@ if (datetime.now() - last_visit_time).days > 0:
 ```
 if (datetime.now() - last_visit_time).seconds > 5:
 ```
+
 这就意味着你只需要等待5秒的时间就能看到`visits`cookie的增长,而不需要一整天.当你这么玩完以后,就可以把它改回来了.
 在不同的时间里使用`-`操作符可以求出它们的差值是Python提供给我们的非常使用的功能.当时间相减,就会返回一个`timedelta`对象,就像上面代码它提供给我们`days`和`seconds`属性.你可以查看 official Python documentation来获取更多关于对象类型和其他属性的信息.
 
@@ -3125,9 +3181,11 @@ def index(request):
     return response
 ```
 
->警告:强烈建议你在启用基于session数据之前删除所有客户端的cookies.你可以在你的浏览器里对它们进行删除,或者是直接清空浏览器的cache - 确保cookies在这个过程中删除.
+!!! warning
+    强烈建议你在启用基于session数据之前删除所有客户端的cookies.你可以在你的浏览器里对它们进行删除,或者是直接清空浏览器的cache - 确保cookies在这个过程中删除.
 
->注意:使用session存储数据的另一个优点是它可以把数据从字符串转化成响应的类型.然而只有像`int`,`float`,`long`,`complex`和`boolean`这样的内置类型才有用.如果你希望存储字典或是其他复杂的类型就不可以啦.在这种情况下你需要 pickling your objects.
+!!! note
+    使用session存储数据的另一个优点是它可以把数据从字符串转化成响应的类型.然而只有像`int`,`float`,`long`,`complex`和`boolean`这样的内置类型才有用.如果你希望存储字典或是其他复杂的类型就不可以啦.在这种情况下你需要 pickling your objects.
 
 ## 11.7 Browser-Length and Persistent Sessions
 
@@ -3196,7 +3254,8 @@ return render(request, 'rango/about.html', {'visits': count})
 
 在Django里有许多的应用提供登录,注册和验证机制.许多的应用都提供这种功能而且几乎不重写url,视图和模板.在这章,我们需要使用`django-registration-redux`包来提供这些功能.这就意味着我们需要重构我们的代码 - 然而它将会教给我们如何使用外部应用以及如何轻松的在我们Django项目里加入应用.它也会使我们的应用更加简洁.
 
->注意:这章并不是必要的,你可以跳过,但是在随后的章节里我们会假设你已经更新了验证机制.
+!!! note
+    这章并不是必要的,你可以跳过,但是在随后的章节里我们会假设你已经更新了验证机制.
 
 ## 12.1 设置DRR
 
@@ -3492,7 +3551,8 @@ TODO(leifos):增加一个定制注册表单...
 
 使用上面的html代码更新你的`base.html`(假设你已经完成了12章的内容,使用了django-registration-redux 包,如果没有你需要更新这些url模板标签).重新加载你的应用.你需要联网才能下载css,js和其他相关文件.你注意到了你的应用看起来变化非常大.试着浏览其他页面看一看.因为它们都继承自基础模板,它们看起来都非常好看.虽然不完美但是非常好.
 
->注意:你应当下载所有关联的文件并存储到静态文件夹.如果这么做以后,在基础模板修改静态文件的引用.
+!!! note
+    你应当下载所有关联的文件并存储到静态文件夹.如果这么做以后,在基础模板修改静态文件的引用.
 
 现在我们已经设置好`base.html`,我们可以快速的使用Bootstrap组建来定制我们的页面.
 
@@ -3676,7 +3736,8 @@ def get_category_list():
 </div>
 ```
 
->注意:每次修改templatetags你需要重启服务.
+!!! note
+    每次修改templatetags你需要重启服务.
 
 ## 14.3 参数化模板标签
 
@@ -3743,7 +3804,8 @@ https://api.datamarket.azure.com/Bing/Search/v1/Web?Query=%27rango%27
 
 我们需要得到API key以便在你发送请求时得到Bing服务器的认证.为了获取你的key,点击页面上部的主帐户密钥现实按钮.这样你就会看到你的API key了.一会我们将使用它,先把它记下来 - 还要注意不要泄露这个key!如果别人得到你的key,那么别人就可以使用你的key进行免费的查询了.
 
->注意:这个页面同时现实剩余每月的事务量.
+!!! note
+    这个页面同时现实剩余每月的事务量.
 
 ## 15.2 增加搜索功能
 
@@ -3834,7 +3896,8 @@ def run_query(search_terms):
 
 注意从Bing服务器返回的结果是JSON.这是因为我们在请求中标明了返回JSON - 查看一下我们定义的`search_url`变量.如果在尝试连接Bing服务器的时候发生了错误,就会通过`except`代码块中的`print`语句打印出来.
 
->注意:Bing搜索API还有许多可控参数我们没有涉及到,如果你有兴趣可以查看这里:Bing Search API Migration Guide and FAQ
+!!! note
+    Bing搜索API还有许多可控参数我们没有涉及到,如果你有兴趣可以查看这里:Bing Search API Migration Guide and FAQ
 
 ## 15.3 安全的保存你的API KEY
 
@@ -3951,7 +4014,8 @@ from rango.bing_search import run_query
 1. 增加`search()`视图和`/rango/search/`URL的映射,命名为`name='search'`.
 2. 在`base.html`导航栏增加搜索链接.记得使用`url`模板标签来引用链接.
 
->注意:通过relevant article on Wikipedia,一个Application Programming Interface (API)是指软件之间如何进行交互.在web应用中API是指一系列已经定义结构的HTTP请求和它们所返回的各样请求信息.任何在互联网上有意义的服务都可以提供它们自己的API - 不限于web搜索.更多的API信息请看 Luis Rei provides an excellent tutorial on APIs.
+!!! note
+    通过relevant article on Wikipedia,一个Application Programming Interface (API)是指软件之间如何进行交互.在web应用中API是指一系列已经定义结构的HTTP请求和它们所返回的各样请求信息.任何在互联网上有意义的服务都可以提供它们自己的API - 不限于web搜索.更多的API信息请看 Luis Rei provides an excellent tutorial on APIs.
 
 # 16 练习
 
@@ -3973,7 +4037,8 @@ from rango.bing_search import run_query
     * 可以让用户修改自己的资料
     * 让用户查看其他用户和他们的资料
 
->注意:我们不需要现在完成所有的任务.一些将会在第19章里完成,剩下的一些当做练习由你自己完成.
+!!! note
+    我们不需要现在完成所有的任务.一些将会在第19章里完成,剩下的一些当做练习由你自己完成.
 
 在我们开始添加功能之前我们将会为每个任务列出一个todo list.把任务划分成小任务将会简化任务的难度,所以让我们一起来各个击破吧.在这章,我们将提供给你上面任务的工作流程.已经学了这么多了,剩下的工作基本上可以独立完成了(除了请求AJAX).在下一章,我们将提供一些代码来展示如何完成这些功能.
 
@@ -4000,7 +4065,8 @@ if request.method == 'GET':
 
 每次都要先检查请求的`GET`方法,然后访问包含参数的`request.GET`字典.如果`page_id`在这个字典中,你可以用`request.GET['page_id']`提取出来.
 
->注意:你也可以不实用查询语句而是使用URL替代,例如`/rango/goto/<page_id>/`.这样你必须创建一个urlpattern来抽取这个`page_id`.
+!!! note
+    你也可以不实用查询语句而是使用URL替代,例如`/rango/goto/<page_id>/`.这样你必须创建一个urlpattern来抽取这个`page_id`.
 
 ## 16.2 在目录页搜索
 
@@ -4264,7 +4330,8 @@ $(document).ready( function() {
 
 看了上面的例子你或许会想JQuery太笨重了,做同样的事需要更多的代码.对于简单的像`alert()`这样的函数或许是真的,但是如果面对复杂的功能它更适用,它会使JQuery/Javascript代码保存在不同的文件(完全的!!).这是因为只是在运行的时候设置事件出发而不是静态的写在代码里.这样我们就成功的分离了JQuery/javascript和HTML代码.
 
->注意:CSS,JAVASCRIPT和HTML,你也需要保持它们分离!
+!!! note
+    CSS,JAVASCRIPT和HTML,你也需要保持它们分离!
 
 ## 18.3 选择器
 
@@ -4605,7 +4672,8 @@ def auto_add_page(request):
 * 测试代码发布时最好有一个钩子.
 * 在测试中使用长的描述性的名字.
 
->注意:在这章我们现在只是提供基础的测试,它只遵循[Django Tutorial](https://docs.djangoproject.com/en/1.7/intro/tutorial05/)的一部分.我们希望在将来能添加更多.
+!!! note
+    在这章我们现在只是提供基础的测试,它只遵循[Django Tutorial](https://docs.djangoproject.com/en/1.7/intro/tutorial05/)的一部分.我们希望在将来能添加更多.
 
 ## 20.1 运行测试
 
@@ -4765,7 +4833,7 @@ $ coverage run --source='.' manage.py test rango
 
 它将会运行rango应用所有的测试并收集覆盖数据.查看报告你需要输入:
 
-```shell
+```
 $ coverage report
 
 Name                                       Stmts   Miss  Cover
@@ -4808,7 +4876,4 @@ TOTAL                                        310    206    34%
 # 21 部署项目
 
 在这章我们将一步步知道你如何部署你的Django应用.我们将会把应用部署在[PythonAnywhere](https://www.pythonanywhere.com/),它提供一个在线的IDE和网页主机服务.这个服务提供了网页访问和Bash命令行交互,意味着你可以像访问使用自己的终端一样来使用PythonAnywhere的服务器.现在PythonAnywhere提供了免费的帐号,它提供的内存和CPU足够我们搭建一个Django应用了.
-
->注意:你可以独立的完成这章(假设你有一些git的知识).
-
 
