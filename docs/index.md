@@ -12,6 +12,11 @@
 [12]: #12-django-registration-redux
 [13]: #13-bootstraprango
 [14]: #14
+[15]: #15
+[16]: #16
+[17]: #17
+[18]: #18-jquerydjango
+[19]: #19-ajax
 
 
 # 1. Twd1.7新特性
@@ -3921,6 +3926,7 @@ if __name__ == '__main__':
 添加完搜索模板后,我们可以添加视图了.在`views.py`模块里添加下面`search()`视图.
 
 ```python
+def search(request):
 
     result_list = []
 
@@ -4798,3 +4804,11 @@ TOTAL                                        310    206    34%
     * 增加测试确保上次访问等于或大于第一次访问.
     * 查看[Part Five of the official Django Tutorial](https://docs.djangoproject.com/en/1.7/intro/tutorial05/)来完成这些测试.
 * 查看[tutorial on test driven development by Harry Percival](http://www.tdd-django-tutorial.com/)
+
+# 21 部署项目
+
+在这章我们将一步步知道你如何部署你的Django应用.我们将会把应用部署在[PythonAnywhere](https://www.pythonanywhere.com/),它提供一个在线的IDE和网页主机服务.这个服务提供了网页访问和Bash命令行交互,意味着你可以像访问使用自己的终端一样来使用PythonAnywhere的服务器.现在PythonAnywhere提供了免费的帐号,它提供的内存和CPU足够我们搭建一个Django应用了.
+
+>注意:你可以独立的完成这章(假设你有一些git的知识).
+
+
