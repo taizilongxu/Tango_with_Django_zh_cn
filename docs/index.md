@@ -9,7 +9,7 @@
 [9]: #9
 [10]: #10
 [11]: #11-cokkiessessions
-[12]: #12-django-registration-redux
+[12]: #12-drr
 [13]: #13-bootstraprango
 [14]: #14
 [15]: #15
@@ -24,7 +24,7 @@
 # 1. Twd1.7新特性
 
 !!! warning
-	这个版本仍在草稿阶段.尽管它们应当还管用(但是一些链接和截图需要更新).如果发现bug,问题或者其他请求请通过github来提交:  https://github.com/leifos/tango_with_django_book/tree/master/17
+	这个版本仍在草稿阶段(一些链接和截图需要更新).如果发现bug,问题或者其他请求请通过github来提交:  https://github.com/leifos/tango_with_django_book/tree/master/17
 
 在这个版本中,我们加入了以下特性:
 
@@ -611,7 +611,7 @@ $ python --version
 2.7.5
 ```
 
-上面的命令将会运行Python解析器,如果有`-c`选项则可以执行它后面的代码.你可以查看输出以检查Python版本是否是你需要的.如果版本不是`2.7.5`,你可能需要返回3.2章节去检查一下安装时是否拉下了某些步骤.
+上面的命令将会运行Python解析器,如果有`-c`选项则可以执行它后面的代码.你可以查看输出以检查Python版本是否是你需要的.如果版本不是`2.7.5`,你可能需要返回[3.2](#32)章节去检查一下安装时是否拉下了某些步骤.
 
 在检验了安装的python后,让我们检验一下Django.
 
@@ -620,7 +620,7 @@ $ python -c "import django; print(django.get_version())"
 1.7
 ```
 
-通过调用Django模块,可以看到下方输出`1.7`.如果你得到的是其他版本,或者出现`ImportError`,那么返回3.2章节或者参看Django Documentation on Installing Django.如果你发现你的Django版本不是1.7,那么以后可能会遇到一些问题.所以还是确保Django的版本是1.7吧.
+通过调用Django模块,可以看到下方输出`1.7`.如果你得到的是其他版本,或者出现`ImportError`,那么返回[3.2](#32)章节或者参看[Django Documentation on Installing Django](https://docs.djangoproject.com/en/1.7/topics/install/).如果你发现你的Django版本不是1.7,那么以后可能会遇到一些问题.所以还是确保Django的版本是1.7吧.
 
 ## 4.2 创建你的Django项目
 
@@ -631,7 +631,7 @@ $ django-admin.py startproject tango_with_django_project
 ```
 
 !!! note
-    在Windows机器上你需要全路径运行django-admin.py脚本.比如`python c:\python27\scripys\django-admin.py startproject tango_with_django_project`
+    根据[stackoverflow](http://stackoverflow.com/questions/8112630/cant-create-django-project-using-command-prompt)在Windows机器上你需要全路径运行django-admin.py脚本.比如`python c:\python27\scripys\django-admin.py startproject tango_with_django_project`
 
 这个命令竟会运行`django-admin.py`脚本,它将会为你创建一个名叫`tango_with_django_project`的Django新项目.这个名字随便你取的.
 
@@ -653,7 +653,7 @@ $ django-admin.py startproject tango_with_django_project
 在项目里还有一个叫做`manage.py`的文件.这个文件是我们开发项目时经常使用的文件,它为我们提供了一系列的Django命令.例如,`manage.py`允许你运行内建的Django服务来测试和运行数据库命令.真的,这个脚本是你最常用的脚本了.
 
 !!! note
-	可以参见Admin and Manage scripts来了解更多.
+	可以参见[Admin and Manage scripts](https://docs.djangoproject.com/en/1.7/ref/django-admin/#django-admin-py-and-manage-py)来了解更多.
 
 现在可以运行`manage.py`脚本了.
 
@@ -709,15 +709,15 @@ $ python manage.py runserver <your_machines_ip_address>:5555
 用上面那个命令就可以轻松的向同事们展示你的网页了.当你运行你的web服务时,其他人可以通过键入`http://<your_machines_ip_address>:<port>/ `来进入你的web应用.当然这也要取决于你的网络设置.在联通之前你或许要设置以下防火墙或者代理.如果你不能远程连接你的网站,那么请检查以下你的网络.
 
 !!! note
-	`django-admin.py`和`manage.py`提供了许多有用的节省时间的功能.`django-admin.py`可以创建项目和应用以及一些其他的命令.不带参数的执行脚本可以参看各自的说明.official Django documentation provides a detailed list and explanation of each possible command 有详细的介绍.
+	`django-admin.py`和`manage.py`提供了许多有用的节省时间的功能.`django-admin.py`可以创建项目和应用以及一些其他的命令.不带参数的执行脚本可以参看各自的说明.[official Django documentation provides a detailed list and explanation of each possible command](http://www.w3.org/Daemon/User/Installation/PrivilegedPorts.html) 有详细的介绍.
 
-如果你正在使用版本控制,那么现在可以提交你的更改到工作空间了.如果你忘记该用什么命令,可以看看crash course on GIT.
+如果你正在使用版本控制,那么现在可以提交你的更改到工作空间了.如果你忘记该用什么命令,可以看看[crash course on GIT][23].
 
 ## 4.3 创建Django应用
 
 通过一系列的设置和各种应用就可以组成一个web应用和网站,这就是Django.熟练的使用它是一个很好的软件工程实践.如果你开发了许多的小型应用,理论上讲你可以非常容易的把应用放入其他的Django项目里.不要重复造轮子!
 
-每个Django应用的存在都对应它实现的一种功能.针对不同的功能你需要创建不同的应用.假设我们有一个项目,它包括一个投票app,一个注册app和一些内容相关的app.在其他的项目里,我们希望能重用投票和注册app,并且用他们来发送不同的内容.这里有许多应用可以下载并用到你的项目里.接下来我们将要学习如何创建你自己的应用.
+每个Django应用的存在都对应它实现的一种功能.针对不同的功能你需要创建不同的应用.假设我们有一个项目,它包括一个投票app,一个注册app和一些内容相关的app.在其他的项目里,我们希望能重用投票和注册app,并且用他们来发送不同的内容.这里有许多应用可以[下载](https://code.djangoproject.com/wiki/DjangoResources#Djangoapplicationcomponents)并用到你的项目里.接下来我们将要学习如何创建你自己的应用.
 
 一开始我们需要创建名字叫Rango的应用.在你的Django项目的目录里(例如`<workspace>/tango_with_django_project`),运行如下命令.
 
@@ -733,7 +733,7 @@ $ python manage.py startapp rango
 * `views.py`,在这里处理用户请求和响应.
 * `admin.py`,在这里你可以向Django注册你的模型,它会为你创建Django的管理界面.
 
-`views.py`和`models.py`在每个应用中都要用到,他们俩是Django设计模式的组成部分,例如Model-View-Template模式.你可以通过the official Django documentation来了解详细的信息.
+`views.py`和`models.py`在每个应用中都要用到,他们俩是Django设计模式的组成部分,例如Model-View-Template模式.你可以通过[the official Django documentation](https://docs.djangoproject.com/en/1.7/intro/overview/)来了解详细的信息.
 
 在你创建模型和视图之前,你必须要告诉Django你的新应用的存在.所以你必须修改你配置目录里的`settings.py`文件.打开文件找到`INSTALLED_APPS`元组.在元祖的最后面增加`rango`.
 
@@ -769,12 +769,12 @@ def index(request):
 
 让我们逐行分析.
 
-* 我们第一行首先从`django.http`模块导入HttpResponse对象.
+* 我们第一行首先从`django.http`模块导入[HttpResponse](https://docs.djangoproject.com/en/1.7/ref/request-response/#django.http.HttpResponse)对象.
 * 在`views.py`文件里每个视图对应一个单独的函数.在这个例子中我们只创建了一个`index`视图.
-* 每个视图至少带一个参数 - 一个在`django.http`模块的HttpRequest对象.
+* 每个视图至少带一个参数 - 一个在`django.http`模块的[HttpRequest对](https://docs.djangoproject.com/en/1.7/ref/request-response/#django.http.HttpRequest)象.
 * 每个视图都要返回一个HttpResponse对象.本例中这个HttpResponse对象把一个字符串当做参数传递给客户端.
 
-虽然已经创建了视图,但是如果想让别人看到它,你必须用URL映射这个视图.
+虽然已经创建了视图,但是如果想让别人看到它,你必须用[URL](http://en.wikipedia.org/wiki/Uniform_resource_locator)映射这个视图.
 
 ## 4.5 URL映射
 
@@ -790,13 +790,13 @@ urlpatterns = patterns('',
 
 这段代码导入Django自带的映射URL机制.导入`rango`的`view`模块引入我们先前建立的视图.
 
-为了建立映射,我们用到了tuple.在Django里必须用`urlpatterns`来命名这个元组.这个`urlpatterns`元组包含一些`django.conf.urls.url()`函数的调用,而每个函数里都有一个唯一的映射.在上面的代码里,我们只用了`url()`一次,所以我们只映射了一个URL.`django.conf.urls.url()`函数的第一个参数是正则表达式`^$`,指的是匹配一个空字符串.所有匹配这个模式的URL都会映射到`views.index()`这个视图.用户的请求信息会包含在`HttpRequest`对象里作为参数传递给视图.我们给`url()`函数可选参数`name`赋值为`index`.
+为了建立映射,我们用到了tuple.在Django里必须用`urlpatterns`来命名这个[元组](http://en.wikipedia.org/wiki/Tuple).这个`urlpatterns`元组包含一些`django.conf.urls.url()`函数的调用,而每个函数里都有一个唯一的映射.在上面的代码里,我们只用了`url()`一次,所以我们只映射了一个URL.`django.conf.urls.url()`函数的第一个参数是正则表达式`^$`,指的是匹配一个空字符串.所有匹配这个模式的URL都会映射到`views.index()`这个视图.用户的请求信息会包含在`HttpRequest`对象里作为参数传递给视图.我们给`url()`函数可选参数`name`赋值为`index`.
 
 !!! note
 	你或许以为映射一个空URL毫无意义 - 它有什么用?当我们进行URL匹配时,只考虑到了原始URL字符串的一部分.这是因为我们的Django项目会优先处理原始URL字符串(例如`http://www.tangowithdjango.com/rango/`).一旦被处理,它将会被删除,留给剩下的部分去做匹配.在本例中,会剩下空字符串 - 所以空字符串会进行匹配!
 
 !!! note
-	`django.conf.urls.url()`函数的`name`参数是个可选参数.Django提供这个方法可以让你区别不同的映射.有时候连个不同的URL映射表达式会调用相同的视图.`name`可以让你轻松的区分他们 - 有些时候反响URL匹配会很有用.更多细节查看the Official Django documentation .
+	`django.conf.urls.url()`函数的`name`参数是个可选参数.Django提供这个方法可以让你区别不同的映射.有时候连个不同的URL映射表达式会调用相同的视图.`name`可以让你轻松的区分他们 - 有些时候反响URL匹配会很有用.更多细节查看[the Official Django documentation](https://docs.djangoproject.com/en/1.7/topics/http/urls/#naming-url-patterns) .
 
 你或许已经看到在项目目录里已经存在了一个`urls.py`文件.为什么创建另一个呢?事实上,你可以吧所有的项目应用的URL都放在这个文件里.但是这是一个坏的习惯,这回增加你的应用的耦合.各自应用的`urls.py`文件存放各自应用的URL.为了最小耦合,你可以稍后把它们加入到项目目录的`urls.py`文件里.
 
@@ -825,10 +825,10 @@ urlpatterns = patterns('',
 
 在每个应用中,你都可以创建许多URL映射.初始映射非常简单.下面我们会用URL做出更复杂的映射.
 
-对于理解Django的URL机制非常的重要.如果你仍有什么困惑可以查看official Django documentation on URL,以做更进一步的了解.
+对于理解Django的URL机制非常的重要.如果你仍有什么困惑可以查看[official Django documentation on URL](https://docs.djangoproject.com/en/1.7/topics/http/urls/),以做更进一步的了解.
 
 !!! note
-	URL模式使用正则表达式来进行匹配.在Python中学好正则表达式非常的有用.Python官方文档包含了userful guide on regular expressions, regexcheatsheet.com提供了 neat summary of regular expressions.
+	URL模式使用[正则表达式](http://en.wikipedia.org/wiki/Regular_expression)来进行匹配.在Python中学好正则表达式非常的有用.Python官方文档包含了[userful guide on regular expressions](http://docs.python.org/2/howto/regex.html), regexcheatsheet.com提供了 [neat summary of regular expressions](http://regexcheatsheet.com/).
 
 ## 4.6 基本流程
 
@@ -855,7 +855,7 @@ urlpatterns = patterns('',
 * 把这个视图映射到`/rango/about/`.在这一步里,你只需要编辑rango应用里的`urls.py`
 * 修改`index`视图的`HttpResponse`,使它返回包含about页面的链接.
 * 在`about`视图里使它包含一个回到主页的链接.
-* 如果你还没怎么明白,还是去看一下Django Tutorial.
+* 如果你还没怎么明白,还是去看一下[Django Tutorial](https://docs.djangoproject.com/en/1.7/intro/tutorial01/).
 
 ### 4.7.1 提示
 
@@ -873,7 +873,7 @@ urlpatterns = patterns('',
 
 为了创建一个Django网页,我们需要把许多东西都集中到一起.现在我们有两个视图以及一些连接它们的映射.下面我们将学习如何把模板加入到里面.
 
-设计优秀的网站会重用他们的布局结构.你是否看到过同样header和footer的页面,这些重复布局会提高网站的组织性同时会给人连续感.Django提供了与应用逻辑上可分的模板来为开发者更容易的实现这样的设计目标.在本章,你将会创建一个模板来创建一个HTML页面.这个模板将会传递给Django的视图.在第7章,我们会用模板做更复杂的事情.
+设计优秀的网站会重用他们的布局结构.你是否看到过同样header和footer的页面,这些[重复布局](http://www.techrepublic.com/blog/web-designer/effective-design-principles-for-web-designers-repetition/)会提高网站的组织性同时会给人连续感.Django提供了与应用逻辑上可分的[模板](https://docs.djangoproject.com/en/1.7/ref/templates/)来为开发者更容易的实现这样的设计目标.在本章,你将会创建一个模板来创建一个HTML页面.这个模板将会传递给Django的视图.在第7章,我们会用模板做更复杂的事情.
 
 ### 5.1.1 设置模板目录
 
@@ -890,13 +890,13 @@ TEMPLATE_DIRS = ['<workspace>/tango_with_django_project/']
 注意你需要提供`templates`目录的绝对路径.如果你是一个团队的一员或者工作在不同的电脑上,这在将来可能出现问题.你可以有不同的用户名这意味着你`<workspace>`目录有不同的路径.如果是硬编码路径的话上面的路径在不同电脑上是不同的.当然,你需要为不同的设置增加不同目录,难道没有什么好的方法了吗?
 
 !!! warning
-	硬编码路径绝逼带你通往地狱.硬编码在软件工程类是绝对抵制的一种模式,它会让你的项目不利于移植.
+	[硬编码](http://en.wikipedia.org/wiki/Hard_coding)路径绝逼带你通往地狱.硬编码在[软件工程](http://sourcemaking.com/antipatterns)里是绝对抵制的一种模式,它会让你的项目不利于[移植](http://en.wikipedia.org/wiki/Software_portability).
 
 ### 5.1.2 动态路径
 
 解决硬编码路径问题的方法是利用Python内建函数来动态的创建`teemplates`目录的路径.通过这个方法你不必考虑你的Django项目位置就能获取它的绝对路径.这将利于你的项目代码的移植.
 
-在Djang1.7的`settings.py`文件里包含了一个变量`BASE_DIR`.这个变量会保存`settings.py`文件的路径.这里面用了一个特殊的`___file__`属性,它能获取模块的绝对路径.然后通过调用`os.path.dirname()`来提供绝对路径的目录.再次调用`os.path.dirname()`我们回得到上层的目录,所以`BASE_DIR`内容是` <workspace>/tango_with_django_project/`.如果你还是很好奇的话你可以输入下面的命令.
+在Djang1.7的`settings.py`文件里包含了一个变量`BASE_DIR`.这个变量会保存`settings.py`文件的路径.这里面用了一个特殊的`__file__`属性,它能获取[模块的绝对路径](http://stackoverflow.com/a/9271479).然后通过调用`os.path.dirname()`来提供绝对路径的目录.再次调用`os.path.dirname()`我们回得到上层的目录,所以`BASE_DIR`内容是` <workspace>/tango_with_django_project/`.如果你还是很好奇的话你可以输入下面的命令.
 
 ```
 print __file__
@@ -983,11 +983,11 @@ def index(request):
 
 如果你没有看到上图,试着读读错误日志重新检查一下刚才修改的文件.确定所有所有的更改都正确.通常都是在`settings.py`文件中设置模板路径产生的错误.有时候需要添加`print`语句来输出`BASE_DIR`和`TEMPLATE_PATH`,确保它们俩设置的正确性.
 
-这个例子展示了在视图里如何使用模板.然而我们仅仅接触了一些Django模板方面的功能.在我们的教程里将会接触到更复杂的模板应用.同时你可以参考templates from the official Django documentation.
+这个例子展示了在视图里如何使用模板.然而我们仅仅接触了一些Django模板方面的功能.在我们的教程里将会接触到更复杂的模板应用.同时你可以参考[templates from the official Django documentation](https://docs.djangoproject.com/en/1.7/ref/templates/).
 
 ## 5.2 提供静态媒体
 
-现在Rango网站确实比较原始,没有样式也没有图片.为了增加样式和引入动态行为我们可以在我们的网站里加入CSS,Javascript和图像这些静态媒体.这些文件和网页有一些不同.这是因为它们不想HTML页面是生成出来的.这章节将会教你如何在Django项目里设置静态媒体.我们将会为我们的模板添加一些静态媒体.
+现在Rango网站确实比较原始,没有样式也没有图片.为了增加样式和引入动态行为我们可以在我们的网站里加入[CSS](http://en.wikipedia.org/wiki/Cascading_Style_Sheets),[Javascript](https://en.wikipedia.org/wiki/JavaScript)和图像这些静态媒体.这些文件和网页有一些不同.这是因为它们不想HTML页面是生成出来的.这章节将会教你如何在Django项目里设置静态媒体.我们将会为我们的模板添加一些静态媒体.
 
 ### 5.2.1 设置静态媒体目录
 
@@ -1011,13 +1011,14 @@ STATICFILES_DIRS = (
 )
 ```
 
-第一个变量`STATIC_URL`定义了当Django运行时Django应用寻找静态媒体的地址.例如,像我们上面的代码一样吧`STATIC_URL`设置成`/static/`,我们就可以通过`http://127.0.0.1:8000/static/`来访问它了. official documentation on serving up static media 警告我们要注意斜杠的书写.如果不这么设置将会引起一大堆麻烦.
+第一个变量`STATIC_URL`定义了当Django运行时Django应用寻找静态媒体的地址.例如,像我们上面的代码一样吧`STATIC_URL`设置成`/static/`,我们就可以通过`http://127.0.0.1:8000/static/`来访问它了. [official documentation on serving up static media](https://docs.djangoproject.com/en/1.7/ref/settings/#std:setting-STATIC_URL) 警告我们要注意斜杠的书写.如果不这么设置将会引起一大堆麻烦.
 
 `STATIC_URL`定义了web服务链接媒体的URL地址,`STATICFILES_DIRS`允许你定义新的`static`目录.像`TEMPLATE_DIRS`元组一样.`STATICFILES_DIRS`需要`static`目录的绝对路径.这里,我们重新用5.1章的`BASE_DIR`变量来创建`STATIC_PATH`.
 
 完成了这两个设置后,再一次运行你的Django服务.如果我们想要查看我们的Rango图片,访问`http://127.0.0.1:8000/static/images/rango.jpg`.如果没有出现请查看`setings.py`文件是否设置正确,并重启服务.如果出现了,试着加入其他类型的文件到`static`目录并在浏览器上访问他们.
 
->小心:在开发环境中可以你可以用这种方法来提供静态媒体文件,但是在生产环境就不太适合了. official Django documentation on Deploymen提供了在生产环境如何部署静态文件.
+!!! note
+    在开发环境中可以你可以用这种方法来提供静态媒体文件,但是在生产环境就不太适合了. [official Django documentation on Deploymen](https://docs.djangoproject.com/en/1.7/howto/static-files/deployment/)提供了在生产环境如何部署静态文件.
 
 ## 5.3 静态媒体文件和模板
 
@@ -1083,9 +1084,10 @@ STATICFILES_DIRS = (
 
 很显然你需要引入的静态文件需要在你的`static`目录里.如果文件不存在或者引用错误的话,控制台将会输出错误.试试看引入一个不存在的文件将会发生什么.
 
-为了进一步了解静态媒体可查看Django documentation on working with static files in templates.
+为了进一步了解静态媒体可查看[Django documentation on working with static files in templates](https://docs.djangoproject.com/en/1.7/howto/static-files/#staticfiles-in-templates).
 
->小心:在你模板的第一行确保文档类型声明(例如`<!DOCTYPE html>`).这就是为什么我们需要把`{% load static %}`放在文档类型声明后面而不是前面.根据HTML/XHTML不同文档类型对象的声明也有稍许不同.很显然Django命令会在模板输出的时候删除,但是删除之后的命令会留下一些空白意味着你的输出将得不到W3C认证服务的验证.
+!!! note
+    在你模板的第一行确保文档类型声明(例如`<!DOCTYPE html>`).这就是为什么我们需要把`{% load static %}`放在文档类型声明后面而不是前面.根据HTML/XHTML不同文档类型对象的声明也有稍许不同.很显然Django命令会在模板输出的时候删除,但是删除之后的命令会留下一些空白意味着你的输出将得不到W3C认证服务的验证.
 
 TODO(leifos):注意当你部署项目的时候最好不要这样做,你可以查询https://docs.djangoproject.com/en/1.7/howto/static-files/deployment/ 
 
@@ -4827,7 +4829,7 @@ TODO
 
 代码覆盖测试将会检查你的代码有多少被测试到了,并且得到你的代码有多少通过了测试.你可以通过`pip install coverage`下载`coverage`包,它可以自动分析代码覆盖了多少.装完`coverage`运行如下命令:
 
-```shell
+```
 $ coverage run --source='.' manage.py test rango
 ```
 
