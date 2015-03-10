@@ -4578,3 +4578,223 @@ def auto_add_page(request):
 
     return render(request, 'rango/page_list.html', context_dict)
 ```
+
+# 20 自动化测试
+
+对项目进行测试是一个很好的习惯.许多软件工程师专门负责编写测试来确保软件的健壮性.当然,大多数时候要么是没有时间写,要么是对自己的代码很有自信.
+
+在[Django Tutorial](https://docs.djangoproject.com/en/1.7/intro/tutorial05/),有许多原因让我们写测试:
+
+* 测试将会节省时间: 一个复杂的系统如果进行改动你不知道会在什么地方发生错误.
+* 测试不仅能发现问题,而且能防止问题出现: 测试可以展示代码里哪里没符合预期.
+* 测试使你的代码更漂亮:"没有测试的代码是设计的失败",Jacob Kaplan-Moss,一个Django开发者说.
+* 测试帮助团队合作: 它能确保团队不会轻易的破坏代码.
+
+通过Pyhton教程 http://docs.python-guide.org/en/latest/writing/tests/ ,当你写测试的时候需要遵循许多规则.下面是一些主要规则.
+
+* 测试注重小功能
+* 测试有明确的目的
+* 测试是独立的
+* 在你完成代码,提交代码之前运行测试
+* 测试代码发布时最好有一个钩子.
+* 在测试中使用长的描述性的名字.
+
+>注意:在这章我们现在只是提供基础的测试,它只遵循[Django Tutorial](https://docs.djangoproject.com/en/1.7/intro/tutorial05/)的一部分.我们希望在将来能添加更多.
+
+## 20.1 运行测试
+
+在建立Django应用时就已经有了测试.你可以用下面饿命令:
+
+```shell
+$ python manage.py test rango
+
+Creating test database for alias 'default'...
+
+----------------------------------------------------------------------
+Ran 0 tests in 0.000s
+
+OK
+Destroying test database for alias 'default'...
+```
+
+这个命令将会对Rango应用进行测试.现在什么事都没有发生.是因为`rango/tests.py`只包含了导入语句.每次你创建一个应用,Django都会自动的创建一个test文件来鼓励你写测试.
+
+这个输出提到了一个叫`default`的数据库,当你运行测试的时候,会建立一个临时的数据库,你的测试都会运行在它之上.这样的话测试就和你现有的数据库进行分离.
+
+## 20.2 测试模型
+
+好了,让我们建立一个测试.在目录模型,我们希望浏览数不会出现负数,因为浏览数永远不会又负数.为了创建一个测试我们需要在`rango/tests.py`里添加如下:
+
+```python
+from django.test import TestCase
+
+from rango.models import Category
+
+class CategoryMethodTests(TestCase):
+
+    def test_ensure_views_are_positive(self):
+
+        """
+                ensure_views_are_positive should results True for categories where views are zero or positive
+        """
+                cat = Category(name='test',views=-1, likes=0)
+                cat.save()
+                self.assertEqual((cat.views >= 0), True)
+```
+
+如果你从来没有写过测试,必须注意首先继承自`TestCase`.在这个类中的方法同样遵循一个习惯就是所有的测试都是以`test_`开头的,它们同时包含一些`assertion`.这里我们用`assertEqual`方法检查数值是否相等,但是其他种类的断言也可以使用.参见Python单元测试文档, https://docs.python.org/2/library/unittest.html (例如,`assertItemsEqual`, `assertListEqual`, `assertDictEqual`等等).Django的测试机制是和Python的分离的,但是仍然提供了一些其他的断言和测试用例.
+
+现在让我们来运行测试:
+
+```shell
+$ python manage.py test rango
+
+
+Creating test database for alias 'default'...
+F
+======================================================================
+FAIL: test_ensure_views_are_positive (rango.tests.CategoryMethodTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/leif/Code/tango_with_django_project_17/rango/tests.py", line 12, in test_ensure_views_are_positive
+      self.assertEqual((cat.views>=0), True)
+      AssertionError: False != True
+
+      ----------------------------------------------------------------------
+      Ran 1 test in 0.001s
+
+      FAILED (failures=1)
+
+```
+
+可以看到测试失败.这是因为模型没有检测这个值是否小于0.为了确保小于0我们需要修改模型.我们需要修改目录模型中`save()`方法中的代码,它会检查浏览数并且修正它.
+
+修改完毕你可以运行试试看是否通过,如果没有再试试看.
+
+让我们添加另一个测试,确保合适的slug行被创建.在`rango/tests.py`添加如下代码
+
+```python
+def test_slug_line_creation(self):
+             """
+             slug_line_creation checks to make sure that when we add a category an appropriate slug line is created
+             i.e. "Random Category String" -> "random-category-string"
+             """
+
+             cat = cat('Random Category String')
+             cat.save()
+             self.assertEqual(cat.slug, 'random-category-string')
+```
+
+你的代码还好吗?
+
+## 20.3 测试视图
+
+到目前为止我们已经编写了确保模型数据完整的测试.Django还提供了测试视图的测试机制.它会模仿一个内部的客户端并通过url请求Django视图.在这个测试中你可以得到响应(包括html)和上下文字典.
+
+让我们创建一个测试当目录模型为空时,首页会不会出现`There are no categories present`.
+
+```python
+from django.core.urlresolvers import reverse
+
+
+class IndexViewTests(TestCase):
+
+    def test_index_view_with_no_categories(self):
+        """
+        If no questions exist, an appropriate message should be displayed.
+        """
+        response = self.client.get(reverse('index'))
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "There are no categories present.")
+        self.assertQuerysetEqual(response.context['categories'], [])
+```
+
+首先,Django`TestCase`会活的一个`client`对象,它可以发送请求.这里它使用`reverse`函数来查找`index`页.然后它会获取页面病保存在`response`里.然后测试会检查下面的内容:页面加载成了吗?html里是否包含"There are no categories present.",上下文字典是否为空.重新调用你的测试尝试一下.
+
+现在让我们检查一下目录页面得到的结果.
+
+```python
+from rango.models import Category
+
+def add_cat(name, views, likes):
+    c = Category.objects.get_or_create(name=name)[0]
+    c.views = views
+    c.likes = likes
+    c.save()
+    return c
+```
+
+然后增加另一个方法`class IndexViewTests(TestCase)`:
+
+```python
+def test_index_view_with_categories(self):
+    """
+    If no questions exist, an appropriate message should be displayed.
+    """
+
+    add_cat('test',1,1)
+    add_cat('temp',1,1)
+    add_cat('tmp',1,1)
+    add_cat('tmp test temp',1,1)
+
+    response = self.client.get(reverse('index'))
+    self.assertEqual(response.status_code, 200)
+    self.assertContains(response, "tmp test temp")
+
+    num_cats =len(response.context['categories'])
+    self.assertEqual(num_cats , 4)
+```
+在这个测试里,我们在数据库里增加了4个目录,并且检查页面是否加载,文本内容是否包含`tmp test temp`,目录数量是否等于4.
+
+## 20.4 测试返回页面
+
+TODO
+## 20.5 覆盖测试
+
+代码覆盖测试将会检查你的代码有多少被测试到了,并且得到你的代码有多少通过了测试.你可以通过`pip install coverage`下载`coverage`包,它可以自动分析代码覆盖了多少.装完`coverage`运行如下命令:
+
+```shell
+$ coverage run --source='.' manage.py test rango
+```
+
+它将会运行rango应用所有的测试并收集覆盖数据.查看报告你需要输入:
+
+```shell
+$ coverage report
+
+Name                                       Stmts   Miss  Cover
+--------------------------------------------------------------
+manage                                         6      0   100%
+populate                                      33     33     0%
+rango/__init__                                 0      0   100%
+rango/admin                                    7      0   100%
+rango/forms                                   35     35     0%
+rango/migrations/0001_initial                  5      0   100%
+rango/migrations/0002_auto_20141015_1024       5      0   100%
+rango/migrations/0003_category_slug            5      0   100%
+rango/migrations/0004_auto_20141015_1046       5      0   100%
+rango/migrations/0005_userprofile              6      0   100%
+rango/migrations/__init__                      0      0   100%
+rango/models                                  28      3    89%
+rango/tests                                   12      0   100%
+rango/urls                                    12     12     0%
+rango/views                                  110    110     0%
+tango_with_django_project/__init__          0      0   100%
+tango_with_django_project/settings         28      0   100%
+tango_with_django_project/urls              9      9     0%
+tango_with_django_project/wsgi              4      4     0%
+--------------------------------------------------------------
+TOTAL                                        310    206    34%
+```
+
+通过报告我们可以看到一些例如`rango/views`关键部分的代码还没有测试到.查看`coveragoe`更详尽的使用访问: http://nedbatchelder.com/code/coverage/
+
+## 20.6 练习
+
+* 我们想要在`Page`页面添加两个字段,`last_visit`和`first_visit`,字段类型为`timedate`.
+    * 修改模型加入这两个字段
+    * 修改add page功能和goto功能
+    * 增加测试确保最后访问的第一次访问不在未来的时间里
+    * 增加测试确保上次访问等于或大于第一次访问.
+    * 查看[Part Five of the official Django Tutorial](https://docs.djangoproject.com/en/1.7/intro/tutorial05/)来完成这些测试.
+* 查看[tutorial on test driven development by Harry Percival](http://www.tdd-django-tutorial.com/)
