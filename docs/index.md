@@ -2974,17 +2974,17 @@ TODO(leifos):指出如何把url放到一个命名空间并引用,见http://djang
 
     这里我们以`about`视图作为例子来进行检查.开始用硬编码的方式进行,代码如下.注意我们只发送字符串 - 我们没有使用`request`参数.
 
-    ```
-    def about(request):
-        return HttpResponse('Rango says: Here is the about page. <a href="/rango/">Index</a>')
-    ```
+```
+def about(request):
+    return HttpResponse('Rango says: Here is the about page. <a href="/rango/">Index</a>')
+```
 
     为了使用模板我们需要调用`render`函数传递`request`对象.这将会使我们的模板引擎可以获取像`user`这样的对象,它可以允许模板引擎查看用户是否登录.(例如进行验证).
 
-    ```
-    def about(request):
-        return render(request, 'rango/about.html', {})
-    ```
+```
+def about(request):
+    return render(request, 'rango/about.html', {})
+```
 
     记住,`render()`最后一个参数是一个字典,它可以添加额外的数据传递给Django模板引擎.因为我们没有什么额外的数据传递给模板所以这里为空.查看[5.1.3](#51)章节复习关于`render()`的知识.
 
@@ -2994,7 +2994,7 @@ TODO(leifos):指出如何把url放到一个命名空间并引用,见http://djang
 
 ## 11.1 Cookies,无处不在的Cookies!
 
-如果你已经熟知cookies的概念和它背后的运行机制,那么请直接跳转到11.2,如果没有让我们继续.
+如果你已经熟知cookies的概念和它背后的运行机制,那么请直接跳转到[11.2](#112-sessions),如果没有让我们继续.
 
 当我们请求访问一个网站时,服务器会返回请求页面的内容.另外还有一个或者多个cookies被传送给客户端,它们将会保存在浏览器的cache里.当一个用户在同一个网站服务器请求新的页面时,所有的关于这个页面的cookies也会发送到请求里.服务器会解析请求里的cookies字段并且生成一个特定的响应.
 
@@ -3002,9 +3002,9 @@ TODO(leifos):指出如何把url放到一个命名空间并引用,见http://djang
 
 ## 11.2 Sessions和无状态协议
 
-所有的浏览器和服务器之间的交互都会通过HTTP协议.通过第8章简单的接触我们知道HTTP是无状态协议.这就意味着每次客户端请求(HTTP`GET`)或者发送(HTTP`POST`)资源给服务器都必须新建立一个连接(一个TCP连接).
+所有的浏览器和服务器之间的交互都会通过[HTTP协议](http://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol).通过[第8章][8]简单的接触我们知道HTTP是[无状态协议](http://en.wikipedia.org/wiki/Stateless_protocol).这就意味着每次客户端请求(HTTP`GET`)或者发送(HTTP`POST`)资源给服务器都必须新建立一个连接(一个TCP连接).
 
-因为客户端和服务器没有持续的连接,两端的软件不能仅仅通过单独的连接保持会话状态.例如,客户端每次都需要告诉服务器谁在这个主机上登录了这个web应用.这就是用户和服务器之间的会话,这也是session的基本 - a semi-permanent exchange of information.作为一个无状态协议,HTTP需要保持会话状态非常的困难 - 但是很走运我们可以使用几种技术来绕过这个问题.
+因为客户端和服务器没有持续的连接,两端的软件不能仅仅通过单独的连接保持会话状态.例如,客户端每次都需要告诉服务器谁在这个主机上登录了这个web应用.这就是用户和服务器之间的会话,这也是session的基本 - [a semi-permanent exchange of information](http://en.wikipedia.org/wiki/Session_(computer_science)).作为一个无状态协议,HTTP需要保持会话状态非常的困难 - 但是很走运我们可以使用几种技术来绕过这个问题.
 
 最常用的一种保持状态的方法就是使用session ID,和cookies一样存储在客户端电脑.session ID可以认为是一种令牌(一大串字符串),它能够唯一标识特定web应用里的会话.和cookies存储许多不同种类的数据不一样(像用户名,名字,密码),它只存储session ID,并且映射到web服务器的一个数据结构.在这个数据结构里,你可以存储任何你需要的信息.这对于用户来说是更安全的存储方法.用这种方法,这些数据不会被一个不安全的客户端和连接所监听.
 
@@ -3019,14 +3019,14 @@ session ID也可以不存储在cookies中.传统的PHP应用会把它们做成�
 
 ## 11.3 在Django里设置Sessions
 
-尽管我们已经设置好并且正确工作,但是如果学会Django的模块提供哪些工作就会更好了.关于sessions方面Django提供了middleware来提供session功能.
+尽管我们已经设置好并且正确工作,但是如果学会Django的模块提供哪些工作就会更好了.关于sessions方面Django提供了[middleware](https://docs.djangoproject.com/en/1.7/topics/http/middleware/)来提供session功能.
 
 为了检查一切都设置妥当,打开Django项目里的`settings.py`文件.找到`MIDDLEWARE_CLASSES`元组.你可以在元组中看到`django.contrib.sessions.middleware.SessionMiddleware`模块 - 如果没有看到现在就加进去.正式这个`SessionMiddleware`中间件能够创建唯一的`sessionid`cookies.
 
 `SessionMiddleware`可以灵活的使用不同的方法来存储session信息.你可以采取很多方法储存 - 存在文件,数据库甚至在cache中.最直接的方法是使用`django.contrib.sessions`应用把session信息存储到Django模型/数据库中(详细的说是`django.contrib.sessions.models.Session`模型).使用这种方法,你必须首先确保在Django项目的`settings.py`文件里`django.contrib.sessions`保存在`INSTALLED_APPS`元组里.如果你现在要添加应用,你需要使用迁移命令来更新数据库.
 
 !!! note
-    如果你希望使用轻量快捷的方式,你可以把session信息存储在cache中.可以查看 official Django documentation for advice on cached sessions.
+    如果你希望使用轻量快捷的方式,你可以把session信息存储在cache中.可以查看 [official Django documentation for advice on cached sessions](https://docs.djangoproject.com/en/1.7/topics/http/sessions/#using-cached-sessions).
 
 ## 11.4 基于cookie的session
 
@@ -3128,16 +3128,19 @@ from datatime import datetime
 !!! note
     你或许注意到了刷新浏览器并不能使`visits`增长.为什么?因为上面给出的示例代码只在用户上次访问距今是1天时才增加.当我们测试的时候这个值有点不合理 - 所以为什么我们不缩短以下这个时间呢?修改`index()`视图,找到下面这一行.
 
-```
-if (datetime.now() - last_visit_time).days > 0:
-```
-我们可以把它们更改为秒数级别的比较.在下面的例子,我们检查是否在5秒之外有登录.
-```
-if (datetime.now() - last_visit_time).seconds > 5:
-```
+    ```
+    if (datetime.now() - last_visit_time).days > 0:
+    ```
 
-这就意味着你只需要等待5秒的时间就能看到`visits`cookie的增长,而不需要一整天.当你这么玩完以后,就可以把它改回来了.
-在不同的时间里使用`-`操作符可以求出它们的差值是Python提供给我们的非常使用的功能.当时间相减,就会返回一个`timedelta`对象,就像上面代码它提供给我们`days`和`seconds`属性.你可以查看 official Python documentation来获取更多关于对象类型和其他属性的信息.
+    我们可以把它们更改为秒数级别的比较.在下面的例子,我们检查是否在5秒之外有登录.
+
+    ```
+    if (datetime.now() - last_visit_time).seconds > 5:
+    ```
+
+    这就意味着你只需要等待5秒的时间就能看到`visits`cookie的增长,而不需要一整天.当你这么玩完以后,就可以把它改回来了.
+
+    在不同的时间里使用`-`操作符可以求出它们的差值是Python提供给我们的非常使用的功能.当时间相减,就会返回一个`timedelta`对象,就像上面代码它提供给我们`days`和`seconds`属性.你可以查看 [official Python documentation](http://docs.python.org/2/library/datetime.html#timedelta-objects)来获取更多关于对象类型和其他属性的信息.
 
 我们可以修改`index.html`在里面加入`<p> visits: {{ visits }}</p>`来现实访问次数.
 
@@ -3149,7 +3152,7 @@ if (datetime.now() - last_visit_time).seconds > 5:
 
 1. 确保`settings.py`文件的` MIDDLEWARE_CLASSES `包含`django.contrib.sessions.middleware.SessionMiddleware`.
 2. 配置session后台.确定`django.contrib.sessions`在你`settings.py`文件的`INSTALLED_APPS`里.如果没有则添加并且运行数据库迁移命令`python manage.py migrate`.
-3. 假设使用数据库作为后台,但是你也可以设置成其他(比如cache).参见 official Django Documentation on Sessions for other backend configurations.
+3. 假设使用数据库作为后台,但是你也可以设置成其他(比如cache).参见 [official Django Documentation on Sessions for other backend configurations](https://docs.djangoproject.com/en/1.7/topics/http/sessions/).
 
 现在我们可以调用`request.session.get()`方法访问服务器端的cookies,使用`request.session[]`存储它们.注意session ID cookie仍然用来标记客户端机器(严格的说是存在一个浏览器端的cookie),但是所有的数据都存储在服务器端.下面我们修改`index()`函数使用基于cookie的session:
 
@@ -3194,7 +3197,7 @@ def index(request):
     强烈建议你在启用基于session数据之前删除所有客户端的cookies.你可以在你的浏览器里对它们进行删除,或者是直接清空浏览器的cache - 确保cookies在这个过程中删除.
 
 !!! note
-    使用session存储数据的另一个优点是它可以把数据从字符串转化成响应的类型.然而只有像`int`,`float`,`long`,`complex`和`boolean`这样的内置类型才有用.如果你希望存储字典或是其他复杂的类型就不可以啦.在这种情况下你需要 pickling your objects.
+    使用session存储数据的另一个优点是它可以把数据从字符串转化成响应的类型.然而只有像`int`,`float`,`long`,`complex`和`boolean`这样的[内置类型](http://docs.python.org/2/library/stdtypes.html)才有用.如果你希望存储字典或是其他复杂的类型就不可以啦.在这种情况下你需要 [pickling your objects](https://wiki.python.org/moin/UsingPickle).
 
 ## 11.7 Browser-Length and Persistent Sessions
 
@@ -3207,7 +3210,7 @@ def index(request):
 
 persistent session默认是开启的,可以设置`SESSION_EXPIRE_AT_BROWSER_CLOSE`为`False`进行开启.persistent sessions有一个额外的设置`SESSION_COOKIE_AGE`,它可以允许你设置cookie的存活时间.这个值是一个整型,代表着cookie能存活的秒数.例如修改为`1209600`意味着网页的cookies将会在两周后过期.
 
-查看 official Django documentation on cookies 获取更多可用的设置.也可以查看 Eli Bendersky’s blog这篇讲述Django和cookie的文章.
+查看 [official Django documentation on cookies](https://docs.djangoproject.com/en/1.7/ref/settings/#session-cookie-age) 获取更多可用的设置.也可以查看 [Eli Bendersky’s blog](http://eli.thegreenplace.net/2011/06/24/django-sessions-part-i-cookies/)这篇讲述Django和cookie的文章.
 
 ## 11.8 清除Sessions数据库
 
@@ -3230,7 +3233,7 @@ Session cookies是不断累积的.所以如果你是使用数据库作为后台�
 如果你需要更安全的cookies,那么就需要使用基于cookies的session:
 
 1. 确保`settings.py`中的` MIDDLEWARE_CLASSES`包含`django.contrib.sessions.middleware.SessionMiddleware`.
-2. 设置你的session后台`SESSION_ENGINE`.查看 official Django Documentation on Sessions 获取不同后台的不同设置.
+2. 设置你的session后台`SESSION_ENGINE`.查看 [official Django Documentation on Sessions](https://docs.djangoproject.com/en/1.7/topics/http/sessions/) 获取不同后台的不同设置.
 3. 通过`requests.sessions.get()`来获取存在的cookie.
 4. 通过`requests.session['<cookie_name>']`更改或设置cookie.
 
@@ -3461,9 +3464,9 @@ TODO(leifos):增加一个定制注册表单...
 
 在本章,我们将使用Bootstrap3.2套件来装饰我们的Rango.我们不需要了解Bootstrap工作的细节,但是我们假设你了解一些CSS.如果没有的话,去查看以下CSS章节或者一些Bootstrap教程了解一下基础知识.现在,你需要通过这一章把所有零碎的知识点连接起来.
 
-开始我们先看一下Bootstrap 3.2.0 website - 它提供了实例代码和不同的组件,并且提供怎么加入样式标签的方法.在Bootstrap网站它们提供了许多example layouts可以给我们使用.
+开始我们先看一下[Bootstrap 3.2.0 website](http://getbootstrap.com/) - 它提供了实例代码和不同的组件,并且提供怎么加入样式标签的方法.在Bootstrap网站它们提供了许多[example layouts](http://getbootstrap.com/getting-started/#examples)可以给我们使用.
 
-为了修改Rango样式我们需要定义dashboard style来满足我们的要求,例如在顶部的菜单栏,侧边栏(用来展示目录)和一个主内容区域.在使用Bootstrap的HTML之前我们还需要做一些工作.下面使我们需要做的:
+为了修改Rango样式我们需要定义[dashboard style](http://getbootstrap.com/examples/dashboard/)来满足我们的要求,例如在顶部的菜单栏,侧边栏(用来展示目录)和一个主内容区域.在使用Bootstrap的HTML之前我们还需要做一些工作.下面使我们需要做的:
 
 * 把所有的`../../`改成`http://getbootstrap.com`
 * 修改`dashboard.css`为绝对路径`http://getbootstrap.com/examples/dashboard/dashboard.css`
@@ -3668,7 +3671,7 @@ TODO(leifos):增加一个定制注册表单...
 
 ## 13.3 登录页面
 
-让我们将注意力转移到登录页面.在Bootstrap网站我们已经看到漂亮的登录表单,查看 http://getbootstrap.com/examples/signin/ .如果查看源代码,你会发现我们需要在基础登录表单上加入许多类.修改`login.html`模板如下:
+让我们将注意力转移到登录页面.在Bootstrap网站我们已经看到[漂亮的登录表单](http://getbootstrap.com/examples/signin/),查看 http://getbootstrap.com/examples/signin/ .如果查看源代码,你会发现我们需要在基础登录表单上加入许多类.修改`login.html`模板如下:
 
 ```
 {% block body_block %}
@@ -3688,7 +3691,7 @@ TODO(leifos):增加一个定制注册表单...
 {% endblock %}
 ```
 
->这里有很多错误暂时不翻译?~
+>这里有很多错误,且对后面没有什么影响暂时不翻译~
 
 # 14 模板标签
 
@@ -3797,7 +3800,7 @@ Bing搜索API提供了在你的应用中嵌入搜索结果的功能.通过简单
 
 为了注册一个Bing API key,你必须首先注册一个免费的Microsoft账户.这个账户提供了许多的Microsoft服务.如果你已经有一个Hotmail账户,那么就不用再注册了.你可以在这里 https://account.windowsazure.com 注册和登录帐号.
 
-当你创建完帐号,访问 Windows Azure Marketplace Bing Search API page.在页面的顶部你需要点击Sign In按钮 - 如果你已经你已经进入到Microsoft账户(上面写着Sing Out),就不需要再登录了.
+当你创建完帐号,访问 [Windows Azure Marketplace Bing Search API page](https://datamarket.azure.com/dataset/5BA839F1-12CE-4CCE-BF57-A49D98D29A44).在页面的顶部你需要点击Sign In按钮 - 如果你已经你已经进入到Microsoft账户(上面写着Sing Out),就不需要再登录了.
 
 页面右边的列表是每月的事务量.在最顶部是5000/月.点击右边的注册按钮 - 你将会订阅一个免费的服务.阅读完有关条例以后,如果同意条款点击注册按钮继续.接下来将会显示成功注册的页面.
 
@@ -3906,7 +3909,7 @@ def run_query(search_terms):
 注意从Bing服务器返回的结果是JSON.这是因为我们在请求中标明了返回JSON - 查看一下我们定义的`search_url`变量.如果在尝试连接Bing服务器的时候发生了错误,就会通过`except`代码块中的`print`语句打印出来.
 
 !!! note
-    Bing搜索API还有许多可控参数我们没有涉及到,如果你有兴趣可以查看这里:Bing Search API Migration Guide and FAQ
+    Bing搜索API还有许多可控参数我们没有涉及到,如果你有兴趣可以查看这里:[Bing Search API Migration Guide and FAQ](http://datamarket.azure.com/dataset/bing/search)
 
 ## 15.3 安全的保存你的API KEY
 
@@ -4024,7 +4027,7 @@ from rango.bing_search import run_query
 2. 在`base.html`导航栏增加搜索链接.记得使用`url`模板标签来引用链接.
 
 !!! note
-    通过relevant article on Wikipedia,一个Application Programming Interface (API)是指软件之间如何进行交互.在web应用中API是指一系列已经定义结构的HTTP请求和它们所返回的各样请求信息.任何在互联网上有意义的服务都可以提供它们自己的API - 不限于web搜索.更多的API信息请看 Luis Rei provides an excellent tutorial on APIs.
+    通过[relevant article on Wikipedia](http://en.wikipedia.org/wiki/Application_programming_interface),一个Application Programming Interface (API)是指软件之间如何进行交互.在web应用中API是指一系列已经定义结构的HTTP请求和它们所返回的各样请求信息.任何在互联网上有意义的服务都可以提供它们自己的API - 不限于web搜索.更多的API信息请看 [Luis Rei provides an excellent tutorial on APIs](http://blog.luisrei.com/articles/rest.html).
 
 # 16 练习
 
@@ -4047,7 +4050,7 @@ from rango.bing_search import run_query
     * 让用户查看其他用户和他们的资料
 
 !!! note
-    我们不需要现在完成所有的任务.一些将会在第19章里完成,剩下的一些当做练习由你自己完成.
+    我们不需要现在完成所有的任务.一些将会在[第19章][19]里完成,剩下的一些当做练习由你自己完成.
 
 在我们开始添加功能之前我们将会为每个任务列出一个todo list.把任务划分成小任务将会简化任务的难度,所以让我们一起来各个击破吧.在这章,我们将提供给你上面任务的工作流程.已经学了这么多了,剩下的工作基本上可以独立完成了(除了请求AJAX).在下一章,我们将提供一些代码来展示如何完成这些功能.
 
