@@ -1087,7 +1087,7 @@ STATICFILES_DIRS = (
 为了进一步了解静态媒体可查看[Django documentation on working with static files in templates](https://docs.djangoproject.com/en/1.7/howto/static-files/#staticfiles-in-templates).
 
 !!! note
-    在你模板的第一行确保文档类型声明(例如`<!DOCTYPE html>`).这就是为什么我们需要把`{% load static %}`放在文档类型声明后面而不是前面.根据HTML/XHTML不同文档类型对象的声明也有稍许不同.很显然Django命令会在模板输出的时候删除,但是删除之后的命令会留下一些空白意味着你的输出将得不到W3C认证服务的验证.
+    在你模板的第一行确保[文档类型声明](http://en.wikipedia.org/wiki/Document_Type_Declaration)(例如`<!DOCTYPE html>`).这就是为什么我们需要把`{% load static %}`放在文档类型声明后面而不是前面.根据HTML/XHTML不同文档类型对象的声明也有稍许不同.很显然Django命令会在模板输出的时候删除,但是删除之后的命令会留下一些空白意味着你的输出将得不到[W3C认证服务](http://validator.w3.org/)的[验证](http://www.w3schools.com/web/web_validate.ASP).
 
 TODO(leifos):注意当你部署项目的时候最好不要这样做,你可以查询https://docs.djangoproject.com/en/1.7/howto/static-files/deployment/ 
 
@@ -1123,7 +1123,7 @@ if settings.DEBUG:
         {'document_root': settings.MEDIA_ROOT}), )
 ```
 
-通过导入`django.conf`的`settings`模块我们可以得到我们项目里`settings.py`文件的变量.接下来的条件判断语句判断Django是否处在DEBUG模式.如果`DEBUG`被设定为`True`,那么就会在`urlpatterns`加入URL匹配模式.所有以`media/`开头的青豆都会传递给`django.views.static`视图.这个视图将会把上传的媒体传给你.
+通过导入`django.conf`的`settings`模块我们可以得到我们项目里`settings.py`文件的变量.接下来的条件判断语句判断Django是否处在[DEBUG](https://docs.djangoproject.com/en/1.7/ref/settings/#debug)模式.如果`DEBUG`被设定为`True`,那么就会在`urlpatterns`加入URL匹配模式.所有以`media/`开头的青豆都会传递给`django.views.static`视图.这个视图将会把上传的媒体传给你.
 
 在修改了`urls.py`文件后,我们需要修改`settings.py`文件.我们需要创建`MEDIA_URL`和`MEDIA_ROOT`两个变量.
 
@@ -1134,7 +1134,8 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media') # Absolute path to the media direct
 
 第一个变量`MEDIA_URL`定义了基地址.如果把`MEDIA_URL`设置为`/media/`意味着上传URL为`http://127.0.0.1:8000/media/`.`MEDIA_ROOT`用来告诉Django你的上传文件保存在电脑的哪个位置.在上边的例子中,我们用5.1章节设置的`PROJECT_PATH`变量和`/media/`连接.就变成了绝对路径`<workspace>/tango_with_django_project/media/`.
 
->小心:和前面提到的一样,Django提供的开发媒体服务对debug非常有帮助.但是它不能用在生产环境中. Django documentation on static files警告这样做"低效率且不安全".如果你需要部署你的Django项目,你需要阅读文档选择更安全的方法解决上传文件的问题.
+!!! note
+    和前面提到的一样,Django提供的开发媒体服务对debug非常有帮助.但是它不能用在生产环境中. [Django documentation on static files](https://docs.djangoproject.com/en/1.7/ref/contrib/staticfiles/#static-file-development-view)警告这样做"低效率且不安全".如果你需要部署你的Django项目,你需要阅读文档选择更安全的方法解决上传文件的问题.
 
 你可以在`media`目录里放入一个图片来检查它是否工作.启动Django服务,在浏览器里访问图片.例如如果你在`media`中加入`rango.jpg`文件,你需要访问的URL看起来是这样的`http://127.0.0.1:8000/media/rango.jpg`.你会看到你的图片.如果你没看到,你需要回去检查设置是否错误.
 
@@ -1197,7 +1198,7 @@ DATABASES = {
 能看到默认用SQLite3作为后端数据库.SQLite是个轻量级的数据库对我们开发很有用.我们仅仅需要设置`DATABASE_PATH`里的`NAME`键值对.其他引擎需要`USER`,`PASSWORD`,`HOST`和`PORT`等关键字.
 
 !!! note
-    对于教程来说使用SQLite引擎还好,但是对于部署你的应用来说可能不是最好的选择,或许应当使用其他更健壮和更大型的数据库引擎.Django同样支持像PostgreSQL和MySQL这样的流行数据库引擎.从 official Django documentation on Database Engines 获取更多细节.你可以查看关于SQLite的网站来选择是否使用SQLite引擎.
+    对于教程来说使用SQLite引擎还好,但是对于部署你的应用来说可能不是最好的选择,或许应当使用其他更健壮和更大型的数据库引擎.Django同样支持像[PostgreSQL](http://www.postgresql.org/)和[MySQL](http://www.mysql.com/)这样的流行数据库引擎.从 [official Django documentation on Database Engines](https://docs.djangoproject.com/en/1.7/ref/settings/#std:setting-DATABASE-ENGINE) 获取更多细节.你可以查看关于这篇关于SQLite的[文章](http://www.sqlite.org/whentouse.html)来选择是否使用SQLite引擎.
 
 ## 6.3 创建模型
 
@@ -1229,7 +1230,7 @@ class Page(models.Model):
 * 'IntegerField',存储整数.
 * `DateField`,存储Python的`datetime.date`.
 
-查看Django documentation on model fields获取完整列表.
+查看[Django documentation on model fields](https://docs.djangoproject.com/en/1.7/ref/models/fields/)获取完整列表.
 
 每个字段都有一个`unique`属性.如果设置为`True`,那么在整个数据库模型里它的字段里的值必须是唯一的.例如,我们上面定义的`Category`模型.`name`字段被设置为`unique` - 所以每一个目录的名字都必须是唯一的.
 
@@ -1350,7 +1351,7 @@ $ python manage.py shell
 在例子中我们首先导入我们需要操作的模型.然后打印出存在的目录,在这里因为我们的图表是空所以输出也是空.然后创建并储存一个目录,打印.
 
 !!! note
-    上面的例子只展示了Django shell一小部分功能.更多的可以看 official Django Tutorial to learn more about interacting with the model和official Django documentation on the list of available commands.
+    上面的例子只展示了Django shell一小部分功能.更多的可以看 [official Django Tutorial to learn more about interacting with the model](https://docs.djangoproject.com/en/1.7/intro/tutorial01/)和[official Django documentation on the list of available commands](https://docs.djangoproject.com/en/1.7/ref/django-admin/#available-commands).
 
 ## 6.6 设置管理界面
 
@@ -1381,10 +1382,10 @@ admin.site.register(Page)
 点击`Categorys`链接.这里我们能看见我们通过Django shell创建的`test`目录.我们可以非常方便的在这里创建,修改和删除目录和页面.同样你可以在`Auth`应用里添加`User`来增加登陆Django管理界面的用户.
 
 !!! note
-    注意管理界面的排印错误(category而不是categories).这个问题可以通过在你的模型里添加元类并定义`verbose_name_plural`属性来解决.查看 Django’s official documentation on models 获取更多细节.
+    注意管理界面的排印错误(category而不是categories).这个问题可以通过在你的模型里添加元类并定义`verbose_name_plural`属性来解决.查看 [Django’s official documentation on models](https://docs.djangoproject.com/en/1.7/topics/db/models/#meta-options) 获取更多细节.
 
 !!! note
-    这里的`admin.py`文件只提供了一个简单的例子.还有许多炫酷的定制可以使用,比如说改变管理界面模型出现的方式.在本教程,我们只使用了最原始的界面.如果感兴趣请查看 official Django documentation on the admin interface .
+    这里的`admin.py`文件只提供了一个简单的例子.还有许多炫酷的定制可以使用,比如说改变管理界面模型出现的方式.在本教程,我们只使用了最原始的界面.如果感兴趣请查看 [official Django documentation on the admin interface](https://docs.djangoproject.com/en/1.7/ref/contrib/admin/) .
 
 ## 6.7 创建Population Script
 
@@ -1469,9 +1470,9 @@ if __name__ == '__main__':
 
 !!! note
     我们使用`get_or_create()`函数创建模型实例.我们可以用`get_or_creat()`函数来检查在数据库里是否存在.如果不存在就创建它.这将减少我们的代码而不是让我们自己检查.
-`get_or_create()`方法返回`(object,created)`元组.如果没有在数据库找到,那么这个`object`参数就是`get_or_create()`方法创造的实例.如果这个实体不存在,那么这个方法就返回和这个实体相符的实例.`created`是一个布尔值;如果`get_or_create()`创建模型实体的话它会返回`true`.
-`[0]`会返回`object`元组的第一个位置,这个其他编程语言一样,Python使用zero-based numbering.
-official Django documentation  可以查看`get_or_vreate()`方法的详细资料.
+    `get_or_create()`方法返回`(object,created)`元组.如果没有在数据库找到,那么这个`object`参数就是`get_or_create()`方法创造的实例.如果这个实体不存在,那么这个方法就返回和这个实体相符的实例.`created`是一个布尔值;如果`get_or_create()`创建模型实体的话它会返回`true`.
+    `[0]`会返回`object`元组的第一个位置,这个其他编程语言一样,Python使用[zero-based numbering](http://en.wikipedia.org/wiki/Zero-based_numbering).
+    [official Django documentation](https://docs.djangoproject.com/en/1.7/ref/models/querysets/#get-or-create)  可以查看`get_or_vreate()`方法的详细资料.
 
 当保存退出以后,我们可以在DJango项目根目录用命令`$ python populate_rango.py`来执行脚本.
 
@@ -1522,7 +1523,7 @@ Starting Rango population script...
 * 增加目录模型`views`和`likes`属性并设置为0.
 * 为你的app/模型进行迁移.
 * 更新 population script ,把Python目录设置成浏览128次和喜欢64次,Django目录浏览64次和喜欢32次,the Other Framenwork目录浏览32次,喜欢16次.
-* 查看part two of official Django tutorial .它将会巩固你所学同时学习更多关于如何定制管理界面.
+* 查看[part two of official Django tutorial](https://docs.djangoproject.com/en/1.7/intro/tutorial02/) .它将会巩固你所学同时学习更多关于如何定制管理界面.
 * 定制管理界面 - 当观看页面模型的时候它的目录,页面名和url.
 
 ### 6.9.1 提示
@@ -1537,7 +1538,7 @@ Starting Rango population script...
 
 ![](img/ch5-rango-admin-custom.png)
 
-# 7 模型,模板和试图
+# 7 模型,模板和视图
 
 现在我们已经建立了模型并且导入了一些数据,现在我们要把这些连一起.我们将会弄清楚如何在视图中访问数据以及如何通过模板展示数据.
 
@@ -1642,14 +1643,14 @@ def index(request):
 另一种方法就是用目录名作为URL.`/rango/category/Python/`将会返回给我们关于Python的目录.这是一个简单的,可读的URL.
 
 !!! note
-    对于网页来说,设计一个简洁的URL是只管重要的.更多细节请看 Wikipedia’s article on Clean URLs.
+    对于网页来说,设计一个简洁的URL是只管重要的.更多细节请看 [Wikipedia’s article on Clean URLs](http://en.wikipedia.org/wiki/Clean_URL).
 
 ### 7.3.2 为Category表增加Slug字段
 
 为了建立简洁的url我们需要在`Category`模型里增加slug字段.首先我们需要从django导入`slugify`函数,这个函数的作用是把空格用连字符代替,例如"how do i create a slug in django"将会转换成"how-do-i-create-a-slug-in-djang".
 
 !!! warning
-    虽然你能在URL中用空格,但是它们并不安全.更多细节查看IETF Memo on URLs.
+    虽然你能在URL中用空格,但是它们并不安全.更多细节查看[IETF Memo on URLs](http://www.ietf.org/rfc/rfc1738.txt).
 
 接下来我们将会重写`Category`模型的`save`方法,我们将会调用`slugify`方法并更新`slug`字段.注意任何时候目录名称更改都会更改slug.像下面一样修改模型.
 
@@ -1810,7 +1811,7 @@ urlpatterns = patterns('',
 附加参数的位置不重要,重要的是在URL模式中定义的参数名称.注意如何为我们的视图在URL模式匹配中定义`category_name_slug`参数.
 
 !!! note
-    正则表达式虽然开始看起来比较复杂,但是网上有许多资料. This cheat sheet将会解决你的疑问.
+    正则表达式虽然开始看起来比较复杂,但是网上有许多资料. [This cheat sheet](http://cheatography.com/davechild/cheat-sheets/regular-expressions/)将会解决你的疑问.
 
 ### 7.3.7 修改index模板
 
@@ -1854,7 +1855,7 @@ urlpatterns = patterns('',
 为了巩固所学请完成下面的练习吧.
 
 * 修改index页面也包含5个最多访问的页面.
-* 查看part three of official Django tutorial 
+* 查看[part three of official Django tutorial](https://docs.djangoproject.com/en/1.7/intro/tutorial03/)
 
 ### 7.4.1 提示
 
@@ -1862,7 +1863,7 @@ urlpatterns = patterns('',
 
 # 8 有趣的表单
 
-到目前为止我们仅仅是通过视图和模板来表现数据.在本章,我们将会学习如何通过web表单来获取数据.Django包含一些表单处理功能,它使在web上收集用户信息变得简单.通过Django’s documentation on forms我们知道表单处理功能包含以下:
+到目前为止我们仅仅是通过视图和模板来表现数据.在本章,我们将会学习如何通过web表单来获取数据.Django包含一些表单处理功能,它使在web上收集用户信息变得简单.通过[Django’s documentation on forms](https://docs.djangoproject.com/en/1.7/topics/forms/)我们知道表单处理功能包含以下:
 
 1. 显示一个HTML表单自动生成的窗体部件(比如一个文本字段或者日期选择器).
 2. 用一系列规则检查提交数据.
@@ -1890,7 +1891,7 @@ urlpatterns = patterns('',
 
 ### 8.2.1 创建`ModelForm`类
 
-在rango的`forms.py`模块里我们将会创建一些继承自`ModelForm`的类.实际上,ModelForm是一个帮助函数,它允许你在一个已经存在的模型里创建Django表单.因为我们定义了两个模型(`Category`和`Page`),我们将会分别为它们创建`ModelForms`.
+在rango的`forms.py`模块里我们将会创建一些继承自`ModelForm`的类.实际上,[ModelForm](https://docs.djangoproject.com/en/1.7/topics/forms/modelforms/#modelform)是一个帮助函数,它允许你在一个已经存在的模型里创建Django表单.因为我们定义了两个模型(`Category`和`Page`),我们将会分别为它们创建`ModelForms`.
 
 在`rango/forms.py`添加下面代码:
 
@@ -1936,14 +1937,14 @@ Django为我们提供了许多定制表单的方法.在上面的例子中,我们
 
 可以看到在每个表单都包含浏览和喜欢的`IntegerField`字段.我们可以在参数里设置`widget=forms.Hiddeninput()`来隐藏窗口组件,设置`initial=0`来设置默认值为0.这是不用用户去自己设置字段为0的一种方法.然而可以在`PageForm`看到,尽管我们隐藏了字段,但是我们还是得在表单里包含字段.如果`fields`排除了`views`,那么表单将不包含字段(尽管已经定义了)而且将不会返回给模型0值.由于模型建立的不同有可能会引起一个错误.如果在模型里我们把这些字段定义为`default=0`那么我们可以自动的返回默认值 - 从而避免`not null`错误.在这种情况下就不需要隐藏字段了.在表单里我们也包含了`slug`字段并设置为`widget=forms.HiddenInput()`值,这里我们并没给他设置初始值或者默认值,而是设置为不需要(`required=False`).这是因为我们的模型将会负责填充字段.实际上,当你定义模型和表单时一定要注意表单一定要包含和传递所有的数据.
 
-除了`CharField`和`IntegerField`组件还有许多.例如,Django提供了`EmailField`(e-mail地址入口),`ChoiceField`(输入按钮)和`DateField`(日期/时间入口).有许多其他不同种类字段可以使用,他们可以为你检查执行错误(例如是否提供了一个有效的整数?).强烈建议你看一下official Django documentation on widgets来定制自己的组件.
+除了`CharField`和`IntegerField`组件还有许多.例如,Django提供了`EmailField`(e-mail地址入口),`ChoiceField`(输入按钮)和`DateField`(日期/时间入口).有许多其他不同种类字段可以使用,他们可以为你检查执行错误(例如是否提供了一个有效的整数?).强烈建议你看一下[official Django documentation on widgets](https://docs.djangoproject.com/en/1.7/ref/forms/widgets/)来定制自己的组件.
 
 或许继承`ModelForm`最大的作用就是需要定义我们要给哪个模型提供表单.我们通过`Meta`类来实现.在`Meta`类设置`model`属性为我们需要使用的模型.例如`CategoryForm`类引用`Category`模型.这对Django创建我们想要的模型表单至关重要.它还可以帮助我们在存储和展示表单数据时获取错误.
 
 我们也可以用`Meat`类来定义我们希望包括的表单字段.用`fields`元组来定义所需包含的字段.
 
 !!! note
-    强烈建议查看 official Django documentation on forms来获取更多.
+    强烈建议查看 [official Django documentation on forms](https://docs.djangoproject.com/en/1.7/ref/forms/)来获取更多.
 
 ### 8.2.2 创建和增加目录视图
 
@@ -2033,7 +2034,7 @@ Django表单处理数据是用过用户浏览器的HTTP`POST`请求实现.它不
 !!! note
     使用隐藏和可见表单字段是因为HTTP是无状态协议.你不可以在两个不同的HTTP请求之间保持状态,因为实现起来相当复杂.为了摆脱这个限制,创建隐藏的HTML表单字段可以使web应用传递给用户HTML表单重要的数据,只有用户提交的时候才会返回数据.
 
-可能你也注意到了代码`{% csrf_token %}`,这是跨站请求伪造令牌,有助于保护我们提交表单的HTTP`POST`方法的安全.Django框架要求使用CSRFtoken.如果忘记在你的表单里包含CSRF令牌,有可能会在提交表单时遇到错误.查看 official Django documentation on CSRF tokens 以获取更多信息.
+可能你也注意到了代码`{% csrf_token %}`,这是跨站请求伪造令牌,有助于保护我们提交表单的HTTP`POST`方法的安全.Django框架要求使用CSRFtoken.如果忘记在你的表单里包含CSRF令牌,有可能会在提交表单时遇到错误.查看 [official Django documentation on CSRF tokens](https://docs.djangoproject.com/en/1.7/ref/contrib/csrf/) 以获取更多信息.
 
 ### 8.2.4 映射增加目录视图
 
@@ -2047,7 +2048,7 @@ urlpatterns = patterns('',
     url(r'^category/(?P<category_name_slug>[\w\-]+)/$', views.category, name='category'),)
 ```
 
-在这里顺序并不重要.更多内容需要查看official Django documentation on how Django process a request.我们增加的URL是`/rango/add_category/`.
+在这里顺序并不重要.更多内容需要查看[official Django documentation on how Django process a request](https://docs.djangoproject.com/en/1.7/topics/http/urls/#how-django-processes-a-request).我们增加的URL是`/rango/add_category/`.
 
 ### 8.2.5 修改主页内容
 
@@ -2068,7 +2069,7 @@ urlpatterns = patterns('',
 
 ### 8.2.7 清理表单
 
-记得我们`Page`模型有一个`url`属性设置为`URLField`类型.在相应的HTML表单,Django希望任何文本输入的URL字段是一个完整的URL.然而,用户能发现输入像`http://www.url.com`这种形式有些繁琐 - 确实,用户 may not even know what forms a correct URL!
+记得我们`Page`模型有一个`url`属性设置为`URLField`类型.在相应的HTML表单,Django希望任何文本输入的URL字段是一个完整的URL.然而,用户能发现输入像`http://www.url.com`这种形式有些繁琐 - 确实,用户 [may not even know what forms a correct URL](https://docs.djangoproject.com/en/1.7/ref/contrib/csrf/)!
 
 设想有时候用户输入并不是一定正确,我们可以重写`ModelForm`模块里`clean()`方法.这个方法会在表单数据存储到模型实例之前被调用,所以它可以让我们验证甚至修改用户输入的数据.在我们上面的例子中,我们可以检查`url`字段的值是否以`http://`开头 - 如果不是我们可以在用户前面添加上`http://`.
 
@@ -2099,7 +2100,7 @@ class PageForm(forms.ModelForm):
 这个小例子说明如何在表单数据存储之前进行修改.这是非常方便的,尤其是有一些字段需要设定默认值时 - 或者表单中的数据发生了丢失.
 
 !!! note
-    重写方法是Django框架提供给我们增加应用额外功能的一种优雅的方法.就像`ModelForm`模块中`clean()`方法一样,Django提供了许多安全的方法可以供你重写.检查 the Official Django Documentation on Models以获取更多信息.
+    重写方法是Django框架提供给我们增加应用额外功能的一种优雅的方法.就像`ModelForm`模块中`clean()`方法一样,Django提供了许多安全的方法可以供你重写.检查 [the Official Django Documentation on Models](https://docs.djangoproject.com/en/1.7/topics/db/models/#overriding-predefined-model-methods)以获取更多信息.
 
 ## 8.3 练习
 
@@ -2109,7 +2110,7 @@ class PageForm(forms.ModelForm):
 * 增加一个已存在的目录会发生什么?
 * 访问不存在的目录会发生什么?
 * 当用户访问一个不存在的目录时如何优雅的处理?
-* 查看 part four of the official Django Tutorial
+* 查看 [part four of the official Django Tutorial](https://docs.djangoproject.com/en/dev/intro/tutorial04/)
 
 ### 8.3.1 创建增加页面视图,模板和URL映射
 
@@ -2154,7 +2155,7 @@ def add_page(request, category_name_slug):
 
 # 9 用户验证
 
-教程的下一部分将教会你Django的用户验证机制.我们将会使用Django标准包`django.contrib.auth`的`auth`应用.通过 Django’s official documentation on Authentication,应用包含下面几方面.
+教程的下一部分将教会你Django的用户验证机制.我们将会使用Django标准包`django.contrib.auth`的`auth`应用.通过 [Django’s official documentation on Authentication](https://docs.djangoproject.com/en/1.7/topics/auth/),应用包含下面几方面.
 
 * 用户.
 * 权限:一系列的二进制标志(例如 yes/no)决定用户可以做或不可以做什么.
@@ -2186,7 +2187,7 @@ INSTALLED_APPS = (
 !!! note
     如果你需要在`INSTALLED_APPS`元组里添加`auth`应用,你需要用命令`python manage.py migrate`来进行更新数据库.
 
-密码默认将会用 PBKDF2 algorithm进行储存,它可以安全的保存你用户的数据.在 official Django documentation on how django stores passwords你可以了解到更多,文档还提供了使用不同的哈希算法来提高安全等级.
+密码默认将会用 [PBKDF2 algorithm](http://en.wikipedia.org/wiki/PBKDF2)进行储存,它可以安全的保存你用户的数据.在 [official Django documentation on how django stores passwords](https://docs.djangoproject.com/en/1.7/topics/auth/passwords/#how-django-stores-passwords)你可以了解到更多,文档还提供了使用不同的哈希算法来提高安全等级.
 
 如果你希望控制使用哪种哈希算法,你需要在`settings.py`里加入`PASSWORD_HASHERS`元组:
 
@@ -2212,7 +2213,7 @@ PASSWORD_HASHERS = (
 
 ## 9.2 用户模型
 
-Django认证系统最重要的部分就是`User`对象,它位于`django.contrib.auth.models.User`.一个`User`对象代表了和Django应用交互的用户. Django documentation on User objects 有详尽的描述.
+Django认证系统最重要的部分就是`User`对象,它位于`django.contrib.auth.models.User`.一个`User`对象代表了和Django应用交互的用户. [Django documentation on User objects](https://docs.djangoproject.com/en/1.7/topics/auth/default/#user-objects) 有详尽的描述.
 
 `User`模型主要有5个属性.它们是:
 
@@ -2222,7 +2223,7 @@ Django认证系统最重要的部分就是`User`对象,它位于`django.contrib.
 * 用户名;
 * 用户姓;
 
-模型也有其他一些属性像`is_active`(决定账户是活动还是非活动状态).查看official Django documentation on the user model,这里有完整的`User`模型属性列表.
+模型也有其他一些属性像`is_active`(决定账户是活动还是非活动状态).查看[official Django documentation on the user model](https://docs.djangoproject.com/en/1.7/ref/contrib/auth/#django.contrib.auth.models.User),这里有完整的`User`模型属性列表.
 
 ## 9.3 增加用户属性
 
@@ -2310,7 +2311,7 @@ class UserProfileForm(forms.ModelForm):
         fields = ('website', 'picture')
 ```
 
-注意到在两个类中我们都加入了`Meta`类.在`Meta`类中所有定义都会被当做它的附加属性.每个`Meta`至少包含一个`model`字段,它可以和模型之间关联.例如在我们的`UserForm`类中就关联了`User`模型.在Django1.7中你可以用`fields`或者`exclude`来定义你需要展示的字段.
+注意到在两个类中我们都加入了一个[nested](http://www.brpreiss.com/books/opus7/html/page598.html)`Meta`类.在`Meta`类中所有定义都会被当做它的附加属性.每个`Meta`至少包含一个`model`字段,它可以和模型之间关联.例如在我们的`UserForm`类中就关联了`User`模型.在Django1.7中你可以用`fields`或者`exclude`来定义你需要展示的字段.
 
 这里我们仅仅需要展示`User`模型的`username`,`email`和`password`字段,和`UserProfile`模型的`website`和`picture`字段.当用户注册的时候我们需要连接`UserPrifile`模型的`user`字段.
 
@@ -2391,7 +2392,7 @@ def register(request):
 
 看起来是不是很难啊?可能一开始看起来比较复杂,但其实不然.和我们前面`add_category()`视图差不多,仅仅添加了两个不同的`ModelForm`实例 - 一个是`User`模型的,另一个是`UserProfile`模型的.如果用户上传图像我们还得需要处理它们.
 
-我们还需要创建两个模型实例之间的连接.创建新的`User`模型实例后,我们需要用`profile.user = user`把它关联到`UserProfile`实例.我们在已经在9.4.1隐藏的`UserProfileForm`表单里填充了`user`属性.
+我们还需要创建两个模型实例之间的连接.创建新的`User`模型实例后,我们需要用`profile.user = user`把它关联到`UserProfile`实例.我们在已经在[9.4.1][#94]隐藏的`UserProfileForm`表单里填充了`user`属性.
 
 ### 9.4.3 创建注册模板
 
@@ -2435,7 +2436,7 @@ def register(request):
 这个HTML模板使用`registered`变量来检测注册是否成功.当`registered`为`False`时模板会展示注册表单 - 否则,除了标题外它只会展示一条成功信息.
 
 !!! warning
-    你可能注意到在`<form>`元素里的`enctype`属性.当你希望用户通过表单上传文件时,必须把`enctype`设置成`multipart/form-data`.这个属性会让你的浏览器以特定的方式把表单数据返回给服务器.实际上,你的文件会被分成一块块的传输.想了解更多查看 this great Stack Overflow answer.你也应当记得加入CSRF令牌.确保在你的`<form>`属性里包含`{% csrf_token %}`.
+    你可能注意到在`<form>`元素里的`enctype`属性.当你希望用户通过表单上传文件时,必须把`enctype`设置成`multipart/form-data`.这个属性会让你的浏览器以特定的方式把表单数据返回给服务器.实际上,你的文件会被分成一块块的传输.想了解更多查看 [this great Stack Overflow answer](http://stackoverflow.com/a/4526286).你也应当记得加入CSRF令牌.确保在你的`<form>`属性里包含`{% csrf_token %}`.
 
 ### 9.4.4 视图`register()`的URL映射
 
@@ -2538,7 +2539,7 @@ def user_login(request):
 
 上面代码最有意思的是用Django内建的机制来实现验证过程.`authenticate()`函数用来检查用户名和密码是否和账户匹配,而`login()`函数用来标记用户登录.
 
-你也可能注意到我们使用了`HttpResponseRedirect`类.看到名字就猜到了,最后代码返回的是一个`HttpResponseRedirect`类实例,它的参数是一个跳转地址,用来使用户的浏览器跳转到该地址.注意它返回的状态码不是正常状态下的200而是302,它表示一个重定向.参看official Django documentation on Redirection以获取更多信息.
+你也可能注意到我们使用了`HttpResponseRedirect`类.看到名字就猜到了,最后代码返回的是一个`HttpResponseRedirect`类实例,它的参数是一个跳转地址,用来使用户的浏览器跳转到该地址.注意它返回的状态码不是正常状态下的200而是302,它表示一个重定向.参看[official Django documentation on Redirection](https://docs.djangoproject.com/en/1.7/ref/request-response/#django.http.HttpResponseRedirect)以获取更多信息.
 
 所有的这些函数和类都在Django之中,所以你需要导入它们,在`rango/views.py`中加入下面.
 
@@ -2641,7 +2642,7 @@ def some_view(request):
         return HttpResponse("You are not logged in.")
 ```
 
-第二个是使用了python装饰器.装饰器是由一种软件设计模式命名的.它们可以动态的修改一个函数,方法或者类而不用去直接修改它们的源代码.
+第二个是使用了[python装饰器](http://wiki.python.org/moin/PythonDecorators).装饰器是由[同名的软件设计模式](http://en.wikipedia.org/wiki/Decorator_pattern)命名的.它们可以动态的修改一个函数,方法或者类而不用去直接修改它们的源代码.
 
 Django提供了叫做`login_required()`的装饰器,它可以在视图里要求用户进行登录.如果一个用户没有登录并且尝试访问一个视图,那么这个用户将会重定向到你设定的页面,通常是一个登录页面.
 
@@ -2738,7 +2739,7 @@ urlpatterns = patterns('',
 
 ## 9.8 练习
 
-这章主要讲述在Django里如何管理用户验证.在我们的项目里讲述了如何安装Django`django.contrib.auth`应用.另外,我们也展示了如何在`django.contrib.auth.models.User`模型里加入用户个人模型的额外字段.我们还详细的列出用户如何注册,登录,注销和访问限制.更多信息请看Django’s official documentation on Authentication.
+这章主要讲述在Django里如何管理用户验证.在我们的项目里讲述了如何安装Django`django.contrib.auth`应用.另外,我们也展示了如何在`django.contrib.auth.models.User`模型里加入用户个人模型的额外字段.我们还详细的列出用户如何注册,登录,注销和访问限制.更多信息请看[Django’s official documentation on Authentication](https://docs.djangoproject.com/en/1.7/topics/auth/).
 
 * 定制你的应用,只有注册用户才能添加/修改目录/页面,非注册用户只能浏览/使用目录/页面.你也可以定制增加/修改页面的链接在只有用户登录时才会展示.
 * 当用户输入错误用户名和密码时提供错误通知.
@@ -2813,7 +2814,7 @@ urlpatterns = patterns('',
 {% block body_block %}This is body_block's default content.{% endblock %}
 ```
 
-当我们创建模板时我们会继承`base.html`和重写`body_block`里的内容.你也可以在模板中放置更多的块,例如,你可以分别为页面标题,底部,侧边栏设置块.Django模板系统中的块十分的有用, official Django documentation on templates查看更多内容.
+当我们创建模板时我们会继承`base.html`和重写`body_block`里的内容.你也可以在模板中放置更多的块,例如,你可以分别为页面标题,底部,侧边栏设置块.Django模板系统中的块十分的有用, [official Django documentation on templates](https://docs.djangoproject.com/en/1.7/topics/templates/#id1)查看更多内容.
 
 ### 10.2.1 更多的抽象
 
@@ -2857,7 +2858,7 @@ urlpatterns = patterns('',
 * 第一个是加入新的Django模板块`title`.所以我们可以为继承自基础模板的页面定制标题.如果页面没有使用这个块,那么这个标题会默认为`Rango - How to Tango with Django!`.
 * 我们也可以把`index.html`模板中的链接列表加入到`body_block`块的后部.这将会为所有继承基础模板的页面展示这些链接.可以在`body_block`内容和链接之间加入一个水平线(<hr />)以便我们区分这两部分.
 
-注意我们的`body_block`包含在HTML`<div>`标签里 - 我们将在24章解释`<div>`意义.我们的链接同样使用`<ul>`和`<li>`标签包含在HTML无序列表里.
+注意我们的`body_block`包含在HTML`<div>`标签里 - 我们将在[24章][24]解释`<div>`意义.我们的链接同样使用`<ul>`和`<li>`标签包含在HTML无序列表里.
 
 ## 10.3 模板继承
 
@@ -2909,7 +2910,7 @@ urlpatterns = patterns('',
 !!! note
     模板非常强大,你甚至可以创建你自己的模板标签.在这里我们将演示如何减小模板里重复的HTML结构.
 然而,模板可以减小应用视图里的代码.例如,如果你想在你的应用增加一些相同的数据库驱动的内容,你需要调用特定的视图来处理网页中重复的部分.这样在每个视图里就不用重复调用Django ORM函数来收集数据了.
-查看更多内容请查看 Django documentation on templates.
+查看更多内容请查看 [Django documentation on templates](https://docs.djangoproject.com/en/1.7/topics/templates/).
 
 ## 10.4 模板里加入URL
 
@@ -2968,18 +2969,24 @@ TODO(leifos):指出如何把url放到一个命名空间并引用,见http://djang
 
 !!! note
     完成上面的练习后,所有Rango的模板都会继承`bashe`.html.让我们回过头看看`base.html`的内容,`user`对象 - 在Django请求的上下文中 - 将会用来检查当前的Rnago用户是否已经登录(通过使用`user.is_authenticated`).因为所有的Rango模板都会继承基础模板,所以所有的Rango模板的访问都要依赖于所发送请求的上下文.
-因为这个新的依赖,你必须检查每个Rango的Django视图.对于每个视图,确保每个请求对于Django模板引擎都是可用的.通过这个教程,我们通过`render()`传递请求作为参数来达到这个目的.有时会发生这样的情况,如果你的请求被错误的传送可能出现用户没有登录,但是Django认为已经登录.
-这里我们以`about`视图作为例子来进行检查.开始用硬编码的方式进行,代码如下.注意我们只发送字符串 - 我们没有使用`request`参数.
-```
-def about(request):
-    return HttpResponse('Rango says: Here is the about page. <a href="/rango/">Index</a>')
-```
-为了使用模板我们需要调用`render`函数传递`request`对象.这将会使我们的模板引擎可以获取像`user`这样的对象,它可以允许模板引擎查看用户是否登录.(例如进行验证).
-```
-def about(request):
-    return render(request, 'rango/about.html', {})
-```
-记住,`render()`最后一个参数是一个字典,它可以添加额外的数据传递给Django模板引擎.因为我们没有什么额外的数据传递给模板所以这里为空.查看5.1.3章节复习关于`render()`的知识.
+
+    因为这个新的依赖,你必须检查每个Rango的Django视图.对于每个视图,确保每个请求对于Django模板引擎都是可用的.通过这个教程,我们通过`render()`传递请求作为参数来达到这个目的.有时会发生这样的情况,如果你的请求被错误的传送可能出现用户没有登录,但是Django认为已经登录.
+
+    这里我们以`about`视图作为例子来进行检查.开始用硬编码的方式进行,代码如下.注意我们只发送字符串 - 我们没有使用`request`参数.
+
+    ```
+    def about(request):
+        return HttpResponse('Rango says: Here is the about page. <a href="/rango/">Index</a>')
+    ```
+
+    为了使用模板我们需要调用`render`函数传递`request`对象.这将会使我们的模板引擎可以获取像`user`这样的对象,它可以允许模板引擎查看用户是否登录.(例如进行验证).
+
+    ```
+    def about(request):
+        return render(request, 'rango/about.html', {})
+    ```
+
+    记住,`render()`最后一个参数是一个字典,它可以添加额外的数据传递给Django模板引擎.因为我们没有什么额外的数据传递给模板所以这里为空.查看[5.1.3](#51)章节复习关于`render()`的知识.
 
 # 11 Cokkies和Sessions
 
