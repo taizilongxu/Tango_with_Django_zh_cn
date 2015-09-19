@@ -2071,7 +2071,7 @@ urlpatterns = patterns('',
 
 记得我们`Page`模型有一个`url`属性设置为`URLField`类型.在相应的HTML表单,Django希望任何文本输入的URL字段是一个完整的URL.然而,用户能发现输入像`http://www.url.com`这种形式有些繁琐 - 确实,用户 [may not even know what forms a correct URL](https://docs.djangoproject.com/en/1.7/ref/contrib/csrf/)!
 
-设想有时候用户输入并不是一定正确,我们可以重写`ModelForm`模块里`clean()`方法.这个方法会在表单数据存储到模型实例之前被调用,所以它可以让我们验证甚至修改用户输入的数据.在我们上面的例子中,我们可以检查`url`字段的值是否以`http://`开头 - 如果不是我们可以在用户前面添加上`http://`.
+有些情况下，用户输入并不是一定正确,我们可以重写`ModelForm`模块里的`clean()`方法.这个方法会在表单数据存储到模型实例之前调用,所以我们可以使用它验证甚至修改用户输入的数据.在我们上面的例子中,我们可以检查`url`字段的值是否以`http://`开头 - 如果不是, 我们可以在用户前面添加上`http://`.
 
 ```
 class PageForm(forms.ModelForm):
@@ -2090,14 +2090,14 @@ class PageForm(forms.ModelForm):
         return cleaned_data
 ```
 
-在`clean()`方法里.
+`clean()`函数展示了一种方法，我们可以采用该方法替换Django中自带的表单处理函数.
 
-1. 表单数据的字典从`ModelForm`的`cleaned_data`属性获取.
-2. 你希望检查的表单字段可以在`cleaned_data`字典中获取.使用`.get()`字典方法获取表单值.如果用户没有表单字段,那么`cleaned_data`字典就没有这项.在这种情况下`.get()`会返回`None`而不是引发异常.这将会使你的代码更加简洁!
-3. 处理你希望处理的表单字段.如果输入了一个值,检查这个值.如果不是你希望的值,你可以在存储到`cleaned_data`字典之前增加一些逻辑来修改这个值.
-4. 必须每次都是以返回`cleaned_data`字典来结束`clean()`方法.如果没有将会得到错误提示.
+1. `ModelForm` 字典的`cleaned_data`属性可以提供表单数据.
+2. 从`cleaned_data`字典获取你希望检查的表单数据.使用.get()字典方法获取表单, 如果用户没有在任何表单字段输入内容,那么`cleaned_data`字典就没有这项.在这种情况下`.get()`会返回`None`而不是引发异常.这将会使你的代码更加简洁!
+3. 对于每一个你希望处理的表单字段，检查返回的值.如果用户输入了一个值,你应该检查这个值的内容.如果输入值并不是你希望的值,你可以在将输入值存储到`cleaned_data`字典之前，增加一些逻辑代码来修正这种情况.
+4. `clean()`方法应该一直返回`cleaned_data`字典.否则你会遇到一些非常棘手的错误.
 
-这个小例子说明如何在表单数据存储之前进行修改.这是非常方便的,尤其是有一些字段需要设定默认值时 - 或者表单中的数据发生了丢失.
+这个小例子说明如何在存储表单数据之前对数据进行处理.这个方法非常方便,尤其当有一些字段需要设定默认值时 - 或者表单中的数据发生了丢失的时候. 我们必须能够处理这类错误的输入数据。
 
 !!! note
     重写方法是Django框架提供给我们增加应用额外功能的一种优雅的方法.就像`ModelForm`模块中`clean()`方法一样,Django提供了许多安全的方法可以供你重写.检查 [the Official Django Documentation on Models](https://docs.djangoproject.com/en/1.7/topics/db/models/#overriding-predefined-model-methods)以获取更多信息.
