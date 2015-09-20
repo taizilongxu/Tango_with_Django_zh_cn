@@ -2071,7 +2071,7 @@ urlpatterns = patterns('',
 
 记得我们`Page`模型有一个`url`属性设置为`URLField`类型.在相应的HTML表单,Django希望任何文本输入的URL字段是一个完整的URL.然而,用户能发现输入像`http://www.url.com`这种形式有些繁琐 - 确实,用户 [may not even know what forms a correct URL](https://docs.djangoproject.com/en/1.7/ref/contrib/csrf/)!
 
-有些情况下，用户输入并不是一定正确,我们可以重写`ModelForm`模块里的`clean()`方法.这个方法会在表单数据存储到模型实例之前调用,所以我们可以使用它验证甚至修改用户输入的数据.在我们上面的例子中,我们可以检查`url`字段的值是否以`http://`开头 - 如果不是, 我们可以在用户前面添加上`http://`.
+有些情况下，用户输入并不一定正确,我们可以重写`ModelForm`模块里的`clean()`方法.这个方法会在表单数据存储到模型实例之前调用,所以我们可以使用它验证甚至修改用户输入的数据.在我们上面的例子中,我们可以检查`url`字段的值是否以`http://`开头 - 如果不是, 我们可以在用户前面添加上`http://`.
 
 ```
 class PageForm(forms.ModelForm):
