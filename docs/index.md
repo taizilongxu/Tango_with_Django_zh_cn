@@ -2232,7 +2232,7 @@ Django认证系统最重要的部分就是`User`对象,它位于`django.contrib.
 * `URLField`,允许用户写明自己的网站;
 * `ImageField`,允许用户在它们的档案里添加图片.
 
-可以再Rango的`models.py`文件里增加模型.让我们加入`UserProfile`模型:
+可以在Rango的`models.py`文件里增加模型.让我们加入`UserProfile`模型:
 
 ```
 class UserProfile(models.Model):
@@ -2856,7 +2856,7 @@ urlpatterns = patterns('',
 我们在模板中引入两个新的特性.
 
 * 第一个是加入新的Django模板块`title`.所以我们可以为继承自基础模板的页面定制标题.如果页面没有使用这个块,那么这个标题会默认为`Rango - How to Tango with Django!`.
-* 我们也可以把`index.html`模板中的链接列表加入到`body_block`块的后部.这将会为所有继承基础模板的页面展示这些链接.可以在`body_block`内容和链接之间加入一个水平线(<hr />)以便我们区分这两部分.
+* 我们也可以把`index.html`模板中的链接列表加入到`body_block`块的后部.这将会为所有继承基础模板的页面展示这些链接.可以在`body_block`内容和链接之间加入一个水平线`(<hr />)`以便我们区分这两部分.
 
 注意我们的`body_block`包含在HTML`<div>`标签里 - 我们将在[24章][24]解释`<div>`意义.我们的链接同样使用`<ul>`和`<li>`标签包含在HTML无序列表里.
 
@@ -2908,8 +2908,7 @@ urlpatterns = patterns('',
 在`category.html`模板里使用`extends`命令来继承`base.html`.在这里你不需要写一个完整的HTML文档,因为`base.html`已经提供了一个完整的框架.你只要把增添的内容写到基础模板里,它就会创建一个完整的HTML文档发送给用户浏览器.
 
 !!! note
-    模板非常强大,你甚至可以创建你自己的模板标签.在这里我们将演示如何减小模板里重复的HTML结构.
-然而,模板可以减小应用视图里的代码.例如,如果你想在你的应用增加一些相同的数据库驱动的内容,你需要调用特定的视图来处理网页中重复的部分.这样在每个视图里就不用重复调用Django ORM函数来收集数据了.
+  模板非常强大,你甚至可以创建你自己的模板标签.在这里我们将演示如何减小模板里重复的HTML结构.  然而,模板可以减小应用视图里的代码.例如,如果你想在你的应用增加一些相同的数据库驱动的内容,你需要调用特定的视图来处理网页中重复的部分.这样在每个视图里就不用重复调用Django ORM函数来收集数据了.
 查看更多内容请查看 [Django documentation on templates](https://docs.djangoproject.com/en/1.7/topics/templates/).
 
 ## 10.4 模板里加入URL
